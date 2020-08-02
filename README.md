@@ -1,18 +1,18 @@
 # RMIT SEPT 2020 Major Project
 
-# Group 00
+# Group 4 (Friday 10:30)
 
 ## Members
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
-* SURNAME, GivenName (sXXXX)
+* BURR, Harrison (s3708981)
+* HUANG, Jasper (s3423585)
+* LYBEROPOULOS, Michael (s3787260)
+* PHUNG, Nikita (s3783287)
+* TAN, Joel (s3758729)
 
 ## Records
 
-* Github repository : https://github.com/RMIT-SEPT/MajorProject/Groupx
-* ClickUp Workspace : https://app.clickup.com/xxxx/yyyy
+* Github repository : https://github.com/RMIT-SEPT/majorproject-1-fri-10-30-4
+* ClickUp Workspace : https://app.clickup.com/6915050/v/l/6-13211523-1
 
 
 ## Code documentation
