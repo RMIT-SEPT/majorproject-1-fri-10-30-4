@@ -12,32 +12,27 @@ public interface User {
 	/**
 	 * @return The user's email address.
 	 */
-	String getCustomerEmail();
+	String getUserEmail();
 	
 	/**
 	 * @return The user's password hash.
 	 */
-	String getCustomerPasswordHash();
+	String getUserPasswordHash();
 	
 	/**
 	 * @return The user's first name only.
 	 */
-	String getCustomerFirstName();
+	String getUserFirstName();
 	
 	/**
 	 * @return The user's last name only.
 	 */
-	String getCustomerLastName();
+	String getUserLastName();
 	
 	/**
 	 * @return The user's full name. 
 	 */
-	String getCustomerFullName();
-	
-	/**
-	 * @return The user's address.
-	 */
-	String getCustomerAddress();
+	String getUserFullName();
 	
 	/**
 	 * @return The user's role.
