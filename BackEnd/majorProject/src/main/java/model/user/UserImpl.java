@@ -2,6 +2,13 @@ package model.user;
 import model.interfaces.user.User;;
 
 public class UserImpl implements User{
+	int userID;
+	UserRole userRole;
+	String email;
+	String hashedPassword;
+	String firstName;
+	String lastName;
+	String fullName;
 
 	/**
 	 * Create a new User object from scratch.
@@ -17,44 +24,55 @@ public class UserImpl implements User{
 	UserImpl(int userID) {
 
 	}
-	
-	@Override
+
+	public UserImpl(int userID, UserRole userRole, String email,
+					String hashedPassword, String firstName, String lastName) {
+		this.userID = userID;
+		this.userRole = userRole;
+		this.email = email;
+		this.hashedPassword = hashedPassword;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+
+
 	public int getUserID() {
-		// TODO Auto-generated method stub
-		return 0;
+		return userID;
 	}
 
 
-
-	@Override
 	public UserRole getUserRole() {
-		// TODO Auto-generated method stub
-		return null;
+		return userRole;
 	}
 
-	@Override
+
 	public String getUserEmail(){
-		return "";
+
+		return email;
 	}
 
-	@Override
+
 	public String getUserPasswordHash() {
-		return "";
+		return hashedPassword;
 	}
 
-	@Override
+
 	public String getUserFirstName() {
-		return "";
+
+		return firstName;
 	}
 
-	@Override
+
 	public String getUserLastName() {
-		return "";
+
+		return lastName;
 	}
 
-	@Override
+
 	public String getUserFullName() {
-		return "";
+		fullName = firstName + " " + lastName;
+		return fullName;
 	}
 	
 	
