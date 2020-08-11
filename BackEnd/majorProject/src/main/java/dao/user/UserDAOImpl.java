@@ -35,13 +35,10 @@ public class UserDAOImpl implements UserDAO {
                                     result.getString(("LAST_NAME")));
                 users.add(retrievedUser);
             }
-
-
         } catch (SQLException e){
             // Error
         }
         DBConnection.closeDBConnection(con);
-
         User user = users.get(0);
         if(user == null) {
             return null;

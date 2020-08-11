@@ -1,19 +1,28 @@
 package model.user;
-import model.interfaces.user.User;;
+import model.interfaces.user.User;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+@Entity
 public class UserImpl implements User{
-	int userID;
-	UserRole userRole;
-	String email;
-	String hashedPassword;
-	String firstName;
-	String lastName;
-	String fullName;
+	@Id
+	@GeneratedValue(strategy= GenerationType.SEQUENCE)
+	private int userID;
+	private UserRole userRole;
+	private String email;
+	private String hashedPassword;
+	private String firstName;
+	private String lastName;
+	private String fullName;
 
 	/**
 	 * Create a new User object from scratch.
 	 */
-	UserImpl(){
+	public UserImpl(){
 
 	}
 	
@@ -21,7 +30,7 @@ public class UserImpl implements User{
 	 * @param userID ID for the user account you want to access.
 	 * Creates a user object from 
 	 */
-	UserImpl(int userID) {
+	public UserImpl(int userID) {
 
 	}
 
@@ -34,8 +43,6 @@ public class UserImpl implements User{
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-
-
 
 	public int getUserID() {
 		return userID;
