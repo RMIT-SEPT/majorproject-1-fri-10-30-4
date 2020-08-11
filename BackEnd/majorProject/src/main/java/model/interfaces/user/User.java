@@ -7,7 +7,7 @@ public interface User {
 	/**
 	 * @return The user's ID as an integer.
 	 */
-	int getUserID();
+	int getUserId();
 	
 	/**
 	 * @return The user's email address.
@@ -38,4 +38,5 @@ public interface User {
 	 * @return The user's role.
 	 */
 	UserRole getUserRole();
+
 }
