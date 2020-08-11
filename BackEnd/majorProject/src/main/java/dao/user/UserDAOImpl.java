@@ -24,15 +24,15 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(2, hashedPassword);
             ResultSet result = preparedStatement.executeQuery();
             while(result.next()){
-                String strUserRole = result.getString("USER_ROLE");
+                String strUserRole = result.getString("role");
                 UserRole userRole = UserRole.valueOf(strUserRole);
                 User retrievedUser = new UserImpl(
-                                    result.getInt("USER_ID"),
+                                    result.getInt("user_id"),
                                     userRole,
-                                    result.getString("EMAIL"),
-                                    result.getString("PASSWORD_HASH"),
-                                    result.getString(("FIRST_NAME")),
-                                    result.getString(("LAST_NAME")));
+                                    result.getString("email"),
+                                    result.getString("password_hash"),
+                                    result.getString(("first_name")),
+                                    result.getString(("last_name")));
                 users.add(retrievedUser);
             }
         } catch (SQLException e){
