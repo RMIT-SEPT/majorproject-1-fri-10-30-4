@@ -1,4 +1,4 @@
-package dao.user;
+package repositories;
 
 import java.util.Collection;
 
