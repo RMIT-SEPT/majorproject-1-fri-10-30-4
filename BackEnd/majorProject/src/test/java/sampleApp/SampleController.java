@@ -1,13 +1,13 @@
 package sampleApp;
 
+import app.model.interfaces.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import model.user.UserImpl;
-import repositories.UserRepository;
+import app.model.user.UserImpl;
+import app.repository.UserRepository;
 
 @RestController
 public class SampleController {
@@ -18,7 +18,7 @@ public class SampleController {
 	@RequestMapping("/debug/allTestUsers")
 	public String index() {
 		ur.save(new UserImpl("test@test.com", "veryGoodPassword", "fname", "lname", 0));
-		for(model.interfaces.user.User i:ur.getUsersByEmail("test@test.com")) {
+		for(User i:ur.getUsersByEmail("test@test.com")) {
 			System.out.println(i.toString());
 		}
 		return "Check the console";

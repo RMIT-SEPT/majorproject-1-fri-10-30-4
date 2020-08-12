@@ -1,6 +1,6 @@
-package model.user;
+package app.model.user;
 
-import model.interfaces.user.BusinessAdmin;
+import app.model.interfaces.user.BusinessAdmin;
 
 import javax.persistence.*;
 

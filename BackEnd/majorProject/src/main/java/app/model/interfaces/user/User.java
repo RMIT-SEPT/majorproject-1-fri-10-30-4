@@ -1,6 +1,6 @@
-package model.interfaces.user;
+package app.model.interfaces.user;
 
-import model.user.UserRole;
+import app.model.user.UserRole;
 
 public interface User {
 	

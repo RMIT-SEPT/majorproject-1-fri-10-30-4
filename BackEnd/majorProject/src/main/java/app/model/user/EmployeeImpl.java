@@ -1,7 +1,6 @@
-package model.user;
+package app.model.user;
 
-import model.interfaces.user.Employee;
-import model.user.UserRole;
+import app.model.interfaces.user.Employee;
 
 import javax.persistence.*;
 import java.util.List;

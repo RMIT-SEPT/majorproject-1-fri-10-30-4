@@ -1,6 +1,6 @@
-package model.user;
+package app.model.user;
 
-import model.interfaces.user.Customer;
+import app.model.interfaces.user.Customer;
 
 import javax.persistence.*;
 

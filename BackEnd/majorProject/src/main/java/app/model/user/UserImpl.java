@@ -1,5 +1,5 @@
-package model.user;
-import model.interfaces.user.User;
+package app.model.user;
+import app.model.interfaces.user.User;
 import javax.persistence.*;
 
 @Entity

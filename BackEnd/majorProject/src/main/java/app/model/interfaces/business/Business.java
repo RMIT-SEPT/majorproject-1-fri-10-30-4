@@ -1,4 +1,4 @@
-package model.interfaces.business;
+package app.model.interfaces.business;
 
 public interface Business {
 

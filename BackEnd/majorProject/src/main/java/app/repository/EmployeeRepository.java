@@ -1,7 +1,6 @@
-package repositories;
+package app.repository;
 
-import model.user.EmployeeImpl;
-import model.user.UserImpl;
+import app.model.user.EmployeeImpl;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

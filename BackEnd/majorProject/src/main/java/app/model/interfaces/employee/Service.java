@@ -1,4 +1,4 @@
-package model.interfaces.employee;
+package app.model.interfaces.employee;
 
 public interface Service {
 	

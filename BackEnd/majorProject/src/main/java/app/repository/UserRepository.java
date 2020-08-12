@@ -1,4 +1,4 @@
-package repositories;
+package app.repository;
 
 import java.util.Collection;
 
@@ -7,8 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import model.interfaces.user.User;
-import model.user.UserImpl;
+import app.model.user.UserImpl;
 
 @Repository
 public interface UserRepository extends CrudRepository<UserImpl, Integer> {

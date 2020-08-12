@@ -1,4 +1,4 @@
-package model.interfaces.booking;
+package app.model.interfaces.booking;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

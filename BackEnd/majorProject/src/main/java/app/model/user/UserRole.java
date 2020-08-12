@@ -1,4 +1,4 @@
-package model.user;
+package app.model.user;
 
 public enum UserRole {
 

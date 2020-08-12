@@ -1,4 +1,4 @@
-package model.interfaces.user;
+package app.model.interfaces.user;
 
 import java.util.List;
 
