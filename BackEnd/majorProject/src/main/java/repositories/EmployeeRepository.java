@@ -1,12 +1,14 @@
 package repositories;
 
 import model.user.EmployeeImpl;
+import model.user.UserImpl;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 
-public interface EmployeeRepository {
+public interface EmployeeRepository extends CrudRepository<EmployeeImpl, Integer> {
 
     /**
      * @param userID
