@@ -10,7 +10,9 @@ public class CustomerImpl implements Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int userID;
+    @Column(name="phoneNumber", nullable = false, length=255, unique=true)
     private String phoneNumber;
+    @Column(name="address", nullable = false, length=255, unique=true)
     private String address;
 
     public CustomerImpl(int userID, String phoneNumber, String address){
