@@ -5,8 +5,9 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import dao.user.UserRepository;
+
 import model.user.UserImpl;
+import repositories.UserRepository;
 
 @RestController
 public class SampleController {
