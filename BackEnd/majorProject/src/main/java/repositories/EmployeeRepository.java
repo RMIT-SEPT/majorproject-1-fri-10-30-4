@@ -1,25 +1,27 @@
 package repositories;
 
 import model.user.EmployeeImpl;
+import model.user.UserImpl;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 
-public interface EmployeeRepository {
+public interface EmployeeRepository extends CrudRepository<EmployeeImpl, Integer> {
 
     /**
-     * @param email Email address (case insensitive) of the user.
-     * @return Collection of employees with that selected email address.
+     * @param userID
+     * @return Employee with the userID
      */
-    @Query("SELECT employees FROM EmployeeImpl employees WHERE (email = LOWER(:email))")
-    Collection<EmployeeImpl> getEmployeeByEmail(@Param("email") String email);
+    @Query("SELECT employees FROM EmployeeImpl employees WHERE (userID = :userID))")
+    EmployeeImpl getEmployeeByID(@Param("userID") int userID);
 
     /**
-     * @param email Email address (case insensitive) of the user.
-     * @param passwordHash Password hash of the employee.
-     * @return Collection of employees with the same email and password provided.
+     *
+     * @param businessID
+     * @return A collection of Employees with the same businessIDs
      */
-    @Query("SELECT employees FROM EmployeeImpl employees WHERE (email = LOWER(:email)) AND (password_hash = :password_hash)")
-    Collection<EmployeeImpl> getEmployeeByEmailAndPassword(@Param("email") String email, @Param("password_hash") String passwordHash);
+    @Query("SELECT employees FROM EmployeeImpl employees WHERE (businessID = :businessID)")
+    Collection<EmployeeImpl> getEmployeeByBusinessID(@Param("businessID") int businessID);
 }
