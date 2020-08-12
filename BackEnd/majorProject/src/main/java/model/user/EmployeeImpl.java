@@ -11,10 +11,10 @@ import java.util.List;
 public class EmployeeImpl implements Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    int userID;
-    int businessID;
-    String phoneNumber;
-    List<Integer> services;
+    private int userID;
+    private int businessID;
+    private String phoneNumber;
+    private List<Integer> services;
 
     public EmployeeImpl(int userID, int businessID, String phoneNumber, List<Integer> services){
         this.userID = userID;

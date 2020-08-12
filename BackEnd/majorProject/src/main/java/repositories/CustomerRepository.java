@@ -1,24 +1,31 @@
 package repositories;
 
-import model.user.EmployeeImpl;
+import model.user.CustomerImpl;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 
 public interface CustomerRepository {
-    /**
-     * @param email Email address (case insensitive) of the user.
-     * @return Collection of employees with that selected email address.
-     */
-    @Query("SELECT customers FROM CustomerImpl customers WHERE (email = LOWER(:email))")
-    Collection<EmployeeImpl> getEmployeeByEmail(@Param("email") String email);
 
     /**
-     * @param email Email address (case insensitive) of the user.
-     * @param passwordHash Password hash of the employee.
-     * @return Collection of employees with the same email and password provided.
+     * @param userID
+     * @return The customer with the userID.
      */
-    @Query("SELECT employees FROM EmployeeImpl employees WHERE (email = LOWER(:email)) AND (password_hash = :password_hash)")
-    Collection<EmployeeImpl> getEmployeeByEmailAndPassword(@Param("email") String email, @Param("password_hash") String passwordHash);
+    @Query("SELECT customer FROM CustomerImpl customer WHERE (userID = :userID")
+    CustomerImpl getCustomerByID(@Param("userID") int userID);
+
+    /**
+     * @param address
+     * @return Get a collection of customers with the same address.
+     */
+    @Query("SELECT customers FROM CustomerImpl customers WHERE address = :address")
+    Collection<CustomerImpl> getCustomerByAddress(@Param("address") String address);
+
+    /**
+     * @param phoneNumber
+     * @return A collection of customers with the same phone number.
+     */
+    @Query("SELECT customers FROM CustomerImpl customers WHERE phoneNumber = :phoneNumber")
+    Collection<CustomerImpl> getCustomerByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 }
