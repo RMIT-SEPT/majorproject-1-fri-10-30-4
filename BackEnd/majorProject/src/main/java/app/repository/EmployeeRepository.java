@@ -13,7 +13,7 @@ public interface EmployeeRepository extends CrudRepository<EmployeeImpl, Integer
      * @param userID
      * @return Employee with the userID
      */
-    @Query("SELECT employees FROM EmployeeImpl employees WHERE (userID = :userID))")
+    @Query("SELECT employees FROM EmployeeImpl employees WHERE (userID = :userID)")
     EmployeeImpl getEmployeeByID(@Param("userID") int userID);
 
     /**

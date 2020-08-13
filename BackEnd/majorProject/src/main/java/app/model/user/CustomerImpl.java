@@ -15,6 +15,13 @@ public class CustomerImpl implements Customer {
     @Column(name="address", nullable = false, length=255, unique=true)
     private String address;
 
+    
+    /**
+     * Default constructor needed for Hibernate.
+     * Do not use.
+     */
+    public CustomerImpl() {}
+    
     public CustomerImpl(int userID, String phoneNumber, String address){
         this.userID = userID;
         this.phoneNumber = phoneNumber;

@@ -13,7 +13,7 @@ public interface CustomerRepository extends CrudRepository<CustomerImpl, Integer
      * @param userID
      * @return The customer with the userID.
      */
-    @Query("SELECT customer FROM CustomerImpl customer WHERE (userID = :userID")
+    @Query("SELECT customer FROM CustomerImpl customer WHERE (userID = :userID)")
     CustomerImpl getCustomerByID(@Param("userID") int userID);
 
     /**

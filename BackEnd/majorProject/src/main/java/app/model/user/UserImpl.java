@@ -56,6 +56,7 @@ public class UserImpl implements User{
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.role = UserRole.values()[userRole];
+		System.out.println(this.userId);
 	}
 
 	@Override
