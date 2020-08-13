@@ -15,9 +15,15 @@ public class EmployeeImpl implements Employee {
     private int businessID;
     @Column(name="phoneNumber", nullable = false, length=20)
     private String phoneNumber;
-    @Column(name="services", nullable = false, length=255)
+    @ElementCollection
     private List<Integer> services;
 
+    /**
+     * Default constructor for Hibernate.
+     * Do not use.
+     */
+    public EmployeeImpl() {}
+    
     public EmployeeImpl(int userID, int businessID, String phoneNumber, List<Integer> services){
         this.userID = userID;
         this.businessID = businessID;

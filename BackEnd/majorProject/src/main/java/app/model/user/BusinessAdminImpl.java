@@ -13,6 +13,13 @@ public class BusinessAdminImpl implements BusinessAdmin {
     @Column(name="businessID", nullable = false, length=100, unique=true)
     private int businessID;
 
+    
+    /**
+     * Default constructor needed for Hibernate.
+     * Do not use.
+     */
+    public BusinessAdminImpl() {}
+    
     public BusinessAdminImpl(int userID, int businessID){
         this.userID = userID;
         this.businessID = businessID;
