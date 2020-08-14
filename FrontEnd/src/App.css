@@ -85,7 +85,7 @@ li a {
   text-decoration: none;
 }
 
-li Link:hover:not(.active) {
+li a:hover:not(.active) {
   background-color:#111;
 }
 
