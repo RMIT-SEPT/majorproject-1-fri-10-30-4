@@ -9,7 +9,7 @@ import EmployeeComponent from './EmployeeComponent.jsx'
 class HomeComponent extends Component {
     render() {
         return (
-            <div className="HomeComponent">
+            <div>
                 <Router>
                     <>
                         <HeaderComponent/>

@@ -5,13 +5,14 @@ class EmployeeRegistrationForm extends Component {
     constructor(props){
         super(props)
 
-        // Employee: change later when employee format in decided
+        // Employee: change later when employee format in decided and connected to the backend
         this.state = {
-            id = '',
-            name = '',
-            contact = ''
+            e_id :'',
+            name : '',
+            contact : ''
         }
     }
+
     handleUsernameChange = (event) => {
         this.setState({
             name: event.target.value
@@ -29,7 +30,7 @@ class EmployeeRegistrationForm extends Component {
                     <label>ID</label>
                     <input
                         type = "text"
-                        value = {this.state.id}
+                        value = {this.state.e_id}
                         onChange={this.handleUsernameChange}
                     />
                     <label>Name</label>
