@@ -13,6 +13,7 @@
 
 * Github repository : https://github.com/RMIT-SEPT/majorproject-1-fri-10-30-4
 * ClickUp Workspace : https://app.clickup.com/6915050/v/l/6-13211523-1
+* Google Drive : https://drive.google.com/drive/folders/1QlKybfPhGG8A0XZsVUqcJ01uWPZ3PGOb?usp=sharing
 
 
 ## Code documentation
