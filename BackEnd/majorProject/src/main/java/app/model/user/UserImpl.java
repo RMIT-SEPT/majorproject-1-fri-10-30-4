@@ -71,7 +71,7 @@ public class UserImpl implements User{
 
 	@Override
 	public String getUserPasswordHash() {
-		return this.getUserPasswordHash();
+		return this.passwordHash;
 	}
 
 	@Override
