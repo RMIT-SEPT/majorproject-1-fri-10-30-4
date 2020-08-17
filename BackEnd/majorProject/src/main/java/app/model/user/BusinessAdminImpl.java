@@ -1,16 +1,16 @@
 package app.model.user;
 
 import app.model.interfaces.user.BusinessAdmin;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name="business_admin")
+@Table(name="BUSINESS_ADMIN")
 public class BusinessAdminImpl implements BusinessAdmin {
     @Id
+    @Column(name="USER_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int userID;
-    @Column(name="businessID", nullable = false, length=100, unique=true)
+    @Column(name="BUSINESS_ID", nullable = false, length=100, unique=true)
     private int businessID;
 
     
@@ -28,11 +28,19 @@ public class BusinessAdminImpl implements BusinessAdmin {
 
     @Override
     public int getUserID() {
-        return 0;
+        return userID;
     }
 
     @Override
     public int getBusinessID() {
-        return 0;
+        return businessID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public void setBusinessID(int businessID) {
+        this.businessID = businessID;
     }
 }
