@@ -11,7 +11,7 @@ import java.time.LocalTime;
 public class BookingImpl implements Booking {
     @Id
     @Column(name="BOOKING_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int bookingID;
 
     @Column(name="SERVICE_ID")
