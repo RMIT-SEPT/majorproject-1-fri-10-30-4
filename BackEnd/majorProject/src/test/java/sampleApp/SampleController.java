@@ -17,7 +17,7 @@ public class SampleController {
 	
 	@RequestMapping("/debug/allTestUsers")
 	public String index() {
-		ur.save(new UserImpl(Double.toString(Math.random()), "veryGoodPassword", "fname", "lname", 0));
+		ur.save(new UserImpl("test@test.com", "veryGoodPassword", "fname", "lname", 0));
 		for(User i:ur.getUsersByEmail("test@test.com")) {
 			System.out.println(i.toString());
 		}

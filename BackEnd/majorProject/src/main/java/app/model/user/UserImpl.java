@@ -56,7 +56,7 @@ public class UserImpl implements User{
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.role = UserRole.values()[userRole];
-		System.out.println("UserID:" + this.userId);
+		System.out.println(this.userId);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class UserImpl implements User{
 
 	@Override
 	public String getUserPasswordHash() {
-		return this.getUserPasswordHash();
+		return this.passwordHash;
 	}
 
 	@Override

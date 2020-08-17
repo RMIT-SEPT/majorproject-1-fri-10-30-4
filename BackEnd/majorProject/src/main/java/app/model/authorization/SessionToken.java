@@ -10,4 +10,12 @@ public class SessionToken {
 		this.checkHash = original.getCheckHash();
 	}
 	
+	public int getSessionId() {
+		return this.sessionId;
+	}
+	
+	public String getCheckHash() {
+		return this.checkHash;
+	}
+	
 }
