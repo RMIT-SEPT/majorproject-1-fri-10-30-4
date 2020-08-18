@@ -30,7 +30,7 @@ public class BookingController {
 
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/remove")
     public ResponseEntity<String> deleteBooking(@RequestParam("bookingID") Integer bookingID) {
         boolean isDeleted = bookingService.deleteBooking(bookingID);
         String msg;
@@ -38,7 +38,7 @@ public class BookingController {
             msg = "Failed to remove booking.";
             return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
         }
-        msg = "Booking " + bookingID.toString() + "successfully removed.";
+        msg = "Booking #" + bookingID.toString() + " successfully removed.";
         return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 

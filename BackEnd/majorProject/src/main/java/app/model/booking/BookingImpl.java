@@ -38,8 +38,6 @@ public class BookingImpl implements Booking {
     private boolean isCancelled;
 
 
-
-
     public BookingImpl() {
 
     }
@@ -65,8 +63,27 @@ public class BookingImpl implements Booking {
     }
 
     @Override
+    public int getBookingDuration() {
+        return bookingDuration;
+    }
+
+    @Override
+    public String getBookingDescription() {
+        return bookingDescription;
+    }
+
+    @Override
+    public boolean getIsCancelled() {
+        return isCancelled;
+    }
+
+    @Override
     public LocalDate getBookingDate() {
         return null;
+    }
+
+    public String getDate(){
+        return date;
     }
 
     @Override
@@ -77,22 +94,6 @@ public class BookingImpl implements Booking {
     @Override
     public LocalTime getBookingEndTime() {
         return null;
-    }
-
-    @Override
-    public int getBookingDuration() {
-        return bookingDuration;
-    }
-
-
-    @Override
-    public String getBookingDescription() {
-        return bookingDescription;
-    }
-
-    @Override
-    public boolean getIsCancelled() {
-        return isCancelled;
     }
 
 
@@ -128,9 +129,6 @@ public class BookingImpl implements Booking {
         this.date = date;
     }
 
-    public String getDate(){
-        return date;
-    }
 
 
 
