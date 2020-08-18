@@ -27,8 +27,7 @@ public class BookingService {
         if (optionalEntity == null) {
             return false;
         }
-        BookingImpl booking = optionalEntity.get();
-        bookingRepository.delete(booking);
+        bookingRepository.deleteById(bookingID);
         return true;
     }
 

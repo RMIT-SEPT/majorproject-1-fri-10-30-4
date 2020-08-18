@@ -17,25 +17,29 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    @GetMapping
+    @GetMapping("/all")
     public Iterable<BookingImpl> getAllBookings() {
         return this.bookingService.getAll();
     }
 
-    @PostMapping
+
+    @PostMapping("/create")
     public ResponseEntity<BookingImpl> createBooking(@Valid @RequestBody BookingImpl newBooking, BindingResult result) {
         BookingImpl booking = bookingService.createBooking(newBooking);
         return new ResponseEntity<BookingImpl>(booking, HttpStatus.OK);
 
     }
 
-    @RequestMapping(value="/delete-bookings/{bookingID}", method=RequestMethod.DELETE )
-    public ResponseEntity<Integer> deleteBooking(@Valid @PathVariable Integer bookingID, BindingResult result) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteBooking(@RequestParam("bookingID") Integer bookingID) {
         boolean isDeleted = bookingService.deleteBooking(bookingID);
+        String msg;
         if(!isDeleted){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            msg = "Failed to remove booking.";
+            return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(bookingID, HttpStatus.OK);
+        msg = "Booking " + bookingID.toString() + "successfully removed.";
+        return new ResponseEntity<>(msg, HttpStatus.OK);
     }
 
 
