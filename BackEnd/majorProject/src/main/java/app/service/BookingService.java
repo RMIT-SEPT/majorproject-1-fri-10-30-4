@@ -6,6 +6,8 @@ import app.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BookingService {
 
@@ -17,7 +19,17 @@ public class BookingService {
     }
 
     public Iterable<BookingImpl> getAll(){
-       return bookingRepository.findAll();
+        return bookingRepository.findAll();
+    }
+
+    public boolean deleteBooking(Integer bookingID){
+        Optional<BookingImpl> optionalEntity = bookingRepository.findById(bookingID);
+        if (optionalEntity == null) {
+            return false;
+        }
+        BookingImpl booking = optionalEntity.get();
+        bookingRepository.delete(booking);
+        return true;
     }
 
 

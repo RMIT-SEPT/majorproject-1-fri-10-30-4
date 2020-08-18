@@ -12,7 +12,7 @@ public class BookingImpl implements Booking {
     @Id
     @Column(name="BOOKING_ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int bookingID;
+    private Integer bookingID;
 
     @Column(name="SERVICE_ID")
     private int serviceID;
@@ -44,8 +44,8 @@ public class BookingImpl implements Booking {
 
     }
 
-    public int getBookingID() {
-
+    @Override
+    public Integer getBookingID() {
         return bookingID;
     }
 
@@ -96,7 +96,7 @@ public class BookingImpl implements Booking {
     }
 
 
-    public void setBookingID(int bookingID) {
+    public void setBookingID(Integer bookingID) {
         this.bookingID = bookingID;
     }
 

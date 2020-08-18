@@ -25,7 +25,18 @@ public class BookingController {
     @PostMapping
     public ResponseEntity<BookingImpl> createBooking(@Valid @RequestBody BookingImpl newBooking, BindingResult result) {
         BookingImpl booking = bookingService.createBooking(newBooking);
-        return new ResponseEntity<BookingImpl>(booking, HttpStatus.CREATED);
+        return new ResponseEntity<BookingImpl>(booking, HttpStatus.OK);
+
     }
+
+    @RequestMapping(value="/delete-bookings/{bookingID}", method=RequestMethod.DELETE )
+    public ResponseEntity<Integer> deleteBooking(@Valid @PathVariable Integer bookingID, BindingResult result) {
+        boolean isDeleted = bookingService.deleteBooking(bookingID);
+        if(!isDeleted){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(bookingID, HttpStatus.OK);
+    }
+
 
 }
