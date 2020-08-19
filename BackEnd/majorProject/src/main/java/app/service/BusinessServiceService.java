@@ -20,7 +20,13 @@ public class BusinessServiceService {
         return businessServiceRepository.save(businessService);
     }
 
-    public void removeService(Integer serviceID){
-        businessServiceRepository.deleteById(serviceID);
+    public boolean removeService(Integer serviceID){
+        for(BusinessServiceImpl service : getAll()){
+            if(service.getServiceID() == serviceID) {
+                businessServiceRepository.deleteById(serviceID);
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -31,7 +31,7 @@ public class BookingController {
     }
 
     @DeleteMapping("/remove")
-    public ResponseEntity<String> deleteBooking(@RequestParam("bookingID") Integer bookingID) {
+    public ResponseEntity<String> removeBooking(@RequestParam("bookingID") Integer bookingID) {
         boolean isDeleted = bookingService.deleteBooking(bookingID);
         String msg;
         if(!isDeleted){

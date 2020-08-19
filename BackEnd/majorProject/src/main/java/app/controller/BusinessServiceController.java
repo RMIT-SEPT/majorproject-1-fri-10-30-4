@@ -29,10 +29,15 @@ public class BusinessServiceController {
     public ResponseEntity<String> removeService(@RequestParam("serviceID") Integer serviceID){
         String message;
         if(serviceID == null){
-            message = "Failed to remove service.";
+            message = "Failed to remove service. Enter a service ID.";
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-        businessServiceService.removeService(serviceID);
+        boolean serviceFoundAndRemoved = businessServiceService.removeService(serviceID);
+        if(!serviceFoundAndRemoved){
+            message = "Failed to remove service #" + serviceID.toString() + "\n"
+            + "Service not found.";
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
         message = "Service #" + serviceID.toString() + " successfully removed.";
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
