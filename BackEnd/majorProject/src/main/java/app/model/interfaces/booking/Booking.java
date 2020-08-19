@@ -9,7 +9,7 @@ public interface Booking {
 	/**
 	 * @return The ID of this booking.
 	 */
-	int getBookingID();
+	Integer getBookingID();
 	
 	/**
 	 * @return True if the booking is still continuing, false if the booking is cancelled.
