@@ -11,9 +11,9 @@ public class EmployeeImpl implements Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int userID;
-    @Column(name="businessID", nullable = false, length=100, unique=true)
+    @Column(name="BUSINESS_ID", nullable = false, length=100, unique=true)
     private int businessID;
-    @Column(name="phoneNumber", nullable = false, length=20)
+    @Column(name="PHONE_NUMBER", nullable = false, length=20)
     private String phoneNumber;
     @ElementCollection
     private List<Integer> services;
@@ -51,4 +51,15 @@ public class EmployeeImpl implements Employee {
         return services;
     }
 
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public void setBusinessID(int businessID) {
+        this.businessID = businessID;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

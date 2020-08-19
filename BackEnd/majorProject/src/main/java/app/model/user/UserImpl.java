@@ -3,21 +3,21 @@ import app.model.interfaces.user.User;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name="USER")
 public class UserImpl implements User{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int userId;
-	@Column(name="email", nullable = false, length=255, unique=true)
+	@Column(name="EMAIL", nullable = false, length=255, unique=true)
 	private String email;
-	@Column(name="password_hash", nullable = false, length=65)
+	@Column(name="PASSWORD_HASH", nullable = false, length=65)
 	private String passwordHash;
-	@Column(name="first_name", nullable = false, length=50)
+	@Column(name="FIRST_NAME", nullable = false, length=50)
 	private String firstName;
-	@Column(name="last_name", nullable = false, length=100)
+	@Column(name="LAST_NAME", nullable = false, length=100)
 	private String lastName;
-	@Column(name="role", nullable=false)
+	@Column(name="ROLE", nullable=false)
 	private UserRole role;
 	
 	
@@ -29,7 +29,6 @@ public class UserImpl implements User{
 	
 	/**
 	 * Creates a new User object. No validation is performed in this method.
-	 * @param userID ID for the customer in the DB
 	 * @param email customer Email.
 	 * @param passwordHash customer's hashed password
 	 * @param firstName Customer's first name.
@@ -95,4 +94,27 @@ public class UserImpl implements User{
 	}
 
 
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
 }
