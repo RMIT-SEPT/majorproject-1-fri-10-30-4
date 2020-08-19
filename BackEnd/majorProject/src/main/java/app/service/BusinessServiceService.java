@@ -19,4 +19,8 @@ public class BusinessServiceService {
     public BusinessServiceImpl createService(BusinessServiceImpl businessService){
         return businessServiceRepository.save(businessService);
     }
+
+    public void removeService(Integer serviceID){
+        businessServiceRepository.deleteById(serviceID);
+    }
 }

@@ -25,9 +25,17 @@ public class BusinessServiceController {
         return new ResponseEntity<>(businessService, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/remove")
     public ResponseEntity<String> removeService(@RequestParam("serviceID") Integer serviceID){
-        
+        String message;
+        if(serviceID == null){
+            message = "Failed to remove service.";
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        businessServiceService.removeService(serviceID);
+        message = "Service #" + serviceID.toString() + " successfully removed.";
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
+
 
 }
