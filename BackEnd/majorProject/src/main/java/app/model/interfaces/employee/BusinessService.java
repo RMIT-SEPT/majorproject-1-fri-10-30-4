@@ -1,6 +1,6 @@
 package app.model.interfaces.employee;
 
-public interface Service {
+public interface BusinessService {
 	
 	/**
 	 * @return The ID for this service.
