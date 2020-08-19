@@ -15,4 +15,8 @@ public class BusinessServiceService {
     public Iterable<BusinessServiceImpl> getAll() {
         return businessServiceRepository.findAll();
     }
+
+    public BusinessServiceImpl createService(BusinessServiceImpl businessService){
+        return businessServiceRepository.save(businessService);
+    }
 }

@@ -20,17 +20,17 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Override
     public int getServiceID() {
-        return 0;
+        return serviceID;
     }
 
     @Override
     public String getServiceType() {
-        return null;
+        return serviceType;
     }
 
     @Override
     public String getServiceDescription() {
-        return null;
+        return serviceDescription;
     }
 
     public void setServiceType(String serviceType) {
