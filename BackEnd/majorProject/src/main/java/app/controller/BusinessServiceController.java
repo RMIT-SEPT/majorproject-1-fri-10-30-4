@@ -25,4 +25,9 @@ public class BusinessServiceController {
         return new ResponseEntity<>(businessService, HttpStatus.OK);
     }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> removeService(@RequestParam("serviceID") Integer serviceID){
+        
+    }
+
 }
