@@ -1,7 +1,6 @@
 package app.model.businessservice;
 
 import app.model.interfaces.employee.BusinessService;
-
 import javax.persistence.*;
 
 @Entity
@@ -34,6 +33,7 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     public void setServiceType(String serviceType) {
+
         this.serviceType = serviceType;
     }
 

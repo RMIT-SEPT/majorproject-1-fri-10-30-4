@@ -22,12 +22,10 @@ public class BookingController {
         return this.bookingService.getAll();
     }
 
-
     @PostMapping("/create")
     public ResponseEntity<BookingImpl> createBooking(@Valid @RequestBody BookingImpl newBooking, BindingResult result) {
         BookingImpl booking = bookingService.createBooking(newBooking);
         return new ResponseEntity<BookingImpl>(booking, HttpStatus.OK);
-
     }
 
     @DeleteMapping("/remove")

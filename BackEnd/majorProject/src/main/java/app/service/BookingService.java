@@ -14,8 +14,8 @@ public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
-    public BookingImpl createBooking(BookingImpl booking){
-       return bookingRepository.save(booking);
+    public BookingImpl createBooking(BookingImpl booking) {
+        return bookingRepository.save(booking);
     }
 
     public Iterable<BookingImpl> getAll(){
