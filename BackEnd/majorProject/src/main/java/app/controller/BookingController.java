@@ -22,6 +22,9 @@ public class BookingController {
         return this.bookingService.getAll();
     }
 
+    @GetMapping("/byid")
+    public Iterable<BookingImpl> getBookingsByCustomerId(@RequestParam("customerID") int customerID) {
+        return bookingService.getByCustomerId(customerID); }
 
     @PostMapping("/create")
     public ResponseEntity<BookingImpl> createBooking(@Valid @RequestBody BookingImpl newBooking, BindingResult result) {

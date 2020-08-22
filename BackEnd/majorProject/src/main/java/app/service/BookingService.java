@@ -6,6 +6,7 @@ import app.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,16 @@ public class BookingService {
 
     public Iterable<BookingImpl> getAll(){
         return bookingRepository.findAll();
+    }
+
+    public Iterable<BookingImpl> getByCustomerId(int customerID) {
+        Iterable<BookingImpl> allBookings = getAll();
+        ArrayList<BookingImpl> customerBookings = new ArrayList<>();
+        for (BookingImpl booking : allBookings) {
+            if (booking.getCustomerUserID() == customerID)
+                customerBookings.add(booking);
+        }
+        return customerBookings;
     }
 
     public boolean deleteBooking(Integer bookingID){
