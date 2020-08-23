@@ -23,14 +23,8 @@ public class BookingService {
         return bookingRepository.findAll();
     }
 
-    public Iterable<BookingImpl> getByCustomerId(int customerID) {
-        Iterable<BookingImpl> allBookings = getAll();
-        ArrayList<BookingImpl> customerBookings = new ArrayList<>();
-        for (BookingImpl booking : allBookings) {
-            if (booking.getCustomerUserID() == customerID)
-                customerBookings.add(booking);
-        }
-        return customerBookings;
+    public Iterable<BookingImpl> getAllByCustomerId(int customerID) {
+        return bookingRepository.getAllByCustomerId(customerID);
     }
 
     public boolean deleteBooking(Integer bookingID){
