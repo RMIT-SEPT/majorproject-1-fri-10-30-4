@@ -17,28 +17,28 @@ import java.time.format.DateTimeFormatter;
 @Table(name="BOOKING")
 public class BookingImpl implements Booking {
     @Id
-    @Column(name="BOOKING_ID")
+    @Column(name="BOOKING_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer bookingID;
 
-    @Column(name="SERVICE_ID")
+    @Column(name="SERVICE_ID", nullable = false)
     @NotEmpty(message ="Error: Please provide a service ID.")
     private int serviceID;
 
-    @Column(name="CUSTOMER_ID")
+    @Column(name="CUSTOMER_ID", nullable = false)
     @NotEmpty(message ="Error: Please provide a customer ID.")
     private int customerID;
 
-    @Column(name="EMPLOYEE_ID")
+    @Column(name="EMPLOYEE_ID", nullable = false)
     @NotEmpty(message ="Error: Please provide a employee ID.")
     private int employeeID;
 
-    @Column(name="DATE")
+    @Column(name="DATE", nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd")
     @NotBlank(message = "Error: Date required for booking.")
     private LocalDate bookingDate;
 
-    @Column(name="START_TIME")
+    @Column(name="START_TIME", nullable = false)
     @JsonFormat(pattern="HH:mm")
     @NotBlank(message = "Error: Time required for booking.")
     private LocalTime bookingStartTime;
@@ -46,7 +46,7 @@ public class BookingImpl implements Booking {
     @Column(name="BOOKING_DESC")
     private String bookingDescription;
 
-    @Column(name="IS_ACTIVE")
+    @Column(name="IS_ACTIVE", nullable = false)
     @NotNull(message = "Error: Booking must be either active or inactive (true or false).")
     private Boolean isActive;
 

@@ -25,7 +25,7 @@ public class BookingController {
     @PostMapping("/create")
     public ResponseEntity<?> createBooking(@Valid @RequestBody BookingImpl newBooking, BindingResult result) {
         if(result.hasErrors()){
-            return new ResponseEntity<>("Invalid Booking Object", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Error: Invalid Booking object.", HttpStatus.BAD_REQUEST);
         }
         BookingImpl booking = bookingService.createBooking(newBooking);
         return new ResponseEntity<BookingImpl>(booking, HttpStatus.OK);
@@ -35,12 +35,12 @@ public class BookingController {
     public ResponseEntity<String> removeBooking(@RequestParam("bookingID") Integer bookingID) {
         String message;
         if(bookingID == null) {
-            message = "Failed to remove booking. Please enter a booking ID.";
+            message = "Error: Failed to remove booking. Please enter a booking ID.";
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         boolean bookingFoundAndRemoved = bookingService.removeBooking(bookingID);
         if(!bookingFoundAndRemoved){
-            message = "Failed to remove booking #" + bookingID.toString() + "\n" +
+            message = "Error: Failed to remove booking #" + bookingID.toString() + "\n" +
             "Booking not found.";
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
