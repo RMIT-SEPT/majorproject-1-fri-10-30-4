@@ -14,10 +14,6 @@ public class BusinessServiceController {
     @Autowired
     private BusinessServiceService businessServiceService;
 
-    @GetMapping("/all")
-    public Iterable<BusinessServiceImpl> getAllServices() {
-        return businessServiceService.getAll();
-    }
 
     @PostMapping("/create")
     public ResponseEntity<BusinessServiceImpl> createService(@RequestBody BusinessServiceImpl newbusinessService, BindingResult bindingResult) {
@@ -42,5 +38,11 @@ public class BusinessServiceController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    /************************************For Testing*****************************************/
 
+    @GetMapping("/all")
+    public Iterable<BusinessServiceImpl> getAllServices() {
+
+        return businessServiceService.getAll();
+    }
 }

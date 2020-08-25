@@ -17,10 +17,6 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    @GetMapping("/all")
-    public Iterable<BookingImpl> getAllBookings() {
-        return this.bookingService.getAll();
-    }
 
     @PostMapping("/create")
     public ResponseEntity<BookingImpl> createBooking(@Valid @RequestBody BookingImpl newBooking, BindingResult result) {
@@ -45,8 +41,13 @@ public class BookingController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-/************************************************************************************/
-    // For testing purposes
+    /************************************For Testing*****************************************/
+
+    @GetMapping("/all")
+    public Iterable<BookingImpl> getAllBookings() {
+        return this.bookingService.getAll();
+    }
+
     @DeleteMapping("/remove-all")
     public ResponseEntity<String> removeAllBookings() {
        for(BookingImpl booking : bookingService.getAll()){
@@ -54,6 +55,9 @@ public class BookingController {
        }
        return new ResponseEntity<>("All bookings removed.", HttpStatus.OK);
     }
+
+
+
 
 
 }
