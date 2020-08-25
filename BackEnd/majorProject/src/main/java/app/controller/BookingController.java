@@ -17,6 +17,15 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    @GetMapping("/all")
+    public Iterable<BookingImpl> getAllBookings() {
+        return this.bookingService.getAll();
+    }
+
+    @GetMapping("/allbyid")
+    public Iterable<BookingImpl> getBookingsByCustomerId(@RequestParam("customerID") int customerID) {
+        return bookingService.getAllByCustomerId(customerID);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<BookingImpl> createBooking(@Valid @RequestBody BookingImpl newBooking, BindingResult result) {
