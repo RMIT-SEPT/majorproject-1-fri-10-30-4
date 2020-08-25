@@ -1,10 +1,17 @@
 package app.model.booking;
 
 import app.model.interfaces.booking.Booking;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name="BOOKING")
@@ -15,27 +22,30 @@ public class BookingImpl implements Booking {
     private Integer bookingID;
 
     @Column(name="SERVICE_ID")
+    @NotEmpty(message ="Error: Please provide a service ID.")
     private int serviceID;
 
     @Column(name="CUSTOMER_ID")
+    @NotEmpty(message ="Error: Please provide a customer ID.")
     private int customerID;
 
     @Column(name="EMPLOYEE_ID")
+    @NotEmpty(message ="Error: Please provide a employee ID.")
     private int employeeID;
 
     @Column(name="DATE")
-    //@DateTimeFormat(pattern = "yyyy-mm-dd")
-    //private LocalDateTime date;
-    private String date;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate bookingDate;
 
-    @Column(name="BOOKING_DURATION")
-    private int bookingDuration;
+    @Column(name="START_TIME")
+    @JsonFormat(pattern="HH:mm")
+    private LocalTime bookingStartTime;
 
     @Column(name="BOOKING_DESC")
     private String bookingDescription;
 
-    @Column(name="IS_CANCELLED")
-    private boolean isCancelled;
+    @Column(name="IS_ACTIVE")
+    private Boolean isActive;
 
 
     public BookingImpl() {
@@ -63,45 +73,32 @@ public class BookingImpl implements Booking {
     }
 
     @Override
-    public int getBookingDuration() {
-        return bookingDuration;
-    }
-
-    @Override
     public String getBookingDescription() {
         return bookingDescription;
     }
 
     @Override
-    public boolean getIsCancelled() {
-        return isCancelled;
+    public Boolean getIsActive() {
+        return isActive;
     }
 
-    @Override
     public LocalDate getBookingDate() {
-        return null;
+        return bookingDate;
     }
 
-    public String getDate(){
-        return date;
-    }
 
-    @Override
     public LocalTime getBookingStartTime() {
-        return null;
-    }
 
-    @Override
-    public LocalTime getBookingEndTime() {
-        return null;
+        return bookingStartTime;
     }
-
 
     public void setBookingID(Integer bookingID) {
+
         this.bookingID = bookingID;
     }
 
     public void setCustomerID(int customerID) {
+
         this.customerID = customerID;
     }
 
@@ -109,27 +106,27 @@ public class BookingImpl implements Booking {
         this.employeeID = employeeID;
     }
 
+
     public void setServiceID(int serviceID) {
+
         this.serviceID = serviceID;
     }
 
-    public void setBookingDuration(int bookingDuration) {
-        this.bookingDuration = bookingDuration;
-    }
-
     public void setBookingDescription(String bookingDescription) {
+
         this.bookingDescription = bookingDescription;
     }
 
-    public void setCancelled(boolean cancelled) {
-        isCancelled = cancelled;
+    public void setIsActive(boolean active) {
+        isActive = active;
     }
 
-    public void setDate(String date){
-        this.date = date;
+    public void setBookingDate(LocalDate bookingDate){
+        this.bookingDate = bookingDate;
     }
 
 
-
-
+    public void setBookingStartTime(LocalTime bookingStartTime) {
+        this.bookingStartTime = bookingStartTime;
+    }
 }

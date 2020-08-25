@@ -41,4 +41,14 @@ public class BookingController {
     }
 
 
+    // For testing purposes
+    @DeleteMapping("/remove-all")
+    public ResponseEntity<String> removeAllBookings() {
+       for(BookingImpl booking : bookingService.getAll()){
+           bookingService.deleteBooking(booking.getBookingID());
+       }
+       return new ResponseEntity<>("All bookings removed.", HttpStatus.OK);
+    }
+
+
 }
