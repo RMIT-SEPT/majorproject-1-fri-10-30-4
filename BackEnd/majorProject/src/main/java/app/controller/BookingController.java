@@ -30,22 +30,27 @@ public class BookingController {
 
     @DeleteMapping("/remove")
     public ResponseEntity<String> removeBooking(@RequestParam("bookingID") Integer bookingID) {
-        boolean isDeleted = bookingService.deleteBooking(bookingID);
-        String msg;
-        if(!isDeleted){
-            msg = "Failed to remove booking.";
-            return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
+        String message;
+        if(bookingID == null) {
+            message = "Failed to remove booking. Please enter a booking ID.";
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-        msg = "Booking #" + bookingID.toString() + " successfully removed.";
-        return new ResponseEntity<>(msg, HttpStatus.OK);
+        boolean bookingFoundAndRemoved = bookingService.removeBooking(bookingID);
+        if(!bookingFoundAndRemoved){
+            message = "Failed to remove booking #" + bookingID.toString() + "\n" +
+            "Booking not found.";
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        message = "Booking #" + bookingID.toString() + " successfully removed.";
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-
+/************************************************************************************/
     // For testing purposes
     @DeleteMapping("/remove-all")
     public ResponseEntity<String> removeAllBookings() {
        for(BookingImpl booking : bookingService.getAll()){
-           bookingService.deleteBooking(booking.getBookingID());
+           bookingService.removeBooking(booking.getBookingID());
        }
        return new ResponseEntity<>("All bookings removed.", HttpStatus.OK);
     }

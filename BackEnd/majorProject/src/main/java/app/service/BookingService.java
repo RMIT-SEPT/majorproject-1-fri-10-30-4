@@ -1,6 +1,7 @@
 package app.service;
 
 import app.model.booking.BookingImpl;
+import app.model.businessservice.BusinessServiceImpl;
 import app.model.interfaces.booking.Booking;
 import app.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,14 @@ public class BookingService {
         return bookingRepository.findAll();
     }
 
-    public boolean deleteBooking(Integer bookingID){
-        Optional<BookingImpl> optionalEntity = bookingRepository.findById(bookingID);
-        if (optionalEntity == null) {
-            return false;
+    public boolean removeBooking(Integer bookingID){
+        for(BookingImpl booking : getAll()){
+            if(booking.getBookingID() == bookingID) {
+                bookingRepository.deleteById(bookingID);
+                return true;
+            }
         }
-        bookingRepository.deleteById(bookingID);
-        return true;
+        return false;
     }
 
 
