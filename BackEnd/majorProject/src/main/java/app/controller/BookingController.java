@@ -17,7 +17,6 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-
     @GetMapping("/allbyid")
     public Iterable<BookingImpl> getBookingsByCustomerId(@RequestParam("customerID") int customerID) {
         return bookingService.getAllByCustomerId(customerID);
