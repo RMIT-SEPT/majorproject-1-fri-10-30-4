@@ -35,16 +35,19 @@ public class BookingImpl implements Booking {
 
     @Column(name="DATE")
     @JsonFormat(pattern="yyyy-MM-dd")
+    @NotBlank(message = "Error: Date required for booking.")
     private LocalDate bookingDate;
 
     @Column(name="START_TIME")
     @JsonFormat(pattern="HH:mm")
+    @NotBlank(message = "Error: Time required for booking.")
     private LocalTime bookingStartTime;
 
     @Column(name="BOOKING_DESC")
     private String bookingDescription;
 
     @Column(name="IS_ACTIVE")
+    @NotNull(message = "Error: Booking must be either active or inactive (true or false).")
     private Boolean isActive;
 
 
