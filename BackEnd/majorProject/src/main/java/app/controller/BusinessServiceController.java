@@ -14,13 +14,13 @@ public class BusinessServiceController {
     @Autowired
     private BusinessServiceService businessServiceService;
 
-    @GetMapping("/all")
-    public Iterable<BusinessServiceImpl> getAllServices() {
-        return businessServiceService.getAll();
-    }
 
     @PostMapping("/create")
-    public ResponseEntity<BusinessServiceImpl> createService(@RequestBody BusinessServiceImpl newbusinessService, BindingResult bindingResult) {
+    public ResponseEntity<?> createService(@RequestBody BusinessServiceImpl newbusinessService, BindingResult result) {
+        if(result.hasErrors()){
+            String message = "Error: Invalid Business Service object.";
+            return new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
+        }
         BusinessServiceImpl businessService = businessServiceService.createService(newbusinessService);
         return new ResponseEntity<>(businessService, HttpStatus.OK);
     }
@@ -29,12 +29,12 @@ public class BusinessServiceController {
     public ResponseEntity<String> removeService(@RequestParam("serviceID") Integer serviceID){
         String message;
         if(serviceID == null){
-            message = "Failed to remove service. Enter a service ID.";
+            message = "Error: Failed to remove service. Enter a service ID.";
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         boolean serviceFoundAndRemoved = businessServiceService.removeService(serviceID);
         if(!serviceFoundAndRemoved){
-            message = "Failed to remove service #" + serviceID.toString() + "\n"
+            message = "Error: Failed to remove service #" + serviceID.toString() + "\n"
             + "Service not found.";
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
@@ -42,5 +42,11 @@ public class BusinessServiceController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    /************************************For Testing*****************************************/
 
+    @GetMapping("/all")
+    public Iterable<BusinessServiceImpl> getAllServices() {
+
+        return businessServiceService.getAll();
+    }
 }

@@ -5,13 +5,26 @@ public interface BusinessService {
 	/**
 	 * @return The ID for this service.
 	 */
-	int getServiceID();
-	
+	Integer getServiceID();
+
 	/**
-	 * @return The type of this service.
+	 *
+	 * @return the ID for the business associated with the service.
 	 */
-	String getServiceType();
+	Integer getBusinessID();
+
+	/**
+	 *
+	 * @return the duration of the service.
+	 */
+
+	Integer getServiceDuration();
 	
+//	/**
+//	 * @return The type of this service.
+//	 */
+//	String getServiceType();
+//
 	/**
 	 * @return The long description of this service.
 	 */

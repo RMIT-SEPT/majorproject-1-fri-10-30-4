@@ -1,6 +1,7 @@
 package app.model.interfaces.booking;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -12,10 +13,13 @@ public interface Booking {
 	Integer getBookingID();
 	
 	/**
-	 * @return True if the booking is still continuing, false if the booking is cancelled.
+	 * @return True if the booking is still continuing, false if the booking is cancelled/or completed.
 	 */
-	boolean getIsCancelled();
-	
+	Boolean getIsActive();
+	/**
+	 * @return The service ID that this booking is for.
+	 */
+	int getServiceID();
 	/**
 	 * @return The ID of the customer associated with this booking.
 	 */
@@ -25,31 +29,23 @@ public interface Booking {
 	 * @return The ID of the employee associated with this booking.
 	 */
 	int getEmployeeUserID();
-	
+
 	/**
 	 * @return The date this booking is for.
 	 */
-	LocalDate getBookingDate();
+	//LocalDate getBookingDate();
 	
 	/**
 	 * @return The time this booking starts (to the nearest minute).
 	 */
-	 LocalTime getBookingStartTime();
+	//LocalDateTime getBookingStartTime();
 	
 	/**
 	 * @return The time this booking ends (to the nearest minute).
 	 */
-	LocalTime getBookingEndTime();
-	
-	/**
-	 * @return The booking's duration in minutes, rounded to nearest minute if needed.
-	 */
-	int getBookingDuration();
-	
-	/**
-	 * @return The service that this booking is for.
-	 */
-	int getServiceID();
+	//LocalTime getBookingEndTime();
+
+
 	
 	String getBookingDescription();
 	
