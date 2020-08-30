@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Collection;
 
 @Repository
-public interface EmployeeRepository extends CrudRepository<EmployeeImpl, Integer> {
+public interface EmployeeRepository extends UserRepository<EmployeeImpl> {
 
     /**
      * @param userID

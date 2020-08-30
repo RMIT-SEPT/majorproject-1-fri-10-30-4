@@ -2,6 +2,7 @@ package app.model.user;
 import app.model.interfaces.user.User;
 import javax.persistence.*;
 
+@Inheritance
 @Entity
 @Table(name="USER")
 public class UserImpl implements User{

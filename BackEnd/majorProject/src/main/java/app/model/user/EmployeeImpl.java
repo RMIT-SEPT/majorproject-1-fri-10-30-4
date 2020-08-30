@@ -7,10 +7,8 @@ import java.util.List;
 
 @Entity
 @Table(name="EMPLOYEE")
-public class EmployeeImpl implements Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int userID;
+public class EmployeeImpl extends UserImpl implements Employee {
+
     @Column(name="BUSINESS_ID", nullable = false, length=100, unique=true)
     private int businessID;
     @Column(name="PHONE_NUMBER", nullable = false, length=20)
@@ -24,17 +22,12 @@ public class EmployeeImpl implements Employee {
      */
     public EmployeeImpl() {}
     
-    public EmployeeImpl(int userID, int businessID, String phoneNumber, List<Integer> services){
-        this.userID = userID;
-        this.businessID = businessID;
-        this.phoneNumber = phoneNumber;
-        this.services = services;
-    }
-
-    @Override
-    public int getUserID() {
-        return userID;
-    }
+//    public EmployeeImpl(int userID, int businessID, String phoneNumber, List<Integer> services){
+//        this.userID = userID;
+//        this.businessID = businessID;
+//        this.phoneNumber = phoneNumber;
+//        this.services = services;
+//    }
 
     @Override
     public int getBusinessID() {
@@ -51,9 +44,6 @@ public class EmployeeImpl implements Employee {
         return services;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
 
     public void setBusinessID(int businessID) {
         this.businessID = businessID;
