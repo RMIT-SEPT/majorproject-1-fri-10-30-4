@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Inheritance
 @Entity
-@Table(name="USER")
+@Table(name="STANDARD_USER")
 public class UserImpl implements User{
 
 	@Id

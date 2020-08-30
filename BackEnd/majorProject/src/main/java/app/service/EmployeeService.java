@@ -13,10 +13,6 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    /* UserRepo might needed to be added here - if an employee is
-    removed from the EmpRepo then it should be removed from the
-    entire data base.*/
-
     public Iterable<EmployeeImpl> getAll() {
         return employeeRepository.findAll();
     }
@@ -33,7 +29,10 @@ public class EmployeeService {
             }
         }
         return false;
+    }
 
+    public void removeAll() {
+            employeeRepository.deleteAll();
     }
 
 

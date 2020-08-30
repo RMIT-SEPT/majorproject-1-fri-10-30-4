@@ -9,9 +9,9 @@ import java.util.List;
 @Table(name="EMPLOYEE")
 public class EmployeeImpl extends UserImpl implements Employee {
 
-    @Column(name="BUSINESS_ID", nullable = false, length=100, unique=true)
-    private int businessID;
-    @Column(name="PHONE_NUMBER", nullable = false, length=20)
+    @Column(name="BUSINESS_ID")
+    private int businessId;
+    @Column(name="PHONE_NUMBER")
     private String phoneNumber;
     @ElementCollection
     private List<Integer> services;
@@ -30,8 +30,8 @@ public class EmployeeImpl extends UserImpl implements Employee {
 //    }
 
     @Override
-    public int getBusinessID() {
-        return businessID;
+    public int getBusinessId() {
+        return businessId;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class EmployeeImpl extends UserImpl implements Employee {
 
 
     public void setBusinessID(int businessID) {
-        this.businessID = businessID;
+        this.businessId = businessId;
     }
 
     public void setPhoneNumber(String phoneNumber) {

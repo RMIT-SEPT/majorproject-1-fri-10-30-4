@@ -1,9 +1,7 @@
 package app.controller;
 
 
-import app.model.businessservice.BusinessServiceImpl;
 import app.model.user.EmployeeImpl;
-import app.repository.EmployeeRepository;
 import app.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,21 +27,29 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/remove")
-    public ResponseEntity<String> removeEmployee(@RequestParam("employeeID") Integer employeeID){
+    public ResponseEntity<String> removeEmployee(@RequestParam("userId") Integer userId){
         String message;
-        if(employeeID == null){
-            message = "Error: Failed to remove service. Enter a service ID.";
+        if(userId == null){
+            message = "Error: Failed to remove User. Enter a user ID.";
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-        boolean foundAndRemoved = employeeService.removeEmployee(employeeID);
+        boolean foundAndRemoved = employeeService.removeEmployee(userId);
         if(!foundAndRemoved){
-            message = "Error: Failed to remove service #" + employeeID.toString() + "\n"
-                    + "Service not found.";
+            message = "Error: Failed to remove service #" + userId.toString() + "\n"
+                    + "User not found.";
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
-        message = "Service #" + employeeID.toString() + " successfully removed.";
+        message = "User #" + userId.toString() + " successfully removed.";
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
+
+    @DeleteMapping("/remove-all")
+    public ResponseEntity<String> removeAllEmployees() {
+        employeeService.removeAll();
+        return new ResponseEntity<>("All employees removed.", HttpStatus.OK);
+    }
+
+
 
     /************************************For Testing*****************************************/
 
