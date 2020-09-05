@@ -12,7 +12,7 @@ public class UserImpl implements User{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name="USER_ID", nullable = false, length=255, unique=true)
 	protected int userId;
-	@Column(name="EMAIL", nullable = false, length=255)
+	@Column(name="EMAIL", nullable = false, length=255, unique=true)
 	protected String email;
 	@Column(name="PASSWORD_HASH", nullable = false, length=65)
 	protected String passwordHash;

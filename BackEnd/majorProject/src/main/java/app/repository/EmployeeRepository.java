@@ -11,5 +11,5 @@ import java.util.Collection;
 
 @Repository
 public interface EmployeeRepository extends UserRepository<EmployeeImpl> {
-    
+
 }
