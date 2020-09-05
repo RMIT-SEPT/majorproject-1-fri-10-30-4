@@ -20,7 +20,8 @@ public class EmployeeImpl extends UserImpl implements Employee {
      * Default constructor for Hibernate.
      * Do not use.
      */
-    public EmployeeImpl() {}
+    public EmployeeImpl() {
+    }
     
 //    public EmployeeImpl(int userID, int businessID, String phoneNumber, List<Integer> services){
 //        this.userID = userID;
@@ -52,4 +53,5 @@ public class EmployeeImpl extends UserImpl implements Employee {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
 }
