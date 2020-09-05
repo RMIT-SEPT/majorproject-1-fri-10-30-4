@@ -3,19 +3,20 @@ import EmployeeData from "../../data/EmployeesData"
 import "../../css/EmployeeList.css"
 import {NavLink} from 'react-router-dom'
 
-class Employees extends Component {
+class EmployeeList extends Component {
     constructor() {
         super()
         this.state = {}
     }
     render() {
-        /* Trying to link eack list item to an employee page (i.e Link to="/employee?{item.userId}") */
         const employees = EmployeeData.map(item => 
-                            {return (
-                            <NavLink to="/employee?">
+                            {return ( 
+                            <NavLink 
+                                key={item.userId} 
+                                to={"/employee/" + item.userId}>
                                 <li>{item.firstName} {item.lastName}</li>
-                            </NavLink>)
-                            })
+                            </NavLink>
+                            )})
         return (
             <div>
                 <h2 className="title">Employees</h2>
@@ -31,4 +32,4 @@ class Employees extends Component {
     }
    
 }
-export default Employees
+export default EmployeeList
