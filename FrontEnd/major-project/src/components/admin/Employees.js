@@ -9,6 +9,7 @@ class Employees extends Component {
         this.state = {}
     }
     render() {
+        /* Trying to link eack list item to an employee page (i.e Link to="/employee?{item.userId}") */
         const employees = EmployeeData.map(item => 
                             {return (
                             <NavLink to="/employee?">
