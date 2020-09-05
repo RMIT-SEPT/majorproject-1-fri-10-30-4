@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import app.model.user.UserImpl;
 
 @Repository
-public interface UserRepository extends CrudRepository<UserImpl, Integer> {
+public interface UserRepository<T extends UserImpl> extends CrudRepository<T, Integer> {
 	
 	/**
 	 * @param email Email address (case insensitive) of the user.
