@@ -1,12 +1,12 @@
 package app.service;
 
-import app.model.businessservice.BusinessServiceImpl;
-import app.model.interfaces.user.Employee;
 import app.model.user.EmployeeImpl;
 import app.model.user.UserImpl;
 import app.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
@@ -21,10 +21,19 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public boolean removeEmployee(Integer userID){
+    public Optional<EmployeeImpl> getEmployee(Integer userId){
+        for(EmployeeImpl employee : getAll()){
+            if(employee.getUserId() == userId) {
+                return employeeRepository.findById(userId);
+            }
+        }
+        return null;
+    }
+
+    public boolean removeEmployee(Integer userId){
         for(UserImpl employee : getAll()){
-            if(employee.getUserId() == userID) {
-                employeeRepository.deleteById(userID);
+            if(employee.getUserId() == userId) {
+                employeeRepository.deleteById(userId);
                 return true;
             }
         }
