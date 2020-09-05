@@ -1,21 +1,26 @@
 import React, { Component } from "react"
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav';
-//import FormControl from 'react-bootstrap/FormControl';
-//import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import {NavLink} from 'react-router-dom'
+import "../css/NavigationBar.css"
 
 class NavigationBar extends Component {
     render() {
         return (
           <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="/home">Vought</Navbar.Brand>
-          <Nav className="mr-auto">
-            <Nav.Link href="/home">Home</Nav.Link>
-            <Nav.Link href="/booking">Employees</Nav.Link>
-            <Nav.Link href="/businesses">Businesses</Nav.Link>
-          </Nav>
-            <Button href="/logout">Log out</Button>
+            <NavLink to="/">
+              <img 
+                src={require("../img/logo.png")} alt="logo"
+                className="logo"
+                ></img>
+            </NavLink>
+            <Nav className="mr-auto">
+              <NavLink to="/" className="navbar-element-style">Home</NavLink>
+              <NavLink to="/employees" className="navbar-element-style">Employees</NavLink>
+              <NavLink to="/businesses" className="navbar-element-style">Businesses</NavLink>
+            </Nav>
+              <Button href="/logout">Log out</Button>
           </Navbar>
         )
     }
