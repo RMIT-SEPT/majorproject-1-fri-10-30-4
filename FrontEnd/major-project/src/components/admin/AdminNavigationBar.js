@@ -3,15 +3,16 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import {NavLink} from 'react-router-dom'
-import "../css/NavigationBar.css"
+import "../../css/NavigationBar.css"
 
 class NavigationBar extends Component {
+  // if admin is logged in render this:
     render() {
         return (
           <Navbar bg="dark" variant="dark">
             <NavLink to="/">
               <img 
-                src={require("../img/logo.png")} alt="logo"
+                src={require("../../img/logo.png")} alt="logo"
                 className="logo"
                 ></img>
             </NavLink>
@@ -21,7 +22,7 @@ class NavigationBar extends Component {
               <NavLink to="/businesses" className="navbar-element-style">Businesses</NavLink>
               <NavLink to="/profile" className="navbar-element-style">Profile</NavLink>
             </Nav>
-              <Button href="/logout">Log out</Button>
+              <NavLink to="/login" className="navbar-element-style"><Button>Log out</Button></NavLink>
           </Navbar>
         )
     }

@@ -1,27 +1,36 @@
 import React, { Component } from "react"
-import data from "../../data/EmployeesData"
 const axios = require('axios').default;
 
 class Employee extends Component {
     constructor(props){
         super(props)
         this.state = {
-            employee: {}
+            employee: {},
+            success: false
         }
     }
 
     componentDidMount() {
-        const { match: { params } } = this.props;
+       // const { match: { params } } = this.props;
       
-        axios.get(`/employee/${params.userId}`)
+        axios.get(`http://localhost:8080/employee/${this.props.match.params.userId}`)
+        .then(response => response.json())
           .then((data) => {
-            this.setState({ employee: data });
-          });
-      }
+            this.setState(
+                prevState => { 
+                    return {
+                        employee: data,
+                        success: !prevState.success
+                    }
+                }
+            );
+        })
+    }
 
     render() {
+       const display = this.state.success ? "success" : "fail"
         return (
-            <h1>This is a Employee Component</h1>
+        <h1>{display}</h1>
         )
     }
 }
