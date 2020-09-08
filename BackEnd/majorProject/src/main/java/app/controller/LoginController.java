@@ -13,6 +13,7 @@ import app.model.authorization.LoginFormObject;
 import app.model.authorization.SessionToken;
 import app.model.user.UserImpl;
 import app.repository.UserRepository;
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class LoginController {
 
