@@ -14,7 +14,7 @@
     box-sizing: border-box;
   }
   .App {
-    width: 700px;
+    width: 500px;
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(43, 42, 42, 0.3);
     border-radius: 5px;
@@ -29,16 +29,9 @@
     margin: 0;
   }
   .comps label {
-    display: inline;
+    display: block;
     margin-bottom: 5px;
     color: rgb(0, 0, 0);
-    font-size: large;
-  }
-  
-  .comps .member {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
   
   h1 {
@@ -54,6 +47,20 @@
     margin-bottom: 12px;
     position: relative;
     padding-bottom: 25px;
+  }
+  
+  .comps input {
+    display: block;
+    border: 2px solid #8d8d8d;
+    width: 100%;
+    padding: 9px;
+    font-size: 12px;
+    border-radius: 3px;
+  }
+  
+  .comps input:focus {
+    outline: 0;
+    border-color: rgb(39, 39, 39);
   }
   
   .form button {

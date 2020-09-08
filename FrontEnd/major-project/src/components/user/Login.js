@@ -6,7 +6,6 @@ function Login() {
         <div className="App">
         <form id="form" class="form">
             <h1>Login </h1>
-
             <div class="comps">
             <label for="fname">Email</label>
             <input type="text" id="email" placeholder="Email" />
