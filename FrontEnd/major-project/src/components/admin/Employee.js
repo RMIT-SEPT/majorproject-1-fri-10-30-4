@@ -3,12 +3,6 @@ import "../../css/EmployeePage.css"
 import "../../css/Loading.css"
 const axios = require('axios').default;
 
-// async function makeGetRequest() {
-//     let res = await axios.get(`localhost:8080/employee/59`);
-//     let data = res.data;
-//     this.setState({employee: data})
-// }
-
 class Employee extends Component {
     constructor(props){
         super(props)

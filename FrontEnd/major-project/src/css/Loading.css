@@ -6,8 +6,8 @@
     height: 120px;
     animation: spin 2s linear infinite;
     position: absolute;
-    top: 46.5%;
-    left: 46.5%;
+    top: 47.5%;
+    left: 47.5%;
   }
   
   @keyframes spin {
