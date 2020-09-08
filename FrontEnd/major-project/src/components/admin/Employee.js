@@ -1,6 +1,12 @@
 import React, { Component } from "react"
 const axios = require('axios').default;
 
+// async function makeGetRequest() {
+//     let res = await axios.get(`localhost:8080/employee/59`);
+//     let data = res.data;
+//     this.setState({employee: data})
+// }
+
 class Employee extends Component {
     constructor(props){
         super(props)
@@ -11,26 +17,27 @@ class Employee extends Component {
     }
 
     componentDidMount() {
-       // const { match: { params } } = this.props;
-      
+        //makeGetRequest();
         axios.get(`http://localhost:8080/employee/${this.props.match.params.userId}`)
-        .then(response => response.json())
-          .then((data) => {
+        .then(response => {
             this.setState(
                 prevState => { 
                     return {
-                        employee: data,
+                        employee: response.data,
                         success: !prevState.success
                     }
                 }
-            );
+              )
         })
     }
 
     render() {
        const display = this.state.success ? "success" : "fail"
         return (
-        <h1>{display}</h1>
+        <div>
+            <h1>{display}</h1>
+            <h2>{this.state.employee.userId}</h2>
+        </div>
         )
     }
 }
