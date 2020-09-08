@@ -15,12 +15,12 @@ public class SampleController {
 	@Autowired
 	UserRepository ur;
 	
-	@RequestMapping("/debug/allTestUsers")
-	public String index() {
-		ur.save(new UserImpl("test@test.com", "veryGoodPassword", "fname", "lname", 0));
-		for(User i:ur.getUsersByEmail("test@test.com")) {
-			System.out.println(i.toString());
-		}
-		return "Check the console";
-	}
+//	@RequestMapping("/debug/allTestUsers")
+//	public String index() {
+//		ur.save(new UserImpl("test@test.com", "veryGoodPassword", "fname", "lname", 0));
+//		for(User i:ur.getUsersByEmail("test@test.com")) {
+//			System.out.println(i.toString());
+//		}
+//		return "Check the console";
+//	}
 }
