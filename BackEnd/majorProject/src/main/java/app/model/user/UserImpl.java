@@ -2,25 +2,28 @@ package app.model.user;
 import app.model.interfaces.user.User;
 import javax.persistence.*;
 
+
 @Entity
-@Table(name="USER")
+@Table(name="STANDARD_USER")
+@Inheritance
 public class UserImpl implements User{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int userId;
+	@Column(name="USER_ID", nullable = false, length=255, unique=true)
+	protected int userId;
 	@Column(name="EMAIL", nullable = false, length=255, unique=true)
-	private String email;
+	protected String email;
 	@Column(name="PASSWORD_HASH", nullable = false, length=65)
-	private String passwordHash;
+	protected String passwordHash;
 	@Column(name="FIRST_NAME", nullable = false, length=50)
-	private String firstName;
+	protected String firstName;
 	@Column(name="LAST_NAME", nullable = false, length=100)
-	private String lastName;
+	protected String lastName;
 	@Column(name="ROLE", nullable=false)
-	private UserRole role;
-	
-	
+	protected UserRole role;
+
+
 	/**
 	 * Default constructor required for Hibernate to work.
 	 * Unclear why.
