@@ -5,11 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import app.model.authorization.LoginFormObject;
 import app.model.authorization.SessionImpl;
@@ -17,7 +13,7 @@ import app.model.authorization.SessionToken;
 import app.model.user.UserImpl;
 import app.repository.SessionRepository;
 import app.repository.UserRepository;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class AuthorisationController {
 	
