@@ -101,23 +101,23 @@ public class UserImpl implements User{
 		this.userId = userId;
 	}
 
-	public void setEmail(String email) {
+	public void setUserEmail(String email) {
 		this.email = email;
 	}
 
-	public void setPasswordHash(String passwordHash) {
+	public void setUserPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setUserFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	public void setLastName(String lastName) {
+	public void setUserLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	public void setRole(UserRole role) {
+	public void setUserRole(UserRole role) {
 		this.role = role;
 	}
 }
