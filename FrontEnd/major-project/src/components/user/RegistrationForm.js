@@ -17,32 +17,32 @@ class RegistrationForm extends Component{
       
                 <div class="comps">
                   <label for="fname">First Name</label>
-                  <input type="text" id="first name" placeholder="Enter First Name" required/>
+                  <input type="text" id="first name" placeholder="Enter First Name" />
                   <small>Error </small>
                 </div>
                 <div class="comps">
                   <label for="lname">Last Name</label>
-                  <input type="text" id="last name" placeholder="Enter Last Name" required/>
+                  <input type="text" id="last name" placeholder="Enter Last Name" />
                   <small>Error </small>
                 </div>
                 <div class="comps">
                   <label for="username">Username</label>
-                  <input type="text" id="username" placeholder="Enter username" required/>
+                  <input type="text" id="username" placeholder="Enter username" />
                   <small>Error</small>
                 </div>
                 <div class="comps">
                   <label for="email">Email</label>
-                  <input type="text" id="email" placeholder="Enter email" required/>
+                  <input type="text" id="email" placeholder="Enter email" />
                   <small>Error </small>
                 </div>
                 <div class="comps">
                   <label for="address">Address</label>
-                  <input type="text" id="address" placeholder="Enter Address" required/>
+                  <input type="text" id="address" placeholder="Enter Address" />
                   <small>Error </small>
                 </div>
                 <div class="comps">
                   <label for="password">Password</label>
-                  <input type="password" id="password" placeholder="Enter password" required/>
+                  <input type="password" id="password" placeholder="Enter password" />
                   <small>Error </small>
                 </div>
                 <div class="comps">
