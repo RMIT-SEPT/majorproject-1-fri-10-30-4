@@ -1,13 +1,7 @@
-.main {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 100px;
-    margin-right: 100px;
-}
 
 .column {
-    float: left;
-    width: 15%;
+    padding-left: 50px;
+    width: 30%;
   }
 
 .title {
