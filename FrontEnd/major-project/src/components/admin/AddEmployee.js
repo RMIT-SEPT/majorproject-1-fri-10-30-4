@@ -1,18 +1,38 @@
 import React, { Component } from "react"
+import "../../css/AddEmployeeForm.css"
+import AddEmployeeComponent from "./AddEmployeeComponent"
 
 class AddEmployee extends Component {
     constructor() {
         super()
-        this.state = {}
+        this.state = {
+            firstName: "",
+            lastName: "",
+            email:"",
+            password:"",
+            phoneNumber: "",
+            availability: "",
+            services: {},
+        }
+        this.onSubmit = this.onSubmit.bind(this)
+        this.onChange = this.onChange.bind(this)
+    }
+
+    onSubmit() {
+
+    }
+
+    onChange() {
+
     }
 
     render() {
         return(
-            <div>
-                <form>
-                    <h1>This is a form for adding an Employee</h1>
-                </form>
-            </div>
+            <AddEmployeeComponent 
+                onClick={this.onSubmit} 
+                onChange={this.onChange} 
+                data={this.state}
+            />
         )
     }
 }
