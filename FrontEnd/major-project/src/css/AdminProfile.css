@@ -1,0 +1,12 @@
+.top-half{
+    display:"flex";
+    justify-content:"space-around";
+    margin:"18px 0px";
+
+}
+
+img {
+    width:160px;
+    height:160px;
+    border-radius: 80px;
+}
