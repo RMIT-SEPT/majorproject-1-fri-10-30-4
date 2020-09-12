@@ -2,6 +2,7 @@ package app.entity.user;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -12,7 +13,7 @@ public class Employee {
     @Column(name="EMPLOYEE_ID", unique=true)
     private int employeeId;
 
-    @NotBlank(message="Error: Business ID required")
+    @NotNull(message="Error: Business ID required")
     @Column(name="BUSINESS_ID")
     private int businessId;
 
