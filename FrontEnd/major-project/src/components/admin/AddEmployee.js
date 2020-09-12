@@ -14,7 +14,7 @@ class AddEmployee extends Component {
             phoneNumber: "",
             service:"",
 
-            mondayTime:"12:00-15:00",
+            mondayTime:"",
             tuesdayTime:"",
             wednesdayTime:"",
             thursdayTime:"",
