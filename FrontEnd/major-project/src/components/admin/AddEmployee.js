@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import "../../css/AddEmployeeForm.css"
 import AddEmployeeComponent from "./AddEmployeeComponent"
+const axios = require('axios').default;
 
 class AddEmployee extends Component {
     constructor() {
@@ -20,7 +21,9 @@ class AddEmployee extends Component {
             thursdayTime:"",
             fridayTime:"",
             saturdayTime:"",
-            sundayTime:""
+            sundayTime:"",
+
+            error:""
 
         }
         this.onSubmit = this.onSubmit.bind(this)
@@ -28,7 +31,29 @@ class AddEmployee extends Component {
     }
 
     onSubmit() {
+        const employee = {
+            businessId: this.state.businessId,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            passwordHash: this.state.passwordHash,
+            phoneNumber: this.state.phoneNumber,
+            service: this.state.service,
 
+            mondayTime: this.state.mondayTime,
+            tuesdayTime: this.state.tuesdayTime,
+            wednesdayTime: this.state.wednesdayTime,
+            thursdayTime: this.state.thursdayTime,
+            fridayTime: this.state.fridayTime,
+            saturdayTime: this.state.saturdayTime,
+            sundayTime: this.state.sundayTime
+        }
+
+        const data = JSON.stringify(employee);
+        const config = {
+            headers: {'Content-Type': 'application/json'}
+        }
+        axios.post("http://localhost:8080/employee/create", data, config);
     }
 
     onChange(event) {
@@ -38,12 +63,12 @@ class AddEmployee extends Component {
         } else {
             this.setState({[name]: value})
         }
-    }
+    }w
 
     render() {
         return(
             <AddEmployeeComponent 
-                onClick={this.onSubmit} 
+                onSubmit={this.onSubmit} 
                 onChange={this.onChange} 
                 data={this.state}
             />
