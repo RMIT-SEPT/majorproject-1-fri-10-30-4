@@ -3,18 +3,18 @@ import React from "react"
 function AddEmployeeComponent(props){
     return (
         <div>
+            <h2>{props.data.error}</h2>
             <h1 className="add-employee-title">Add Employee</h1>
-           
-            <form className="add-employee-form">
+            <form className="add-employee-form" onSubmit={props.onSubmit}>
             <hr></hr>
             <h4>Employee Information</h4>
             <br></br>
                 <div className="form-group row">
-                    <label className="control-label col-sm-1" for="fname">First Name</label>
+                    <label className="control-label col-sm-1">First Name</label>
                     <div className="col-sm-4">
                         <input 
                             onChange={props.onChange}
-                            value={props.data.firstNamw}
+                            value={props.data.firstName}
                             name="firstName"
                             type="text" 
                             className="form-control" 
@@ -23,7 +23,7 @@ function AddEmployeeComponent(props){
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="control-label col-sm-1" for="fname">Last Name</label>
+                    <label className="control-label col-sm-1">Last Name</label>
                     <div className="col-sm-4">
                         <input 
                               onChange={props.onChange}
@@ -36,7 +36,7 @@ function AddEmployeeComponent(props){
                     </div>
                 </div>
                 <div className="form-group row">
-                    <label className="control-label col-sm-1" >Email</label>
+                    <label className="control-label col-sm-1">Email</label>
                     <div className="col-sm-4">
                         <input 
                             onChange={props.onChange}
@@ -55,7 +55,8 @@ function AddEmployeeComponent(props){
                             onChange={props.onChange} 
                             value={props.data.phoneNumber}
                             name="phoneNumber"  
-                            type="tel" 
+                            type="tel"
+                            pattern="[0-9]+"
                             className="form-control"  
                             required>
                         </input>
@@ -249,13 +250,15 @@ function AddEmployeeComponent(props){
                         </tr>
                     </table>
                 </div>
-
                 <br></br>
                 <br></br>
-                <span>
-                    <button type="button" className="btn btn-secondary add-employee-btn-group">Cancel</button>
-                    <button type="submit" className="btn btn-success add-employee-btn-group">Add Employee</button>
-                </span>
+                <div>
+                    <span>
+                        <button type="button" className="btn btn-secondary add-employee-btn-group">Cancel</button>
+                        <button type="submit" className="btn btn-success add-employee-btn-group">Add Employee</button>
+                    </span>
+                </div>
+                 <br></br>
             </form>
             
         </div>
