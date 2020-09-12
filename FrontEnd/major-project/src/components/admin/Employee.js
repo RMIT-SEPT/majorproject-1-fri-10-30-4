@@ -46,7 +46,7 @@ class Employee extends Component {
                                 <p><b>First Name</b>:</p>
                             </div>
                             <div className="column">
-                                <p>{employee.userFirstName}</p>
+                                <p>{employee.firstName}</p>
                             </div>
                         </div>
                         <div className="row">
@@ -54,7 +54,7 @@ class Employee extends Component {
                                 <p><b>Last Name:</b></p>
                             </div>
                             <div className="column">
-                                <p>{employee.userLastName}</p>
+                                <p>{employee.lastName}</p>
                             </div>
                         </div>
                         <div className="row">
@@ -62,7 +62,7 @@ class Employee extends Component {
                                 <p><b>Email:</b></p>
                             </div>
                             <div className="column">
-                                <p>{employee.userEmail}</p>
+                                <p>{employee.email}</p>
                             </div>
                         </div>
                         <div className="row">

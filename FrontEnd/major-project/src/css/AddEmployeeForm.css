@@ -3,6 +3,7 @@
     margin-left: 80px; 
     margin-right: 80px;
 }
+
 .add-employee-title {
     text-align: center;
     margin-top: 40px;
@@ -10,4 +11,17 @@
 
 .add-employee-btn-group {
     margin-right: 20px;
+}
+
+.day-label{
+    width: 200px;
+    margin-right:20px;
+    text-align: center;
+    
+}
+
+
+.schedule-table-col {
+    padding-right: 30px;
+    text-align:center;
 }

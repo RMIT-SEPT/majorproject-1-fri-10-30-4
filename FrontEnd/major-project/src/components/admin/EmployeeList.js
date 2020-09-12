@@ -33,8 +33,8 @@ class EmployeeList extends Component {
         const employees = this.state.employees.map(item => 
                             {return ( 
                                 <Jumbotron className="jumbotron-container">
-                                        <NavLink key={item.userId} to={"/employee/" + item.userId}>
-                                            <p>{item.userFirstName} {item.userLastName}</p>
+                                        <NavLink key={item.employeeId} to={"/employee/" + item.employeeId}>
+                                            <p>{item.firstName} {item.lastName}</p>
                                         </NavLink>
                                         <span>
                                         <button className="btn btn-primary employee-button">Edit</button>

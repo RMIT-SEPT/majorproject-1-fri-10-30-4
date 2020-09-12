@@ -9,8 +9,8 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      adminLoggedIn: false,
-      customerLoggedIn: true
+      adminLoggedIn: true,
+      customerLoggedIn: false
     };
   }
 
