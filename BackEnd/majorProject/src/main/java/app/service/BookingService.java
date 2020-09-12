@@ -1,8 +1,8 @@
 package app.service;
 
-import app.model.booking.BookingImpl;
-import app.model.businessservice.BusinessServiceImpl;
-import app.model.interfaces.booking.Booking;
+
+
+import app.entity.Booking;
 import app.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,25 +16,25 @@ public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
-    public BookingImpl createBooking(BookingImpl booking) {
+    public Booking createBooking(Booking booking) {
         return bookingRepository.save(booking);
     }
 
-    public Iterable<BookingImpl> getAll(){
+    public Iterable<Booking> getAll(){
         return bookingRepository.findAll();
     }
 
-    public boolean removeBooking(Integer bookingID){
-        for(BookingImpl booking : getAll()) {
-            if (booking.getBookingID() == bookingID) {
-                bookingRepository.deleteById(bookingID);
+    public boolean removeBooking(Integer bookingId){
+        for(Booking booking : getAll()) {
+            if (booking.getBookingId() == bookingId) {
+                bookingRepository.deleteById(bookingId);
                 return true;
             }
         }
         return false;
     }
 
-    public Iterable<BookingImpl> getAllByCustomerId(int customerID) {
+    public Iterable<Booking> getAllByCustomerId(int customerID) {
         return bookingRepository.getAllByCustomerId(customerID);
     }
 
