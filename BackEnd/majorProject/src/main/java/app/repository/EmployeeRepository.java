@@ -1,5 +1,6 @@
 package app.repository;
 
+import app.model.user.CustomerImpl;
 import app.model.user.EmployeeImpl;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -12,4 +13,6 @@ import java.util.Collection;
 @Repository
 public interface EmployeeRepository extends UserRepository<EmployeeImpl> {
 
+    @Query("SELECT employees FROM EmployeeImpl employees WHERE BUSINESS_ID = :businessID")
+    Collection<EmployeeImpl> getEmployeeByBusiness(@Param("businessID") int businessID);
 }

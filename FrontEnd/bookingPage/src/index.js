@@ -10,6 +10,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+/*
 var y = 0;
 var m = 0;
 var d = 0;
@@ -43,6 +44,7 @@ for (m = 9; m <= 17; m++) {
     document.getElementById("startHours").options.add(srtHour);
   }
 }
+*/
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

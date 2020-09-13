@@ -1,6 +1,7 @@
 package app.controller;
 
 import app.model.booking.BookingImpl;
+import app.model.user.EmployeeImpl;
 import app.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

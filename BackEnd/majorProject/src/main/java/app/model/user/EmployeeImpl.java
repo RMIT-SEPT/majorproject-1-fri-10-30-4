@@ -14,6 +14,7 @@ public class EmployeeImpl extends UserImpl implements Employee {
     @Column(name="PHONE_NUMBER")
     private String phoneNumber;
     @ElementCollection
+    @CollectionTable(name="employee_service", joinColumns=@JoinColumn(name= "USER_ID"))
     private List<Integer> services;
 
     /**
@@ -54,4 +55,8 @@ public class EmployeeImpl extends UserImpl implements Employee {
         this.phoneNumber = phoneNumber;
     }
 
+    public void addService(int serviceID) {
+    	this.services.add(serviceID);
+    }
+    
 }

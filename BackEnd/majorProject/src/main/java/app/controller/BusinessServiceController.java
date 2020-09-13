@@ -43,10 +43,9 @@ public class BusinessServiceController {
     }
 
     /************************************For Testing*****************************************/
-
+    @CrossOrigin(origins="*")
     @GetMapping("/all")
     public Iterable<BusinessServiceImpl> getAllServices() {
-
         return businessServiceService.getAll();
     }
 }

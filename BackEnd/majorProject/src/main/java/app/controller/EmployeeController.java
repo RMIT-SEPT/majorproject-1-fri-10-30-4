@@ -5,6 +5,8 @@ import app.model.interfaces.user.Employee;
 import app.model.user.EmployeeImpl;
 import app.model.user.UserImpl;
 import app.service.EmployeeService;
+import net.bytebuddy.description.modifier.MethodArguments;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,8 +70,26 @@ public class EmployeeController {
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
+    @PostMapping("/assignService")
+    public void assignServiceToEmployee(@RequestParam("userID") int userID, @RequestParam("serviceID") int serviceID){
+    	EmployeeImpl targetEmployee = employeeService.getEmployee(userID).get();
+    	targetEmployee.addService(serviceID);
+    	employeeService.saveEmployee(targetEmployee);
+    }
+    
+    @CrossOrigin(origins="*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.HEAD})
+    @GetMapping("/findForService")
+    public ResponseEntity<?> getEmployeeByService(@RequestParam("businessID") int businessID, @RequestParam("serviceID") int serviceID){
+    	return new ResponseEntity<Iterable<EmployeeImpl>>(employeeService.getAllByBusinessAndService(businessID, serviceID), HttpStatus.OK);
+    }
 
-
+    @CrossOrigin(origins="*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.HEAD})
+    @GetMapping("/getAvailableDates")
+    public ResponseEntity<?> getAvailableDates(@RequestParam("businessID") int businessID, @RequestParam("serviceID") int serviceID, @RequestParam("employeeID") int employeeID){
+    	
+    	//return new ResponseEntity<Iterable<EmployeeImpl>>(employeeService.getAllByBusinessAndService(businessID, serviceID), HttpStatus.OK);
+    }
+    
     /************************************For Testing*****************************************/
 
     @GetMapping("/all")
