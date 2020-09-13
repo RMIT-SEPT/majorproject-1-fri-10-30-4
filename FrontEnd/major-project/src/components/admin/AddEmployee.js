@@ -37,7 +37,7 @@ class AddEmployee extends Component {
             lastName: this.state.lastName,
             email: this.state.email,
             passwordHash: this.state.passwordHash,
-            phoneNumber: this.state.phoneNumber,
+            phoneNumber: this.state.phoneNumber,    
             service: this.state.service,
 
             mondayTime: this.state.mondayTime,
@@ -55,7 +55,7 @@ class AddEmployee extends Component {
         }
         axios.post("http://localhost:8080/employee/create", data, config);
     }
-
+    
     onChange(event) {
         const {name, value, type, checked} = event.target
         if(type === "checkbox"){

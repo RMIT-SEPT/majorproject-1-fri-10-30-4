@@ -37,7 +37,9 @@ class EmployeeList extends Component {
                                             <p>{item.firstName} {item.lastName}</p>
                                         </NavLink>
                                         <span>
-                                        <button className="btn btn-primary employee-button">Edit</button>
+                                        <NavLink  key={item.employeeId} to={"/employee/update/" + item.employeeId}>
+                                            <button className="btn btn-primary employee-button">Edit</button>
+                                        </NavLink>
                                         <button className="btn btn-danger employee-button">Remove</button>
                                         </span>
                                 </Jumbotron >

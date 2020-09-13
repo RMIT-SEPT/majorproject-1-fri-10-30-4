@@ -14,7 +14,7 @@ class Employee extends Component {
 
     componentDidMount() {
         this.setState({loading: true})
-        axios.get(`http://localhost:8080/employee/${this.props.match.params.userId}`)
+        axios.get(`http://localhost:8080/employee/${this.props.match.params.employeeId}`)
         .then(response =>{
             const employeeData = response.data
             this.setState(
