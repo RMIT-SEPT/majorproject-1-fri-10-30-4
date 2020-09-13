@@ -22,6 +22,17 @@ public class EmployeeService {
         return this.employeeRepository.save(employee);
     }
 
+    public Employee updateEmployee(Employee employee){
+        for(Employee e : getAll()){
+            if(e.getEmployeeId() == employee.getEmployeeId()) {
+                return this.employeeRepository.save(employee);
+                //return true;
+            }
+        }
+        //return false;
+        return null;
+    }
+
     public Optional<Employee> getEmployee(Integer employeeId){
         for(Employee employee : getAll()){
             if(employee.getEmployeeId() == employeeId) {

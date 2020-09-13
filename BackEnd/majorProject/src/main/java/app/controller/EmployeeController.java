@@ -49,6 +49,16 @@ public class EmployeeController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<?> updateEmployee(@Valid @RequestBody Employee employee, BindingResult result){
+        if(result.hasErrors()){
+            String message = "Error: Invalid Employee object.";
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        Employee employeeResponseEntity = employeeService.updateEmployee(employee);
+        return new ResponseEntity<>(employeeResponseEntity, HttpStatus.OK);
+    }
+
     @DeleteMapping("/remove-all")
     public ResponseEntity<String> removeAllEmployees() {
         employeeService.removeAll();
