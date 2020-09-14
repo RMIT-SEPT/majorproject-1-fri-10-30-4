@@ -1,3 +1,7 @@
+/*
+    Author: Nikita
+ */
+
 package app.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
