@@ -100,10 +100,12 @@ class EditEmployee extends Component {
         const config = {
             headers: {'Content-Type': 'application/json'}
         }
-        axios.put("http://localhost:8080/employee/update", data, config)
+        axios.put("http://localhost:8080/employee/update", data, config).then (
+            this.loadData()
+        )
         //this.props.history.push("/employee/update-result/" + this.state.employeeId)
         //this.props.history.push("/")
-        this.loadData()
+       
         
     }
     
