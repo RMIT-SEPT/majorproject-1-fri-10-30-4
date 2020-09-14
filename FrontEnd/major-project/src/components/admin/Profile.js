@@ -12,16 +12,26 @@ class Profile extends Component {
     render() {
         
         return(
-            <div>
-                <div className="top-half">
-                    <div>
-                        <img src="../../img/default_profilepic.png"/>
-
+            <div class="container">
+                <div class="card">
+                    <div class="card-bio">
+                        <div class="img-wrapper">
+                                <img src={require("../../img/default.png")} alt="person" class="imageProfile"></img>
+                        </div>
+                        <div class="person-info">
+                            <h4>ID:</h4>
+                            <h4>Name:</h4>
+                            <p>Working as an administrator for E-booking.</p>
+                            <p>Please contact me via email</p>
+                        </div>
                     </div>
-                    <div>
-                        <h4>Admin ID</h4>
-                        <h4>Admin Name</h4>
-                        <h4>Admin Email</h4>
+                    <div class="person-socialInfo">
+                        <div class ="icon-wrapper">
+                            <i class="envelope"></i>
+                        </div>
+                        <h4>Email:</h4>
+                        <p>admin_email@gmail.com</p>
+                        <span>></span>
                     </div>
                 </div>
             </div>
