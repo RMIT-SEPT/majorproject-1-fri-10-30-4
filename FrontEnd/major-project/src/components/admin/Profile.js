@@ -34,7 +34,10 @@ class Profile extends Component {
                         </div>
                         <h4>Email:</h4>
                         <p>admin_email@gmail.com</p>
-                        <span>></span>
+
+                        <h4>Phone:</h4>
+                        <p>+61 012345678</p>
+                        
                     </div>
                 </div>
             </div>
