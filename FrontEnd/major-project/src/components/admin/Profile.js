@@ -19,11 +19,14 @@ class Profile extends Component {
                                 <img src={require("../../img/default.png")} alt="person" class="imageProfile"></img>
                         </div>
                         <div class="person-info">
-                            <h4>ID:</h4>
-                            <h4>Name:</h4>
+                            <h4>1234</h4>
+                            <h4>MY NAME</h4>
+                            <p>Administrator</p>
                             <p>Working as an administrator for E-booking.</p>
-                            <p>Please contact me via email</p>
                         </div>
+                    </div>
+                    <div class="card-myinfo">
+                        <h3>My Information</h3>
                     </div>
                     <div class="person-socialInfo">
                         <div class ="icon-wrapper">
