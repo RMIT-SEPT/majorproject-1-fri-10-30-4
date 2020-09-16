@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import "../../css/AddEmployeeForm.css"
+import "../../css/EmployeeForm.css"
 import AddEmployeeComponent from "./AddEmployeeComponent"
 const axios = require('axios').default;
 

@@ -1,8 +1,9 @@
 import React, { Component } from "react"
-import "../../css/AddEmployeeForm.css"
+import "../../css/EmployeeForm.css"
 import EditEmployeeComponent from "./EditEmployeeComponent"
 import "../../css/Loading.css"
-//import { Redirect } from 'react-router-dom';
+import { Jumbotron } from "react-bootstrap";
+// import { NavLink } from 'react-router-dom';
 const axios = require('axios').default;
 
 
@@ -28,7 +29,7 @@ class EditEmployee extends Component {
             saturdayTime:"",
             sundayTime:"",
             
-            success: false,
+            updated: false,
             loading: false
 
         }
@@ -75,7 +76,7 @@ class EditEmployee extends Component {
     }
 
     onSubmit() {
-        
+        this.setState({updated: true})
         const employee = {
             employeeId: this.state.employeeId,
             businessId: this.state.businessId,
@@ -99,10 +100,13 @@ class EditEmployee extends Component {
         const config = {
             headers: {'Content-Type': 'application/json'}
         }
-        axios.put("http://localhost:8080/employee/update", data, config)
+        axios.put("http://localhost:8080/employee/update", data, config).then (
+            this.loadData()
+        )
         //this.props.history.push("/employee/update-result/" + this.state.employeeId)
         //this.props.history.push("/")
-        this.loadData()
+       
+        
     }
     
     onChange(event) {
@@ -129,7 +133,24 @@ class EditEmployee extends Component {
                 <div className="loader"></div>
             )
         }
-        const renderPage = this.state.loading ? loading() : editEmployeeComponent()
+        const updatedMessage = () => {
+            return (
+                <div>
+                    <Jumbotron>
+                    <h5 className="display-5 submitted-label">
+                        Changes Submitted.
+                    </h5>
+                    </Jumbotron>
+                </div>
+            )
+        }
+        let renderPage;
+        if(this.state.updated){
+             renderPage = updatedMessage()
+        } else {
+             renderPage =  this.state.loading ? loading() : editEmployeeComponent()
+        }
+       // renderPage =  this.state.loading ? loading() : editEmployeeComponent()
         return(
            renderPage
         )
