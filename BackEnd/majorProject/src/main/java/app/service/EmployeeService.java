@@ -5,6 +5,9 @@ import app.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.List;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
 
 @Service
@@ -18,19 +21,11 @@ public class EmployeeService {
     }
 
     public Employee createEmployee(Employee employee){
-
         return this.employeeRepository.save(employee);
     }
 
     public Employee updateEmployee(Employee employee){
-        for(Employee e : getAll()){
-            if(e.getEmployeeId() == employee.getEmployeeId()) {
-                return this.employeeRepository.save(employee);
-                //return true;
-            }
-        }
-        //return false;
-        return null;
+        return this.employeeRepository.save(employee);
     }
 
     public Optional<Employee> getEmployee(Integer employeeId){
@@ -56,7 +51,14 @@ public class EmployeeService {
             employeeRepository.deleteAll();
     }
 
-
-
-
+    public Iterable<Employee> getAllByBusinessAndService(int businessID, int serviceID){
+    	Collection<Employee> businessEmployees = employeeRepository.getEmployeeByBusiness(businessID);
+    	Collection<Employee> output = new HashSet<Employee>();
+    	for(Employee employee : businessEmployees) {
+    		if(employee.getServices().contains(serviceID)) {
+    			output.add(employee);
+    		}
+    	}
+    	return output;
+    }
 }

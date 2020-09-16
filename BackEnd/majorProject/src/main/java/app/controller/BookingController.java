@@ -1,6 +1,5 @@
 package app.controller;
 
-
 import app.entity.Booking;
 import app.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
