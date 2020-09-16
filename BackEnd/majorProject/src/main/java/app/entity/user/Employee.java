@@ -141,6 +141,7 @@ public class Employee {
         if(mondayTime == null) {
             this.mondayTime = NO_SCHEDULE;
         }
+        this.mondayTime = mondayTime;
     }
 
     public String getTuesdayTime() {
