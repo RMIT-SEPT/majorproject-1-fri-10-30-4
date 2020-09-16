@@ -267,5 +267,4 @@ class BookingFormCarousel extends React.Component{
     }
 }
 
-
 export default BookingFormCarousel

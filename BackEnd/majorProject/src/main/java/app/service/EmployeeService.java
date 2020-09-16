@@ -1,7 +1,6 @@
 package app.service;
 
-import app.model.user.EmployeeImpl;
-import app.model.user.UserImpl;
+import app.entity.user.Employee;
 import app.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,27 +15,40 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public Iterable<EmployeeImpl> getAll() {
+    public Iterable<Employee> getAll() {
+
         return employeeRepository.findAll();
     }
 
-    public EmployeeImpl createEmployee(EmployeeImpl employee){
-        return employeeRepository.save(employee);
+    public Employee createEmployee(Employee employee){
+
+        return this.employeeRepository.save(employee);
     }
 
-    public Optional<EmployeeImpl> getEmployee(Integer userId){
-        for(EmployeeImpl employee : getAll()){
-            if(employee.getUserId() == userId) {
-                return employeeRepository.findById(userId);
+    public Employee updateEmployee(Employee employee){
+        for(Employee e : getAll()){
+            if(e.getEmployeeId() == employee.getEmployeeId()) {
+                return this.employeeRepository.save(employee);
+                //return true;
+            }
+        }
+        //return false;
+        return null;
+    }
+
+    public Optional<Employee> getEmployee(Integer employeeId){
+        for(Employee employee : getAll()){
+            if(employee.getEmployeeId() == employeeId) {
+                return employeeRepository.findById(employeeId);
             }
         }
         return null;
     }
 
-    public boolean removeEmployee(Integer userId){
-        for(UserImpl employee : getAll()){
-            if(employee.getUserId() == userId) {
-                employeeRepository.deleteById(userId);
+    public boolean removeEmployee(Integer employeeId){
+        for(Employee employee : getAll()){
+            if(employee.getEmployeeId() == employeeId) {
+                employeeRepository.deleteById(employeeId);
                 return true;
             }
         }
@@ -47,10 +59,10 @@ public class EmployeeService {
             employeeRepository.deleteAll();
     }
 
-    public Iterable<EmployeeImpl> getAllByBusinessAndService(int businessID, int serviceID){
-    	Collection<EmployeeImpl> businessEmployees = employeeRepository.getEmployeeByBusiness(businessID);
-    	Collection<EmployeeImpl> output = new HashSet<EmployeeImpl>();
-    	for(EmployeeImpl employee : businessEmployees) {
+    public Iterable<Employee> getAllByBusinessAndService(int businessID, int serviceID){
+    	Collection<Employee> businessEmployees = employeeRepository.getEmployeeByBusiness(businessID);
+    	Collection<Employee> output = new HashSet<Employee>();
+    	for(Employee employee : businessEmployees) {
     		if(employee.getServices().contains(serviceID)) {
     			output.add(employee);
     		}
@@ -58,7 +70,7 @@ public class EmployeeService {
     	return output;
     }
     
-    public void saveEmployee(EmployeeImpl employee) {
+    public void saveEmployee(Employee employee) {
     	employeeRepository.save(employee);
     }
     

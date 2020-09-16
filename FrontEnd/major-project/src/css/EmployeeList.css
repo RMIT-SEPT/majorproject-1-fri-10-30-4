@@ -1,0 +1,25 @@
+
+.employee-button {
+    margin-left: 20px;
+    width: 100px;
+}
+
+.jumbotron-container {
+    display: flex;
+    justify-content: space-between;
+    width: 98%;
+
+}
+
+.employee-title {
+    margin-top:50px;
+    text-align: center;
+
+}
+
+.add-employee-button {
+    margin-left: 50px;
+}
+.buttons {
+    text-align: left;
+}
