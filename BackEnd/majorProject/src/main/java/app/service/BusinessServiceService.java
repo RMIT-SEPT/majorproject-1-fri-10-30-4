@@ -1,6 +1,7 @@
 package app.service;
 
-import app.entity.BusinessService;
+import app.entity.BusinessServiceJob;
+import app.entity.user.Employee;
 import app.repository.BusinessServiceRepository;
 
 import java.util.NoSuchElementException;
@@ -14,11 +15,11 @@ public class BusinessServiceService {
     @Autowired
     private BusinessServiceRepository businessServiceRepository;
 
-    public Iterable<BusinessService> getAll() {
+    public Iterable<BusinessServiceJob> getAll() {
         return businessServiceRepository.findAll();
     }
     
-    public BusinessService getById(int serviceID) {
+    public BusinessServiceJob getById(int serviceID) {
     	try {
     		return businessServiceRepository.findById(serviceID).get();
     	} catch (NoSuchElementException e) {
@@ -26,17 +27,30 @@ public class BusinessServiceService {
     	}
     }
 
-    public BusinessService createService(BusinessService businessService){
+    public BusinessServiceJob createService(BusinessServiceJob businessService){
+        return businessServiceRepository.save(businessService);
+    }
+    
+    public BusinessServiceJob saveService(BusinessServiceJob businessService){
         return businessServiceRepository.save(businessService);
     }
 
     public boolean removeService(Integer serviceID){
-        for(BusinessService service : getAll()){
+        for(BusinessServiceJob service : getAll()){
             if(service.getServiceID() == serviceID) {
                 businessServiceRepository.deleteById(serviceID);
                 return true;
             }
         }
         return false;
+    }
+    
+    public void removeAll() {
+		for(BusinessServiceJob service : getAll()) {
+			for(Employee employee : service.getAssignedEmployees()) {
+				employee.removeService(service);
+			}
+		}
+    	businessServiceRepository.deleteAll();
     }
 }

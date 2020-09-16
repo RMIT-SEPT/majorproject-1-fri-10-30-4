@@ -16,6 +16,9 @@ public class BusinessService {
     @Autowired
     private BusinessRepository businessRepository;
 
+    @Autowired
+    private BusinessServiceRepository businessServiceRepository;
+    
     public Business saveBusiness(Business business) {
     	return businessRepository.save(business);
     }
@@ -26,5 +29,19 @@ public class BusinessService {
     
     public Iterable<Business> getAll() {
         return businessRepository.findAll();
+    }
+    
+    public void removeAll() {
+    	businessRepository.findAll().forEach(business->{
+    		business.getAllServices().forEach(service->{
+    			businessServiceRepository.delete(service);
+    		});
+    	});
+    	businessRepository.deleteAll();
+    }
+    
+    public Business forceIDChange(Business business, int newID) {
+    	businessRepository.forceBusinessIDChanges(business.getBusinessID(), newID);
+    	return businessRepository.findById(newID).get();
     }
 }

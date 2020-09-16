@@ -7,9 +7,11 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="SERVICE")
-public class BusinessService {
+public class BusinessServiceJob {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -21,6 +23,7 @@ public class BusinessService {
 	private Business business;
 	
 	@ManyToMany(mappedBy="assignedServices")
+	@JsonIgnore
 	private Set<Employee> assignedEmployees = new HashSet<Employee>();
 	
 	//Length of the service in hours.
@@ -29,10 +32,15 @@ public class BusinessService {
 	
 	@Column(name="SERVICE_DESCRIPTION")
 	private String serviceDescription;
+		
+	/**
+	 * Needed for hibernate. 
+	 * Do not use.
+	 */
+	public BusinessServiceJob() {
+	}
 	
-	BusinessService(){};
-	
-	BusinessService(int length, String description){
+	public BusinessServiceJob(int length, String description){
 		this.serviceLength = length;
 		this.serviceDescription = description;
 	}

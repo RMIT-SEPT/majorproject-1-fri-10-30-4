@@ -27,7 +27,7 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name="SERVICE_ID")
-    private BusinessService service;
+    private BusinessServiceJob service;
 
     @Column(name="CUSTOMER_ID")
     @NotEmpty(message ="Error: Customer ID required")
@@ -62,11 +62,11 @@ public class Booking {
         this.bookingId = bookingId;
     }
 
-    public BusinessService getService() {
+    public BusinessServiceJob getService() {
         return this.service;
     }
 
-    public void setService(BusinessService service) {
+    public void setService(BusinessServiceJob service) {
         this.service = service;
     }
 

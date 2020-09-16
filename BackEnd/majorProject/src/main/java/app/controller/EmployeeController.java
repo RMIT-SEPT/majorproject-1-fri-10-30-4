@@ -4,19 +4,16 @@ package app.controller;
 import app.entity.user.Employee;
 import app.service.BusinessServiceService;
 import app.service.EmployeeService;
-import net.bytebuddy.description.modifier.MethodArguments;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.Optional;
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {

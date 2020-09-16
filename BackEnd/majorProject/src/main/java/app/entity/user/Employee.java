@@ -1,7 +1,7 @@
 package app.entity.user;
 
 import app.entity.Business;
-import app.entity.BusinessService;
+import app.entity.BusinessServiceJob;
 
 import java.util.HashSet;
 import java.util.List;
@@ -46,12 +46,12 @@ public class Employee {
     @Column(name="PHONE_NUMBER")
     private String phoneNumber;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name="EMPLOYEE_SERVICE",
     	joinColumns = {@JoinColumn(name="EMPLOYEE_ID")}, 
     	inverseJoinColumns = {@JoinColumn(name="SERVICE_ID")}
     )
-    private Set<BusinessService> assignedServices = new HashSet<BusinessService>();
+    private Set<BusinessServiceJob> assignedServices = new HashSet<BusinessServiceJob>();
     
     // For employee working times
     //TODO: Implement "shift" style system to replace this in future.
@@ -76,16 +76,42 @@ public class Employee {
     @Column(name="SUNDAY_TIME")
     private String sundayTime;
 
-    public Set<BusinessService> getServices() {
+    
+    /**
+     * Needed for Hibernate.
+     * Do not use.
+     */
+    public Employee() {};
+    
+    public Employee(int employeeID, Business business, String firstName, String lastName, 
+    	String email, String passwordHash, String phoneNumber)
+    {
+    	this.employeeId = employeeID;
+    	this.business = business;
+    	this.firstName = firstName;
+    	this.lastName = lastName;
+    	this.email = email;
+    	this.passwordHash = passwordHash;
+    	this.phoneNumber = phoneNumber;
+    	this.mondayTime = "";
+    	this.tuesdayTime = "";
+    	this.wednesdayTime = "";
+    	this.thursdayTime = "";
+    	this.fridayTime = "";
+    	this.saturdayTime = "";
+    	this.sundayTime = "";
+    }
+    
+    public Set<BusinessServiceJob> getServices() {
         return this.assignedServices;
     }
 
-    public void addService(BusinessService service) {
+    public void addService(BusinessServiceJob service) {
         this.assignedServices.add(service);
         service.getAssignedEmployees().add(this);
     }
     
-    public void removeService(BusinessService service) {
+    public void removeService(BusinessServiceJob service) {
     	this.assignedServices.remove(service);
     	service.getAssignedEmployees().remove(this);
     }

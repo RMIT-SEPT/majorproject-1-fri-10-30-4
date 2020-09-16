@@ -16,7 +16,6 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public Iterable<Employee> getAll() {
-
         return employeeRepository.findAll();
     }
 
@@ -61,4 +60,5 @@ public class EmployeeService {
     	}
     	return output;
     }
+    
 }
