@@ -21,19 +21,11 @@ public class EmployeeService {
     }
 
     public Employee createEmployee(Employee employee){
-
         return this.employeeRepository.save(employee);
     }
 
     public Employee updateEmployee(Employee employee){
-        for(Employee e : getAll()){
-            if(e.getEmployeeId() == employee.getEmployeeId()) {
-                return this.employeeRepository.save(employee);
-                //return true;
-            }
-        }
-        //return false;
-        return null;
+        return this.employeeRepository.save(employee);
     }
 
     public Optional<Employee> getEmployee(Integer employeeId){
@@ -69,9 +61,4 @@ public class EmployeeService {
     	}
     	return output;
     }
-    
-    public void saveEmployee(Employee employee) {
-    	employeeRepository.save(employee);
-    }
-    
 }

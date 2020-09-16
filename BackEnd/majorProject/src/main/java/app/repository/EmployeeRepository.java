@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
 
-    @Query("SELECT employees FROM EmployeeImpl employees WHERE BUSINESS_ID = :businessID")
+    @Query("SELECT employees FROM Employee employees WHERE BUSINESS_ID = :businessID")
     Collection<Employee> getEmployeeByBusiness(@Param("businessID") int businessID);
 }

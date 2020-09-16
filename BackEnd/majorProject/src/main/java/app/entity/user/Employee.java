@@ -1,6 +1,11 @@
 package app.entity.user;
 
+import app.entity.Business;
+import app.entity.BusinessService;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -17,9 +22,9 @@ public class Employee {
     @Column(name="EMPLOYEE_ID", unique=true)
     private int employeeId;
 
-    @NotNull(message="Error: Business ID required")
-    @Column(name="BUSINESS_ID")
-    private int businessId;
+    @ManyToOne
+    @JoinColumn(name = "BUSINESS_ID")
+    private Business business;
 
     @NotBlank(message="Error: First name required")
     @Column(name="FIRST_NAME")
@@ -41,11 +46,15 @@ public class Employee {
     @Column(name="PHONE_NUMBER")
     private String phoneNumber;
 
-    @ElementCollection
-    private List<Integer> services;
+    @ManyToMany
+    @JoinTable(name="EMPLOYEE_SERVICE",
+    	joinColumns = {@JoinColumn(name="EMPLOYEE_ID")}, 
+    	inverseJoinColumns = {@JoinColumn(name="SERVICE_ID")}
+    )
+    private Set<BusinessService> assignedServices = new HashSet<BusinessService>();
     
     // For employee working times
-
+    //TODO: Implement "shift" style system to replace this in future.
     @Column(name="MONDAY_TIME")
     private String mondayTime;
 
@@ -67,12 +76,18 @@ public class Employee {
     @Column(name="SUNDAY_TIME")
     private String sundayTime;
 
-    public String getService() {
-        return service;
+    public Set<BusinessService> getServices() {
+        return this.assignedServices;
     }
 
-    public void setService(String service) {
-        this.service = service;
+    public void addService(BusinessService service) {
+        this.assignedServices.add(service);
+        service.getAssignedEmployees().add(this);
+    }
+    
+    public void removeService(BusinessService service) {
+    	this.assignedServices.remove(service);
+    	service.getAssignedEmployees().remove(this);
     }
 
     public int getEmployeeId() {
@@ -115,12 +130,12 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public int getBusinessId() {
-        return businessId;
+    public Business getBusiness() {
+        return this.business;
     }
 
-    public void setBusinessId(int businessId) {
-        this.businessId = businessId;
+    public void setBusiness(Business business) {
+        this.business = business;
     }
 
     public String getPhoneNumber() {

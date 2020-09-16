@@ -1,5 +1,5 @@
 package app.controller;
-import app.model.businessservice.BusinessServiceImpl;
+import app.entity.BusinessService;
 import app.service.BusinessServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,14 +15,13 @@ public class BusinessServiceController {
     @Autowired
     private BusinessServiceService businessServiceService;
 
-
     @PostMapping("/create")
-    public ResponseEntity<?> createService(@RequestBody BusinessServiceImpl newbusinessService, BindingResult result) {
+    public ResponseEntity<?> createService(@RequestBody BusinessService newbusinessService, BindingResult result) {
         if(result.hasErrors()){
             String message = "Error: Invalid Business Service object.";
             return new ResponseEntity<String>(message, HttpStatus.BAD_REQUEST);
         }
-        BusinessServiceImpl businessService = businessServiceService.createService(newbusinessService);
+        BusinessService businessService = businessServiceService.createService(newbusinessService);
         return new ResponseEntity<>(businessService, HttpStatus.OK);
     }
 
@@ -46,7 +45,7 @@ public class BusinessServiceController {
     /************************************For Testing*****************************************/
     @CrossOrigin(origins="*")
     @GetMapping("/all")
-    public Iterable<BusinessServiceImpl> getAllServices() {
+    public Iterable<BusinessService> getAllServices() {
         return businessServiceService.getAll();
     }
 }

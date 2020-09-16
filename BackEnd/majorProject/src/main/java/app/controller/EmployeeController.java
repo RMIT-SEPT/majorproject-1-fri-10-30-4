@@ -2,6 +2,7 @@ package app.controller;
 
 
 import app.entity.user.Employee;
+import app.service.BusinessServiceService;
 import app.service.EmployeeService;
 import net.bytebuddy.description.modifier.MethodArguments;
 
@@ -23,8 +24,10 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private BusinessServiceService businessServiceService;
+    
     @PostMapping("/create")
-
     public ResponseEntity<?> createEmployee(@Valid @RequestBody Employee employee, BindingResult result) {
         if(result.hasErrors()){
             String message = "Error: Invalid Employee object.";
@@ -85,8 +88,8 @@ public class EmployeeController {
     @PostMapping("/assignService")
     public void assignServiceToEmployee(@RequestParam("userID") int userID, @RequestParam("serviceID") int serviceID){
     	Employee targetEmployee = employeeService.getEmployee(userID).get();
-    	targetEmployee.addService(serviceID);
-    	employeeService.saveEmployee(targetEmployee);
+    	targetEmployee.addService(businessServiceService.getById(serviceID));
+    	employeeService.updateEmployee(targetEmployee);
     }
     
     @CrossOrigin(origins="*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.HEAD})
@@ -98,6 +101,7 @@ public class EmployeeController {
     @CrossOrigin(origins="*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.HEAD})
     @GetMapping("/getAvailableDates")
     public ResponseEntity<?> getAvailableDates(@RequestParam("businessID") int businessID, @RequestParam("serviceID") int serviceID, @RequestParam("employeeID") int employeeID){
+		return null;
     	
     	//return new ResponseEntity<Iterable<EmployeeImpl>>(employeeService.getAllByBusinessAndService(businessID, serviceID), HttpStatus.OK);
     }

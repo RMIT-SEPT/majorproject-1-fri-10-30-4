@@ -1,4 +1,4 @@
 export const initialState = {
-    isLoggedIn: false,
+    isLoggedIn: true,
     userId: '',
 }
