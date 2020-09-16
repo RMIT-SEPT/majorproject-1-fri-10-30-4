@@ -132,13 +132,13 @@ public class Employee {
 
     public String getMondayTime() {
         if(mondayTime.equals(NO_SCHEDULE)){
-            return null;
+            return "";
         }
         return mondayTime;
     }
 
     public void setMondayTime(String mondayTime) {
-        if(mondayTime == null) {
+        if(mondayTime.isBlank()) {
             this.mondayTime = NO_SCHEDULE;
         }
         this.mondayTime = mondayTime;
@@ -146,13 +146,13 @@ public class Employee {
 
     public String getTuesdayTime() {
         if(tuesdayTime.equals(NO_SCHEDULE)){
-            return null;
+            return "";
         }
         return tuesdayTime;
     }
 
     public void setTuesdayTime(String tuesdayTime) {
-        if(tuesdayTime == null){
+        if(tuesdayTime.isBlank()){
             this.tuesdayTime = NO_SCHEDULE;
         }
         this.tuesdayTime = tuesdayTime;
@@ -161,13 +161,13 @@ public class Employee {
 
     public String getWednesdayTime() {
         if(wednesdayTime.equals(NO_SCHEDULE)){
-            return null;
+            return "";
         }
         return wednesdayTime;
     }
 
     public void setWednesdayTime(String wednesdayTime) {
-        if(wednesdayTime == null){
+        if(wednesdayTime.isBlank()){
             this.wednesdayTime = NO_SCHEDULE;
         }
         this.wednesdayTime = wednesdayTime;
@@ -177,13 +177,13 @@ public class Employee {
 
     public String getThursdayTime() {
         if(thursdayTime.equals(NO_SCHEDULE)){
-            return null;
+            return "";
         }
         return thursdayTime;
     }
 
     public void setThursdayTime(String thursdayTime) {
-        if(thursdayTime == null){
+        if(thursdayTime.isBlank()){
             this.mondayTime = NO_SCHEDULE;
         }
         this.thursdayTime = thursdayTime;
@@ -193,13 +193,13 @@ public class Employee {
 
     public String getFridayTime() {
         if(fridayTime.equals(NO_SCHEDULE)){
-            return null;
+            return "";
         }
         return fridayTime;
     }
 
     public void setFridayTime(String fridayTime) {
-        if(fridayTime == null){
+        if(fridayTime.isBlank()){
             this.fridayTime = NO_SCHEDULE;
         }
         this.fridayTime = fridayTime;
@@ -209,13 +209,13 @@ public class Employee {
 
     public String getSaturdayTime() {
         if(saturdayTime.equals(NO_SCHEDULE)){
-            return null;
+            return "";
         }
         return saturdayTime;
     }
 
     public void setSaturdayTime(String saturdayTime) {
-        if(saturdayTime == null){
+        if(saturdayTime.isBlank()){
             this.saturdayTime = NO_SCHEDULE;
         }
         this.saturdayTime = saturdayTime;
@@ -225,13 +225,13 @@ public class Employee {
 
     public String getSundayTime() {
         if(sundayTime.equals(NO_SCHEDULE)){
-            return null;
+            return "";
         }
         return sundayTime;
     }
 
     public void setSundayTime(String sundayTime) {
-        if(sundayTime == null){
+        if(sundayTime.isBlank()){
             this.sundayTime = NO_SCHEDULE;
         }
         this.sundayTime = sundayTime;
