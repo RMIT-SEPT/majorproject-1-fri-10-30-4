@@ -152,8 +152,9 @@ public class Employee {
 
     public void setTuesdayTime(String tuesdayTime) {
         if(tuesdayTime == null){
-            this.mondayTime = NO_SCHEDULE;
+            this.tuesdayTime = NO_SCHEDULE;
         }
+        this.tuesdayTime = tuesdayTime;
     }
 
 
@@ -166,8 +167,9 @@ public class Employee {
 
     public void setWednesdayTime(String wednesdayTime) {
         if(wednesdayTime == null){
-            this.mondayTime = NO_SCHEDULE;
+            this.wednesdayTime = NO_SCHEDULE;
         }
+        this.wednesdayTime = wednesdayTime;
     }
 
 
@@ -183,6 +185,7 @@ public class Employee {
         if(thursdayTime == null){
             this.mondayTime = NO_SCHEDULE;
         }
+        this.thursdayTime = thursdayTime;
     }
 
 
@@ -196,8 +199,9 @@ public class Employee {
 
     public void setFridayTime(String fridayTime) {
         if(fridayTime == null){
-            this.mondayTime = NO_SCHEDULE;
+            this.fridayTime = NO_SCHEDULE;
         }
+        this.fridayTime = fridayTime;
     }
 
 
@@ -211,8 +215,9 @@ public class Employee {
 
     public void setSaturdayTime(String saturdayTime) {
         if(saturdayTime == null){
-            this.mondayTime = NO_SCHEDULE;
+            this.saturdayTime = NO_SCHEDULE;
         }
+        this.saturdayTime = saturdayTime;
     }
 
 
@@ -225,6 +230,9 @@ public class Employee {
     }
 
     public void setSundayTime(String sundayTime) {
+        if(sundayTime == null){
+            this.sundayTime = NO_SCHEDULE;
+        }
         this.sundayTime = sundayTime;
     }
 
