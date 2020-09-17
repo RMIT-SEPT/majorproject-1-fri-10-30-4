@@ -1,6 +1,6 @@
 import React from "react"
 
-function AddEmployeeComponent(props){
+function EditEmployeeComponent(props){
     return (
         <div>
             <h1 className="add-employee-title">Edit Employee #{props.data.employeeId}</h1>
@@ -264,4 +264,4 @@ function AddEmployeeComponent(props){
     )
 }
 
-export default AddEmployeeComponent
+export default EditEmployeeComponent

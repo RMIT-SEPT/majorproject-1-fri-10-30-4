@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import "../../css/EmployeeForm.css"
 import AddEmployeeComponent from "./AddEmployeeComponent"
+import {Jumbotron} from "react-bootstrap";
 const axios = require('axios').default;
 
 class AddEmployee extends Component {
@@ -23,7 +24,8 @@ class AddEmployee extends Component {
             saturdayTime:"",
             sundayTime:"",
 
-            error:""
+
+            added: false
 
         }
         this.onSubmit = this.onSubmit.bind(this)
@@ -66,12 +68,36 @@ class AddEmployee extends Component {
     }w
 
     render() {
+        let renderPage;
+        const addEmployee = () => {
+            return(
+                <AddEmployeeComponent 
+                    onSubmit={this.onSubmit} 
+                    onChange={this.onChange} 
+                    data={this.state}
+                />
+            )
+        }
+        const addedMessage = () => {
+            return(
+                <div>
+                    <Jumbotron>
+                    <h5 className="display-5">
+                        Employee Added
+                    </h5>
+                    </Jumbotron>
+                </div>
+            )
+        }
+
+        if(this.state.added){
+            renderPage = addedMessage()
+        } else {
+            renderPage = addEmployee()
+        }
+
         return(
-            <AddEmployeeComponent 
-                onSubmit={this.onSubmit} 
-                onChange={this.onChange} 
-                data={this.state}
-            />
+           renderPage
         )
     }
 }
