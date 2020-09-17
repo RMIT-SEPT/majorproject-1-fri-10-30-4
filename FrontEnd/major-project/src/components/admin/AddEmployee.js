@@ -55,7 +55,7 @@ class AddEmployee extends Component {
         const config = {
             headers: {'Content-Type': 'application/json'}
         }
-        axios.post("http://localhost:8080/employee/create", data, config);
+        axios.post("http://localhost:8080/employee/create", data, config).then(this.setState({added:true}))
     }
     
     onChange(event) {

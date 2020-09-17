@@ -21,11 +21,6 @@ class RemoveEmployee extends Component {
     }
   }
 
-  onChange(event){
-    const {value} = event.target;
-    this.setState({employeeId: value});
-  }
-
   render() {
     const removedMessage = () => {
         return (
