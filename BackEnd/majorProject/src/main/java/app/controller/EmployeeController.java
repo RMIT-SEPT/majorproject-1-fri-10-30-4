@@ -69,7 +69,7 @@ public class EmployeeController {
     public ResponseEntity<?> getEmployee(@PathVariable(value="employeeId") Integer employeeId) {
         String message = "";
         if(employeeId == null) {
-            message = "Error: User ID required in path parameter.";
+            message = "Error: Employee ID required in path parameter.";
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         }
         Optional<Employee> employee = employeeService.getEmployee(employeeId);
