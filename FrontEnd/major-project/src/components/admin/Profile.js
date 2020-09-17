@@ -2,15 +2,32 @@ import React, { Component } from "react"
 import "../../css/AdminProfile.css"
 
 class Profile extends Component {
-    constructor() {
-        super()
+    constructor(props){
+        super(props)
         this.state = {
-            
+            admin: {},
+            loading: true
         }
     }
 
+    componentDidMount() {
+        this.setState({loading: true})
+        axios.get(`http://localhost:8080/user/${this.props.match.params.userId}`)
+        .then(response =>{
+            const adminData = response.data
+            this.setState(
+                prevState => { 
+                    return {
+                        admin: adminData,
+                        loading: !prevState.loading
+                    }
+                }
+              )
+        })
+    }
+
     render() {
-        
+        const {admin } = this.state;
         return(
             <div class="container">
                 <div class="card">
@@ -19,8 +36,8 @@ class Profile extends Component {
                                 <img src={require("../../img/default.png")} alt="person" class="imageProfile"></img>
                         </div>
                         <div class="person-info">
-                            <h4>1234</h4>
-                            <h4>MY NAME</h4>
+                            <h4>{admin.businessID}</h4>
+                            <h4>{admin.name}</h4>
                             <p>Administrator</p>
                             <p>Working as an administrator for E-booking.</p>
                         </div>
