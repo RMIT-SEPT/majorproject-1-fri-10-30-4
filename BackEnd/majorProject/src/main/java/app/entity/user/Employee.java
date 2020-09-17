@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="EMPLOYEE")
 public class Employee {
+    static String NO_SCHEDULE = "NO_SCHEDULE";
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="EMPLOYEE_ID", unique=true)
@@ -37,12 +39,11 @@ public class Employee {
     @Column(name="PHONE_NUMBER")
     private String phoneNumber;
 
-    @NotBlank(message="Error: Service required")
+    //@NotBlank(message="Error: Service required")
     @Column(name="SERVICE")
     private String service;
 
     // For employee working times
-    // If the string is null then they do not work on that day
 
     @Column(name="MONDAY_TIME")
     private String mondayTime;
@@ -130,68 +131,109 @@ public class Employee {
     }
 
     public String getMondayTime() {
+        if(mondayTime.equals(NO_SCHEDULE)){
+            return "";
+        }
         return mondayTime;
     }
 
     public void setMondayTime(String mondayTime) {
+        if(mondayTime.isBlank()) {
+            this.mondayTime = NO_SCHEDULE;
+        }
         this.mondayTime = mondayTime;
     }
 
-
     public String getTuesdayTime() {
+        if(tuesdayTime.equals(NO_SCHEDULE)){
+            return "";
+        }
         return tuesdayTime;
     }
 
     public void setTuesdayTime(String tuesdayTime) {
+        if(tuesdayTime.isBlank()){
+            this.tuesdayTime = NO_SCHEDULE;
+        }
         this.tuesdayTime = tuesdayTime;
     }
 
 
     public String getWednesdayTime() {
+        if(wednesdayTime.equals(NO_SCHEDULE)){
+            return "";
+        }
         return wednesdayTime;
     }
 
     public void setWednesdayTime(String wednesdayTime) {
+        if(wednesdayTime.isBlank()){
+            this.wednesdayTime = NO_SCHEDULE;
+        }
         this.wednesdayTime = wednesdayTime;
     }
 
 
 
     public String getThursdayTime() {
+        if(thursdayTime.equals(NO_SCHEDULE)){
+            return "";
+        }
         return thursdayTime;
     }
 
     public void setThursdayTime(String thursdayTime) {
+        if(thursdayTime.isBlank()){
+            this.mondayTime = NO_SCHEDULE;
+        }
         this.thursdayTime = thursdayTime;
     }
 
 
 
     public String getFridayTime() {
+        if(fridayTime.equals(NO_SCHEDULE)){
+            return "";
+        }
         return fridayTime;
     }
 
     public void setFridayTime(String fridayTime) {
+        if(fridayTime.isBlank()){
+            this.fridayTime = NO_SCHEDULE;
+        }
         this.fridayTime = fridayTime;
     }
 
 
 
     public String getSaturdayTime() {
+        if(saturdayTime.equals(NO_SCHEDULE)){
+            return "";
+        }
         return saturdayTime;
     }
 
     public void setSaturdayTime(String saturdayTime) {
+        if(saturdayTime.isBlank()){
+            this.saturdayTime = NO_SCHEDULE;
+        }
         this.saturdayTime = saturdayTime;
     }
 
 
 
     public String getSundayTime() {
+        if(sundayTime.equals(NO_SCHEDULE)){
+            return "";
+        }
         return sundayTime;
     }
 
     public void setSundayTime(String sundayTime) {
+        if(sundayTime.isBlank()){
+            this.sundayTime = NO_SCHEDULE;
+        }
         this.sundayTime = sundayTime;
     }
 
