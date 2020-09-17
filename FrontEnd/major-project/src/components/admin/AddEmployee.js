@@ -13,7 +13,7 @@ class AddEmployee extends Component {
             email:"",
             passwordHash:"",
             phoneNumber: "",
-            service:"",
+            services:[],
 
             mondayTime:"",
             tuesdayTime:"",
@@ -38,7 +38,7 @@ class AddEmployee extends Component {
             email: this.state.email,
             passwordHash: this.state.passwordHash,
             phoneNumber: this.state.phoneNumber,    
-            service: this.state.service,
+            services: this.state.services,
 
             mondayTime: this.state.mondayTime,
             tuesdayTime: this.state.tuesdayTime,
