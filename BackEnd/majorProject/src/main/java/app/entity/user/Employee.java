@@ -39,7 +39,7 @@ public class Employee {
     @Column(name="PHONE_NUMBER")
     private String phoneNumber;
 
-    @NotBlank(message="Error: Service required")
+    //@NotBlank(message="Error: Service required")
     @Column(name="SERVICE")
     private String service;
 
