@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../../css/Loading.css"
 import {Jumbotron} from "react-bootstrap";
 const axios = require('axios').default;
 
@@ -7,21 +8,39 @@ class RemoveEmployee extends Component {
     super(props);
     this.state = {
       employeeId: this.props.match.params.employeeId,
-      removed: false
+      removed: false,
+      loading: false
     };
     this.onClick = this.onClick.bind(this);
   }
 
+  componentDidMount() {
+    this.setState({loading: false})
+  }
+
   onClick() {
+    this.setState({loading: true})
+    const id = this.state.employeeId
+    async function remove() {
+      const response = await axios.delete(`http://localhost:8080/employee/remove?employeeId=${id}`)
+      return response
+    }
+ 
     if(this.state.employeeId !== 0){
-      // delete request
-      axios.delete(
-          `http://localhost:8080/employee/remove?employeeId=${this.state.employeeId}`
-      ).then( this.setState({removed: true}))
+      remove().then(
+        this.setState({
+              loading: false,
+              removed: true
+        }))
     }
   }
 
   render() {
+    const loading = () => {
+      return (
+          <div className="loader"></div>
+      )
+    }
     const removedMessage = () => {
         return (
             <div>
@@ -56,10 +75,11 @@ class RemoveEmployee extends Component {
 
     let renderPage;
     if(this.state.removed){
-        renderPage = removedMessage()
+        renderPage = this.state.loading ? loading() : removedMessage()
     } else {
         renderPage =  removeEmployee()
     }
+
     return (
       renderPage
     )
