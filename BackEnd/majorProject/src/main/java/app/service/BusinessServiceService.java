@@ -1,8 +1,11 @@
 package app.service;
 
-import app.model.businessservice.BusinessServiceImpl;
-import app.model.interfaces.employee.BusinessService;
+import app.entity.BusinessServiceJob;
+import app.entity.user.Employee;
 import app.repository.BusinessServiceRepository;
+
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,21 +15,42 @@ public class BusinessServiceService {
     @Autowired
     private BusinessServiceRepository businessServiceRepository;
 
-    public Iterable<BusinessServiceImpl> getAll() {
+    public Iterable<BusinessServiceJob> getAll() {
         return businessServiceRepository.findAll();
     }
+    
+    public BusinessServiceJob getById(int serviceID) {
+    	try {
+    		return businessServiceRepository.findById(serviceID).get();
+    	} catch (NoSuchElementException e) {
+    		return null;
+    	}
+    }
 
-    public BusinessServiceImpl createService(BusinessServiceImpl businessService){
+    public BusinessServiceJob createService(BusinessServiceJob businessService){
+        return businessServiceRepository.save(businessService);
+    }
+    
+    public BusinessServiceJob saveService(BusinessServiceJob businessService){
         return businessServiceRepository.save(businessService);
     }
 
     public boolean removeService(Integer serviceID){
-        for(BusinessServiceImpl service : getAll()){
+        for(BusinessServiceJob service : getAll()){
             if(service.getServiceID() == serviceID) {
                 businessServiceRepository.deleteById(serviceID);
                 return true;
             }
         }
         return false;
+    }
+    
+    public void removeAll() {
+		for(BusinessServiceJob service : getAll()) {
+			for(Employee employee : service.getAssignedEmployees()) {
+				employee.removeService(service);
+			}
+		}
+    	businessServiceRepository.deleteAll();
     }
 }

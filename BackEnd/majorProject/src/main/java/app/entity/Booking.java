@@ -6,6 +6,8 @@ package app.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import app.entity.user.Employee;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.*;
@@ -23,17 +25,17 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer bookingId;
 
-    @Column(name="SERVICE_ID")
-    @NotEmpty(message ="Error: Service ID required")
-    private int serviceId;
+    @ManyToOne
+    @JoinColumn(name="SERVICE_ID")
+    private BusinessServiceJob service;
 
     @Column(name="CUSTOMER_ID")
     @NotEmpty(message ="Error: Customer ID required")
     private int customerId;
 
-    @Column(name="EMPLOYEE_ID")
-    @NotEmpty(message ="Error: Employee ID required")
-    private int employeeId;
+    @ManyToOne
+    @JoinColumn(name="EMPLOYEE_ID")
+    private Employee employee;
 
     @Column(name="DATE")
     @JsonFormat(pattern="yyyy-MM-dd")
@@ -60,12 +62,12 @@ public class Booking {
         this.bookingId = bookingId;
     }
 
-    public int getServiceId() {
-        return serviceId;
+    public BusinessServiceJob getService() {
+        return this.service;
     }
 
-    public void setServiceId(int serviceId) {
-        this.serviceId = serviceId;
+    public void setService(BusinessServiceJob service) {
+        this.service = service;
     }
 
     public int getCustomerId() {
@@ -76,12 +78,12 @@ public class Booking {
         this.customerId = customerId;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public Employee getEmployee() {
+        return this.employee;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public LocalDate getBookingDate() {

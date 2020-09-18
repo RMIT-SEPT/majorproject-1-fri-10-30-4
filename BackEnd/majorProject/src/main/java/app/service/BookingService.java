@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -38,4 +39,8 @@ public class BookingService {
         return bookingRepository.getAllByCustomerId(customerID);
     }
 
+    public Iterable<Date> getAvailableDates(int businessID, int serviceID, int employeeID){
+		return null;
+    }
+    
 }

@@ -2,18 +2,18 @@ package app.controller;
 
 
 import app.entity.user.Employee;
+import app.service.BusinessServiceService;
 import app.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.Date;
 
-
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -21,8 +21,10 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private BusinessServiceService businessServiceService;
+    
     @PostMapping("/create")
-
     public ResponseEntity<?> createEmployee(@Valid @RequestBody Employee employee, BindingResult result) {
         if(result.hasErrors()){
             String message = "Error: Invalid Employee object.";
@@ -79,6 +81,27 @@ public class EmployeeController {
         }
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
+
+    @PostMapping("/assignService")
+    public void assignServiceToEmployee(@RequestParam("userID") int userID, @RequestParam("serviceID") int serviceID){
+    	Employee targetEmployee = employeeService.getEmployee(userID).get();
+    	targetEmployee.addService(businessServiceService.getById(serviceID));
+    	employeeService.updateEmployee(targetEmployee);
+    }
+    
+    @CrossOrigin(origins="*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.HEAD})
+    @GetMapping("/findForService")
+    public ResponseEntity<?> getEmployeeByService(@RequestParam("businessID") int businessID, @RequestParam("serviceID") int serviceID){
+    	return new ResponseEntity<Iterable<Employee>>(employeeService.getAllByBusinessAndService(businessID, serviceID), HttpStatus.OK);
+    }
+
+    @CrossOrigin(origins="*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.HEAD})
+    @GetMapping("/getAvailableDates")
+    public ResponseEntity<?> getAvailableDates(@RequestParam("businessID") int businessID, @RequestParam("serviceID") int serviceID, @RequestParam("employeeID") int employeeID){
+    	return new ResponseEntity<Iterable<Date>>(employeeService.getUpcomingBookingDates(businessID, serviceID, employeeID), HttpStatus.OK);
+    }
+    
+    /************************************For Testing*****************************************/
 
     @GetMapping("/all")
     public Iterable<Employee> getAllEmployees() {
