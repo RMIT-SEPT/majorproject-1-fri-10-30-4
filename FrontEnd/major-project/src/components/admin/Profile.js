@@ -29,7 +29,7 @@ class Profile extends Component {
     render() {
         const {admin } = this.state;
         return(
-            <div class="container">
+            <div class="profile-container">
                 <div class="card">
                     <div class="card-bio">
                         <div class="img-wrapper">
