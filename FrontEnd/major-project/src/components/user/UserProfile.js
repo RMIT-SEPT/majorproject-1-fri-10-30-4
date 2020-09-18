@@ -1,11 +1,11 @@
 import React, { Component } from "react"
-import "../../css/AdminProfile.css"
+import "../../css/UserProfile.css"
 
 class Profile extends Component {
     constructor(props){
         super(props)
         this.state = {
-            admin: {},
+            user: {},
             loading: true
         }
     }
@@ -14,11 +14,11 @@ class Profile extends Component {
         this.setState({loading: true})
         axios.get(`http://localhost:8080/user/${this.props.match.params.userId}`)
         .then(response =>{
-            const adminData = response.data
+            const userData = response.data
             this.setState(
                 prevState => { 
                     return {
-                        admin: adminData,
+                        user: userData,
                         loading: !prevState.loading
                     }
                 }
@@ -27,7 +27,7 @@ class Profile extends Component {
     }
 
     render() {
-        const {admin } = this.state;
+        const {user } = this.state;
         return(
             <div class="container">
                 <div class="card">
@@ -36,10 +36,10 @@ class Profile extends Component {
                                 <img src={require("../../img/default.png")} alt="person" class="imageProfile"></img>
                         </div>
                         <div class="person-info">
-                            <h4>{admin.businessID}</h4>
-                            <h4>{admin.name}</h4>
-                            <p>Administrator</p>
-                            <p>Working as an administrator for E-booking.</p>
+                            <h4>{user.userId}</h4>
+                            <h4>{user.userFirstName}</h4>
+                            <p>You can see your profile here !</p>
+                            <p>This is your profile page yay</p>
                         </div>
                     </div>
                     <div class="card-myinfo">
@@ -50,7 +50,7 @@ class Profile extends Component {
                             <i class="envelope"></i>
                         </div>
                         <h4>Email:</h4>
-                        <p>admin_email@gmail.com</p>
+                        <p>customer_email@gmail.com</p>
 
                         <h4>Phone:</h4>
                         <p>+61 012345678</p>
