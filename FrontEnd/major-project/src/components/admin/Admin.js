@@ -27,7 +27,7 @@ class Admin extends Component {
             <Route exact path="/profile" component={AdminProfile}/>
             <Route exact path="/employee/add" component={AddEmployee}/>
             <Route exact path="/employee/update/:employeeId" component={EditEmployee}/>
-            <Route exact path="/employee/remove" component={RemoveEmployee}/>
+            <Route exact path="/employee/remove/:employeeId" component={RemoveEmployee}/>
             <Route exact path="/employee/:employeeId" component={Employee}/>
             <Route exact path="/employee-list" component={EmployeeList}/>
           </Switch>

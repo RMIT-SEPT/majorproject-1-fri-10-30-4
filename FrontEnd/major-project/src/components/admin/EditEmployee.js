@@ -8,11 +8,11 @@ const axios = require('axios').default;
 
 
 class EditEmployee extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
 
-            employeeId: 0,
+            employeeId: this.props.match.params.employeeId,
             businessId: 0, 
             firstName: "",
             lastName: "",
@@ -40,9 +40,13 @@ class EditEmployee extends Component {
     }
 
     loadData() {
+        const id = this.state.employeeId
         this.setState({loading: true})
-        axios.get(`http://localhost:8080/employee/${this.props.match.params.employeeId}`)
-        .then(response =>{
+        async function getData() {
+           const response = await axios.get(`http://localhost:8080/employee/${id}`)
+            return response 
+        }
+        getData().then(response =>{
             const employeeData= response.data
             this.setState(
                 prevState => { 
@@ -67,16 +71,18 @@ class EditEmployee extends Component {
                         sundayTime: employeeData.sundayTime
                     }
                 }
-              )
+            )
         })
+        
     }
 
     componentDidMount() {
        this.loadData()
     }
 
+  
     onSubmit() {
-        this.setState({updated: true})
+       
         const employee = {
             employeeId: this.state.employeeId,
             businessId: this.state.businessId,
@@ -100,12 +106,16 @@ class EditEmployee extends Component {
         const config = {
             headers: {'Content-Type': 'application/json'}
         }
-        axios.put("http://localhost:8080/employee/update", data, config).then (
-            this.loadData()
-        )
-        //this.props.history.push("/employee/update-result/" + this.state.employeeId)
-        //this.props.history.push("/")
+
+        async function update(data, config) {
+            const response = await axios.put("http://localhost:8080/employee/update", data, config)
+            return response
+        }
        
+        update(data, config).then(
+            this.loadData(),
+            this.setState({updated: true})
+        )
         
     }
     
@@ -146,11 +156,11 @@ class EditEmployee extends Component {
         }
         let renderPage;
         if(this.state.updated){
-             renderPage = updatedMessage()
+             renderPage = this.state.loading ? loading() : updatedMessage()
         } else {
              renderPage =  this.state.loading ? loading() : editEmployeeComponent()
         }
-       // renderPage =  this.state.loading ? loading() : editEmployeeComponent()
+       
         return(
            renderPage
         )

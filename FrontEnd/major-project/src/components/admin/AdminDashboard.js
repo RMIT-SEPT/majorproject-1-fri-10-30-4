@@ -17,6 +17,12 @@ function AdminDashboard() {
                             <button>View / Edit / Remove</button>
                         </NavLink>
                     </div>
+                    <div className="comps">
+                        <NavLink to="/profile">
+                                <button>Profile</button>
+                        </NavLink>
+                    </div>
+
                     {/*
                     <div className="comps">
                         <label>Bookings</label>

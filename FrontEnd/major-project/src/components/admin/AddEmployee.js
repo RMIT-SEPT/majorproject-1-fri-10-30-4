@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import "../../css/EmployeeForm.css"
 import AddEmployeeComponent from "./AddEmployeeComponent"
 import {Jumbotron} from "react-bootstrap";
+
 const axios = require('axios').default;
 
 class AddEmployee extends Component {
@@ -55,7 +56,7 @@ class AddEmployee extends Component {
         const config = {
             headers: {'Content-Type': 'application/json'}
         }
-        axios.post("http://localhost:8080/employee/create", data, config);
+        axios.post("http://localhost:8080/employee/create", data, config).then(this.setState({added:true}))
     }
     
     onChange(event) {
