@@ -11,7 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Optional;
-
+import java.util.Date;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -98,9 +98,7 @@ public class EmployeeController {
     @CrossOrigin(origins="*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.HEAD})
     @GetMapping("/getAvailableDates")
     public ResponseEntity<?> getAvailableDates(@RequestParam("businessID") int businessID, @RequestParam("serviceID") int serviceID, @RequestParam("employeeID") int employeeID){
-		return null;
-    	
-    	//return new ResponseEntity<Iterable<EmployeeImpl>>(employeeService.getAllByBusinessAndService(businessID, serviceID), HttpStatus.OK);
+    	return new ResponseEntity<Iterable<Date>>(employeeService.getUpcomingBookingDates(businessID, serviceID, employeeID), HttpStatus.OK);
     }
     
     /************************************For Testing*****************************************/
