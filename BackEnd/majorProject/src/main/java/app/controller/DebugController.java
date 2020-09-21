@@ -51,8 +51,8 @@ public class DebugController {
     	Employee philPrice = new Employee(100, eCorp, "Phillip", "Price", "philPrice@email.com", "greatPasswordHash", "0400111222");
     	Employee elliotAlderson = new Employee(101, eCorp, "Elliot", "Alderson", "elliotAlderson@email.com", "greatPasswordHash", "0433444555");
     	Employee angelaMoss = new Employee(102, eCorp, "Angela", "Moss", "angelaMoss@email.com", "greatPasswordHash", "0477888999");
-    	elliotAlderson.setMondayTime("0900-1200");
-    	elliotAlderson.setTuesdayTime("0900-1200");
+    	elliotAlderson.setMondayTime("09:00-12:00");
+    	elliotAlderson.setTuesdayTime("09:00-12:00");
     	philPrice = employeeService.createEmployee(philPrice);
     	elliotAlderson = employeeService.createEmployee(elliotAlderson);
     	angelaMoss = employeeService.createEmployee(angelaMoss);

@@ -8,11 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpResponse;
+
 import javax.validation.Valid;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/bookings")
+@RequestMapping("/booking")
 public class BookingController {
 
     @Autowired
@@ -49,6 +51,16 @@ public class BookingController {
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
+    @GetMapping("/getAvailbleTimes")
+    public ResponseEntity<?> findAvailableBookings(
+    		@RequestParam("businessID") int businessID, 
+    		@RequestParam("employeeID") int employeeID, 
+    		@RequestParam("serviceID") int serviceID, 
+    		@RequestParam("date") long date)
+    {
+    	return new ResponseEntity<>(bookingService.getAvailableBookings(businessID, employeeID, serviceID, date), HttpStatus.OK);
+    }
+    
     /************************************For Testing*****************************************/
 
     @GetMapping("/all")

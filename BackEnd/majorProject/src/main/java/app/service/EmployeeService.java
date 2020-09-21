@@ -75,52 +75,51 @@ public class EmployeeService {
     	Employee employee = employeeRepository.findById(employeeID).get();
     	Calendar calendar = Calendar.getInstance();
     	int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-    	validDates.add(new Date(calendar.getTimeInMillis()));
-    	if(employee.getSundayTime() != null && employee.getSundayTime() != "NO_SCHEDULE") {
+    	if(employee.getSundayTime().isEmpty() != true && employee.getSundayTime() != "NO_SCHEDULE") {
     		Calendar dateToAdd = Calendar.getInstance();
     		dateToAdd.add(Calendar.DAY_OF_YEAR, 7 - dayOfWeek);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     		dateToAdd.add(Calendar.DAY_OF_YEAR, 7);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     	}
-    	if(employee.getMondayTime() != null && employee.getMondayTime() != "NO_SCHEDULE") {
+    	if(employee.getMondayTime().isEmpty() != true && employee.getMondayTime() != "NO_SCHEDULE") {
     		Calendar dateToAdd = Calendar.getInstance();
-    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((0 - dayOfWeek) + 1, 7));
+    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((0 - dayOfWeek) + 1, 7) + 1);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     		dateToAdd.add(Calendar.DAY_OF_YEAR, 7);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     	}
-    	if(employee.getTuesdayTime() != null && employee.getTuesdayTime() != "NO_SCHEDULE") {
+    	if(employee.getTuesdayTime().isEmpty() != true && employee.getTuesdayTime() != "NO_SCHEDULE") {
     		Calendar dateToAdd = Calendar.getInstance();
-    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((1 - dayOfWeek) + 1, 7));
+    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((1 - dayOfWeek) + 1, 7) + 1);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     		dateToAdd.add(Calendar.DAY_OF_YEAR, 7);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     	}
-    	if(employee.getWednesdayTime() != null && employee.getWednesdayTime() != "NO_SCHEDULE") {
+    	if(employee.getWednesdayTime().isEmpty() != true && employee.getWednesdayTime() != "NO_SCHEDULE") {
     		Calendar dateToAdd = calendar.getInstance();
-    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((2 - dayOfWeek) + 1, 7));
+    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((2 - dayOfWeek) + 1, 7) + 1);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     		dateToAdd.add(Calendar.DAY_OF_YEAR, 7);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     	}
-    	if(employee.getThursdayTime() != null && employee.getThursdayTime() != "NO_SCHEDULE") {
+    	if(employee.getThursdayTime().isEmpty() != true && employee.getThursdayTime() != "NO_SCHEDULE") {
     		Calendar dateToAdd = calendar.getInstance();
-    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((3 - dayOfWeek) + 1, 7));
+    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((3 - dayOfWeek) + 1, 7) + 1);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     		dateToAdd.add(Calendar.DAY_OF_YEAR, 7);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     	}
-    	if(employee.getFridayTime() != null && employee.getFridayTime() != "NO_SCHEDULE") {
+    	if(employee.getFridayTime().isEmpty() != true && employee.getFridayTime() != "NO_SCHEDULE") {
     		Calendar dateToAdd = calendar.getInstance();
-    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((4 - dayOfWeek) + 1, 7));
+    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((4 - dayOfWeek) + 1, 7) + 1);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     		dateToAdd.add(Calendar.DAY_OF_YEAR, 7);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     	}
-    	if(employee.getSaturdayTime() != null && employee.getSaturdayTime() != "NO_SCHEDULE") {
+    	if(employee.getSaturdayTime().isEmpty() != true && employee.getSaturdayTime() != "NO_SCHEDULE") {
     		Calendar dateToAdd = calendar.getInstance();
-    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((5 - dayOfWeek) + 1, 7));
+    		dateToAdd.add(Calendar.DAY_OF_YEAR, Math.floorMod((5 - dayOfWeek) + 1, 7) + 1);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));
     		dateToAdd.add(Calendar.DAY_OF_YEAR, 7);
     		validDates.add(new Date(dateToAdd.getTimeInMillis()));

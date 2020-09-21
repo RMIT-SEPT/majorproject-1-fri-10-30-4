@@ -40,7 +40,7 @@ public class BusinessController {
         return new ResponseEntity<>(business, HttpStatus.OK);
     }
     
-    
+
     /************************************For Testing*****************************************/
 
     @CrossOrigin(origins="*")
@@ -50,7 +50,4 @@ public class BusinessController {
     }
 
     /************************************For Testing*****************************************/
-
-
-
 }

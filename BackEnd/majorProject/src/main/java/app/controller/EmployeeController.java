@@ -2,6 +2,7 @@ package app.controller;
 
 
 import app.entity.user.Employee;
+import app.model.booking.BookingTimeOptionDTO;
 import app.service.BusinessServiceService;
 import app.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.resource.HttpResource;
+
 import javax.validation.Valid;
 import java.util.Optional;
+import java.net.http.HttpResponse;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 //TODO:Fix this
@@ -110,7 +117,6 @@ public class EmployeeController {
     }
 
     /************************************For Testing*****************************************/
-
-
-
 }
+
+

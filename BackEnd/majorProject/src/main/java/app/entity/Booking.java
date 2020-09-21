@@ -37,16 +37,9 @@ public class Booking {
     @JoinColumn(name="EMPLOYEE_ID")
     private Employee employee;
 
-    @Column(name="DATE")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @NotBlank(message = "Error: Date required for booking.")
-    private LocalDate bookingDate;
-
-    @Column(name="START_TIME")
-    @JsonFormat(pattern="HH:mm")
-    @NotBlank(message = "Error: Time required for booking.")
-    private LocalTime bookingStartTime;
-
+    @Column(name="UTC_DATE_TIME")
+    private Long date;
+    
     @Column(name="BOOKING_DESC")
     private String bookingDescription;
 
@@ -86,21 +79,21 @@ public class Booking {
         this.employee = employee;
     }
 
-    public LocalDate getBookingDate() {
-        return bookingDate;
-    }
+//    public LocalDate getBookingDate() {
+//        return bookingDate;
+//    }
+//
+//    public void setBookingDate(LocalDate bookingDate) {
+//        this.bookingDate = bookingDate;
+//    }
 
-    public void setBookingDate(LocalDate bookingDate) {
-        this.bookingDate = bookingDate;
-    }
-
-    public LocalTime getBookingStartTime() {
-        return bookingStartTime;
-    }
-
-    public void setBookingStartTime(LocalTime bookingStartTime) {
-        this.bookingStartTime = bookingStartTime;
-    }
+//    public LocalTime getBookingStartTime() {
+//        return bookingStartTime;
+//    }
+//
+//    public void setBookingStartTime(LocalTime bookingStartTime) {
+//        this.bookingStartTime = bookingStartTime;
+//    }
 
     public String getBookingDescription() {
         return bookingDescription;
