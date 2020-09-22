@@ -1,6 +1,6 @@
 import React from "react"
 
-function AddEmployeeComponent(props){
+function EditEmployeeComponent(props){
     return (
         <div>
             <h1 className="add-employee-title">Edit Employee #{props.data.employeeId}</h1>
@@ -128,7 +128,8 @@ function AddEmployeeComponent(props){
                                 <option value=""> None</option>
                                 <option value ="9:00-12:00">9am - 12pm</option>
                                 <option value ="12:00-15:00">12pm - 3pm</option>
-                                <option value ="15:00-18:00">3pm - 6pm</option>      
+                                <option value ="15:00-18:00">3pm - 6pm</option>
+                                <option value ="9:00-18:00">9am - 6pm</option>         
                             </select>
                         </td>
                     </tr>
@@ -143,7 +144,8 @@ function AddEmployeeComponent(props){
                                 <option value=""> None</option>
                                 <option value ="9:00-12:00">9am - 12pm</option>
                                 <option value ="12:00-15:00">12pm - 3pm</option>
-                                <option value ="15:00-18:00">3pm - 6pm</option>        
+                                <option value ="15:00-18:00">3pm - 6pm</option>
+                                <option value ="9:00-18:00">9am - 6pm</option>           
                             </select>
                         </td>
                     </tr>
@@ -158,7 +160,8 @@ function AddEmployeeComponent(props){
                                 <option value=""> None</option>
                                 <option value ="9:00-12:00">9am - 12pm</option>
                                 <option value ="12:00-15:00">12pm - 3pm</option>
-                                <option value ="15:00-18:00">3pm - 6pm</option>        
+                                <option value ="15:00-18:00">3pm - 6pm</option>
+                                <option value ="9:00-18:00">9am - 6pm</option>           
                             </select>
                         </td>
                     </tr>
@@ -173,7 +176,8 @@ function AddEmployeeComponent(props){
                                 <option value=""> None</option>
                                 <option value ="9:00-12:00">9am - 12pm</option>
                                 <option value ="12:00-15:00">12pm - 3pm</option>
-                                <option value ="15:00-18:00">3pm - 6pm</option>       
+                                <option value ="15:00-18:00">3pm - 6pm</option>
+                                <option value ="9:00-18:00">9am - 6pm</option>          
                             </select>
                         </td>
                     </tr>
@@ -188,7 +192,8 @@ function AddEmployeeComponent(props){
                                 <option value=""> None</option>
                                 <option value ="9:00-12:00">9am - 12pm</option>
                                 <option value ="12:00-15:00">12pm - 3pm</option>
-                                <option value ="15:00-18:00">3pm - 6pm</option>   
+                                <option value ="15:00-18:00">3pm - 6pm</option>
+                                <option value ="9:00-18:00">9am - 6pm</option>    
                             </select>
                         </td>
                     </tr>
@@ -203,7 +208,8 @@ function AddEmployeeComponent(props){
                                 <option value=""> None</option>
                                 <option value ="9:00-12:00">9am - 12pm</option>
                                 <option value ="12:00-15:00">12pm - 3pm</option>
-                                <option value ="15:00-18:00">3pm - 6pm</option>       
+                                <option value ="15:00-18:00">3pm - 6pm</option>
+                                <option value ="9:00-18:00">9am - 6pm</option>          
                             </select>
                         </td> 
                     </tr>
@@ -218,7 +224,8 @@ function AddEmployeeComponent(props){
                                 <option value=""> None</option>
                                 <option value ="9:00-12:00">9am - 12pm</option>
                                 <option value ="12:00-15:00">12pm - 3pm</option>
-                                <option value ="15:00-18:00">3pm - 6pm</option>       
+                                <option value ="15:00-18:00">3pm - 6pm</option>
+                                <option value ="9:00-18:00">9am - 6pm</option>          
                             </select>
                         </td>
                     </tr>
@@ -264,4 +271,4 @@ function AddEmployeeComponent(props){
     )
 }
 
-export default AddEmployeeComponent
+export default EditEmployeeComponent

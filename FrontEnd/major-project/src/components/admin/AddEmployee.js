@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import "../../css/EmployeeForm.css"
 import AddEmployeeComponent from "./AddEmployeeComponent"
+import {Jumbotron} from "react-bootstrap";
+
 const axios = require('axios').default;
 
 class AddEmployee extends Component {
@@ -13,7 +15,7 @@ class AddEmployee extends Component {
             email:"",
             passwordHash:"",
             phoneNumber: "",
-            service:"",
+            services:[],
 
             mondayTime:"",
             tuesdayTime:"",
@@ -23,7 +25,8 @@ class AddEmployee extends Component {
             saturdayTime:"",
             sundayTime:"",
 
-            error:""
+
+            added: false
 
         }
         this.onSubmit = this.onSubmit.bind(this)
@@ -38,7 +41,7 @@ class AddEmployee extends Component {
             email: this.state.email,
             passwordHash: this.state.passwordHash,
             phoneNumber: this.state.phoneNumber,    
-            service: this.state.service,
+            services: this.state.services,
 
             mondayTime: this.state.mondayTime,
             tuesdayTime: this.state.tuesdayTime,
@@ -53,7 +56,7 @@ class AddEmployee extends Component {
         const config = {
             headers: {'Content-Type': 'application/json'}
         }
-        axios.post("http://localhost:8080/employee/create", data, config);
+        axios.post("http://localhost:8080/employee/create", data, config).then(this.setState({added:true}))
     }
     
     onChange(event) {
@@ -66,12 +69,36 @@ class AddEmployee extends Component {
     }w
 
     render() {
+        let renderPage;
+        const addEmployee = () => {
+            return(
+                <AddEmployeeComponent 
+                    onSubmit={this.onSubmit} 
+                    onChange={this.onChange} 
+                    data={this.state}
+                />
+            )
+        }
+        const addedMessage = () => {
+            return(
+                <div>
+                    <Jumbotron>
+                    <h5 className="display-5">
+                        Employee Added
+                    </h5>
+                    </Jumbotron>
+                </div>
+            )
+        }
+
+        if(this.state.added){
+            renderPage = addedMessage()
+        } else {
+            renderPage = addEmployee()
+        }
+
         return(
-            <AddEmployeeComponent 
-                onSubmit={this.onSubmit} 
-                onChange={this.onChange} 
-                data={this.state}
-            />
+           renderPage
         )
     }
 }
