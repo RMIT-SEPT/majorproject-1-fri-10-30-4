@@ -10,12 +10,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookingRepository extends CrudRepository<Booking, Integer> {
 
-    /**
-     * @param customerId
-     * @return an Iterable list of bookings filtered by customer id.
-     */
-    @Query("SELECT booking FROM Booking booking WHERE (booking.customerId = ?1)")
-    Iterable<Booking> getAllByCustomerId(int customerId);
+//    /**
+//     * @param customerId
+//     * @return an Iterable list of bookings filtered by customer id.
+//     */
+//    @Query("SELECT booking FROM Booking booking WHERE (booking.customerId = ?1)")
+//    Iterable<Booking> getAllByCustomerId(int customerId);
 
     /**
      * @param employeeID
@@ -23,6 +23,6 @@ public interface BookingRepository extends CrudRepository<Booking, Integer> {
      * @param serviceLength in milliseconds.
      * @return
      */
-    @Query("SELECT booking FROM Booking booking WHERE (booking.date < :startTime) AND (:startTime < booking.date) AND (booking.employee.employeeId = :employeeID)")
-    Iterable<Booking> getOverlappingBookings(@Param("employeeID") int employeeID, @Param("startTime") Long startTime);
+    @Query("SELECT booking FROM Booking booking WHERE (booking.startTime < :finishTime) AND (:startTime < booking.endTime) AND (booking.employee.employeeId = :employeeID)")
+    Iterable<Booking> getOverlappingBookings(@Param("employeeID") int employeeID, @Param("startTime") Long startTime, @Param("finishTime") Long finishTime);
 }

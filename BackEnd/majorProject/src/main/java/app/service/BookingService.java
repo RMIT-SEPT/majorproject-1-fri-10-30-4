@@ -1,14 +1,16 @@
 package app.service;
 
-
-
 import app.entity.Booking;
+import app.entity.Business;
 import app.entity.BusinessServiceJob;
+import app.entity.user.Customer;
 import app.entity.user.Employee;
 import app.model.booking.BookingTimeOptionDTO;
 import app.repository.BookingRepository;
+import app.repository.BusinessRepository;
 import app.repository.BusinessServiceRepository;
 import app.repository.EmployeeRepository;
+import app.repository.CustomerRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -31,11 +34,34 @@ public class BookingService {
     private EmployeeRepository employeeRepository;
     
     @Autowired
+    private BusinessRepository businessRepository;
+    
+    @Autowired
     private BusinessServiceRepository businessServiceRepository;
+    
+    @Autowired
+    private CustomerRepository customerRepository;
     
     public Booking createBooking(Booking booking) {
         return bookingRepository.save(booking);
     }
+    
+    public Booking createBooking(
+    	int businessID, 
+    	int employeeID, 
+    	int customerID, 
+    	int serviceID, 
+    	long date
+    	) {
+    	Business business = businessRepository.findById(businessID).get();
+    	Employee employee = employeeRepository.findById(employeeID).get();
+    	Customer customer  = customerRepository.findById(customerID).get();
+    	BusinessServiceJob service = businessServiceRepository.findById(serviceID).get();
+    	//TODO:validate
+    	Booking booking =  new Booking(service, employee, customer, date, "");
+    	return bookingRepository.save(booking);
+   }
+    
 
     public Iterable<Booking> getAll(){
         return bookingRepository.findAll();
@@ -51,9 +77,9 @@ public class BookingService {
         return false;
     }
 
-    public Iterable<Booking> getAllByCustomerId(int customerID) {
-        return bookingRepository.getAllByCustomerId(customerID);
-    }
+//    public Iterable<Booking> getAllByCustomerId(int customerID) {
+//        return bookingRepository.getAllByCustomerId(customerID);
+//    }
 
     public Iterable<BookingTimeOptionDTO>getAvailableBookings(int businessID, int employeeID, int serviceID, long date) {
     	Employee employee = (Employee) employeeRepository.findById(employeeID).get();
@@ -88,8 +114,8 @@ public class BookingService {
 				break;
 		}
     	String[] shift = shiftString.split("-");
-		LocalTime shiftStart = LocalTime.parse(shift[0]);
-		LocalTime shiftEnd = LocalTime.parse(shift[1]);
+		LocalTime shiftStart = LocalTime.parse(shift[0], DateTimeFormatter.ofPattern("HH:mm"));
+		LocalTime shiftEnd = LocalTime.parse(shift[1], DateTimeFormatter.ofPattern("HH:mm"));
 		int appointmentIncrement = 60;
 		shiftEnd = shiftEnd.minusMinutes(serviceLength);
 		
@@ -97,17 +123,16 @@ public class BookingService {
 		for(LocalTime i = LocalTime.from(shiftStart);!i.isAfter(shiftEnd);i = i.plusMinutes(appointmentIncrement)) {
 			Calendar shiftStartCalendar = Calendar.getInstance();
 			shiftStartCalendar.setTimeInMillis(date);
-			shiftStartCalendar.set(Calendar.HOUR, i.getHour());
+			shiftStartCalendar.set(Calendar.HOUR_OF_DAY, i.getHour());
 			shiftStartCalendar.set(Calendar.MINUTE, i.getMinute());
 			shiftStartCalendar.set(Calendar.SECOND, 0);
-			Iterable<Booking> overlappingBookings = bookingRepository.getOverlappingBookings(employeeID, shiftStartCalendar.getTimeInMillis());
+			Iterable<Booking> overlappingBookings = bookingRepository.getOverlappingBookings(employeeID, shiftStartCalendar.getTimeInMillis(), shiftStartCalendar.getTimeInMillis() + (serviceLength * 60 * 1000));
+			System.out.println(shiftStartCalendar.getTimeInMillis());
+			System.out.println(shiftStartCalendar.getTimeInMillis() + (serviceLength * 60 * 1000));
 			if(!overlappingBookings.iterator().hasNext()) {
 				bookingTimeOptions.add(new BookingTimeOptionDTO(i, i.plusMinutes(serviceLength)));
 			}
 		}
     	return bookingTimeOptions;
-    }
-    
-    
-    
+    }    
 }

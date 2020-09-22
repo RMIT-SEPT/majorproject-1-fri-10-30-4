@@ -26,7 +26,7 @@ public class BusinessServiceJob {
 	@JsonIgnore
 	private Set<Employee> assignedEmployees = new HashSet<Employee>();
 	
-	//Length of the service in hours.
+	//Length of the service in minutes.
 	@Column(name="SERVICE_LENGTH")
 	private int serviceLength;
 	
@@ -61,6 +61,9 @@ public class BusinessServiceJob {
 		this.business = business;
 	}
 	
+	/**
+	 * @return Length of the service in minutes.
+	 */
 	public int getServiceLength() {
 		return this.serviceLength;
 	}
