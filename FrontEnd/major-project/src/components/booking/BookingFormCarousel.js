@@ -1,16 +1,15 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom'
 
 window.$selectedSlide = 0;
 window.numberOfSlides = 4;
-window.businessID = 101;
+window.businessID = 10;
 
 class CarouselControls extends React.Component{
     render(){
         return <div id="BookingFormCarouselControls">
             <div onClick={window.bookingFormCarouselComponent.changePageBack.bind()} class="BackButton">Back</div>
-            <div>Controls</div>
+            <div class="centrePadding"></div>
             <div onClick={window.bookingFormCarouselComponent.changePageForward.bind()} class="ForwardButton">Forward</div>
         </div>
     }
@@ -36,6 +35,7 @@ class ServicesList extends React.Component{
         fetch('http://localhost:8080/services/all', {method:'GET'})
             .then((response)=>response.json())
             .then((responseJson)=>{
+                this.state.listItems = []
                 for(const i in responseJson){
                     var service = responseJson[i];
                     this.state.listItems.push(service);
@@ -58,27 +58,32 @@ class ServicesListItem extends React.Component{
     }
     updateSelectedService(){
         window.selectedService = this.props.serviceId;
+        window.selectedServiceName = this.props.serviceName;
         window.WorkersList.updateWorkers();
+        window.BookingSummaryWindow.forceUpdate();
     }
 }
 
 class WorkersList extends React.Component{
     state = {
-        listItems: []
+        listItems: [],
+        isLoading: false
     }
     constructor(props){
         super(props)
         window.WorkersList = this;
-        this.updateWorkers = this.updateWorkers.bind(this);
+        this.updateWorkers =  this.updateWorkers.bind(this);
     }
     render(){
         if(window.selectedService==null){
             return <div id="WorkersListComponent" class="hiddenCarouselItem">Please select a service before continuing.</div>
+        } else if(this.state.isLoading){
+            return <div id="WorkersListComponent" class="hiddenCarouselItem">Now loading employees...</div>
         } else{  
             var renderedList = [];
             for(const i in this.state.listItems){
                 var worker = this.state.listItems[i];
-                renderedList.push(<WorkersListItem workerName={worker.userFirstName + " " + worker.userLastName} workerId={worker.userId}/>)
+                renderedList.push(<WorkersListItem workerName={worker.firstName + " " + worker.lastName} workerId={worker.employeeId}/>)
             }
             return <div id="WorkersListComponent" class="hiddenCarouselItem">
                 {renderedList}
@@ -87,17 +92,21 @@ class WorkersList extends React.Component{
     }
 
     updateWorkers(){
+        this.state.isLoading = true;
+        this.forceUpdate();
         var requestBody = [];
         requestBody.push("businessID" + "=" + window.businessID);
         requestBody.push("serviceID" + "=" + window.selectedService); 
         fetch("http://localhost:8080/employee/findForService?"+requestBody.join("&"), {method:"GET"})
         .then((response)=>response.json())
         .then((responseJson)=>{
+            var listItems = []
             for(const i in responseJson){
                 var employee = responseJson[i];
-                this.state.listItems.push(employee);
+                listItems.push(employee);
             }
-            console.log(this.state.listItems);
+            this.state.listItems = listItems;
+            this.state.isLoading = false;
             this.forceUpdate();
         });
     }
@@ -116,12 +125,16 @@ class WorkersListItem extends React.Component{
     }
     updateSelectedWorker(){
         window.selectedWorker = this.props.workerId;
+        window.selectedWorkerName = this.props.workerName;
+        window.DatesList.updateDates();
+        window.BookingSummaryWindow.forceUpdate();
     }    
 }
 
 class DatesList extends React.Component{
     state = {
-        listItems: []
+        listItems: [], 
+        isLoading: false
     }
     constructor(props){
         super(props)
@@ -129,13 +142,15 @@ class DatesList extends React.Component{
         this.updateDates = this.updateDates.bind(this);
     }
     render(){
-        if(window.selectedWorker==null){
+        if(window.selectedService==null){
             return <div id="DatesListComponent" class="hiddenCarouselItem">Please select a service before continuing.</div>
+        } else if(this.state.isLoading){
+            return <div id="DatesListComponent" class="hiddenCarouselItem">Now loading possible dates...</div>
         } else{  
             var renderedList = [];
             for(const i in this.state.listItems){
                 var dateOption = this.state.listItems[i];
-                renderedList.push(<DatesListItem date={dateOption.date} />)
+                renderedList.push(<DatesListItem date={dateOption} />)
             }
             return <div id="DatesListComponent" class="hiddenCarouselItem">
                 {renderedList}
@@ -144,55 +159,95 @@ class DatesList extends React.Component{
     }
 
     updateDates(){
+        this.state.isLoading = true;
+        this.forceUpdate();
         var requestBody = [];
         requestBody.push("businessID" + "=" + window.businessID);
         requestBody.push("serviceID" + "=" + window.selectedService);
-        requestBody.push("workerID" + "=" + window.selectedWorker) 
-        fetch("http://localhost:8080/booking/findValidDates?"+requestBody.join("&"), {method:"GET"})
+        requestBody.push("employeeID" + "=" + window.selectedWorker);
+        fetch("http://localhost:8080/employee/getAvailableDates?"+requestBody.join("&"), {method:"GET"})
         .then((response)=>response.json())
-        .then((responseJson)=>{
+        .then((responseJson)=>{ 
+            this.state.listItems = [];
             for(const i in responseJson){
-                var dateOption = responseJson[i];
-                this.state.listItems.push(dateOption);
+                this.state.listItems.push(new Date(responseJson[i]));
             }
-            console.log(this.state.listItems);
+            this.state.listItems.sort(function(a, b){return a.getTime() - b.getTime()});
+            this.state.isLoading = false;
             this.forceUpdate();
         });
-    }
-
-    render(){
-        return <div id="DatesListComponent" class="hiddenCarouselItem">
-            <ul>
-                <li>date1</li>
-                <li>Date2</li>
-            </ul>
-        </div>
     }
 }
 
 class DatesListItem extends React.Component{
+
     constructor(props){
         super(props);
         this.updateSelectedDate = this.updateSelectedDate.bind(this);
     }
     render(){
+        var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var year = this.props.date.getFullYear();
+        var month = this.props.date.getMonth() + 1; //Months are indexed from 0
+        var date = this.props.date.getDate();
+        
         return <button class="ServicesListItem" onClick={this.updateSelectedDate.bind()}>
-            <a>{this.props.workerName}</a>
+            <a>{days[this.props.date.getDay()]}, {date}/{month}/{year}</a>
         </button>
     }
     updateSelectedDate(){
         window.selectedDate = this.props.date;
+        window.TimesList.updateTimes();
+        window.BookingSummaryWindow.forceUpdate();
     }    
 }
 
 class TimesList extends React.Component{
+    state = {
+        listItems: [], 
+        isLoading: false
+    }
+    constructor(props){
+        super(props)
+        window.TimesList = this;
+        this.updateTimes= this.updateTimes.bind(this);
+    }
     render(){
-        return <div id="TimesListComponent" class="hiddenCarouselItem">
-            <ul>
-                <li>Time1</li>
-                <li>Time2</li>
-            </ul>
-        </div>
+        if(window.selectedService==null){
+            return <div id="TimesListComponent" class="hiddenCarouselItem">Please select a date before continuing.</div>
+        } else if(this.state.isLoading){
+            return <div id="TimesListComponent" class="hiddenCarouselItem">Now loading appointment times...</div>
+        } else{  
+            var renderedList = [];
+            for(const i in this.state.listItems){
+                var timeOption = this.state.listItems[i];
+                renderedList.push(<TimesListItem startTime={timeOption.shiftStart} endTime={timeOption.shiftEnd} />)
+            }
+            return <div id="TimesListComponent" class="hiddenCarouselItem">
+                {renderedList}
+            </div>         
+        }
+    }
+
+    updateTimes(){
+        this.state.isLoading = true;
+        this.forceUpdate();
+        var requestBody = [];   
+        requestBody.push("businessID" + "=" + window.businessID);
+        requestBody.push("serviceID" + "=" + window.selectedService);
+        requestBody.push("employeeID" + "=" + window.selectedWorker);
+        requestBody.push("date" + "=" + window.selectedDate.getTime());
+        fetch("http://localhost:8080/booking/getAvailbleTimes?"+requestBody.join("&"), {method:"GET"})
+        .then((response)=>response.json())
+        .then((responseJson)=>{ 
+            this.state.listItems = [];
+            for(const i in responseJson){
+                this.state.listItems.push((responseJson[i]));
+            }
+            console.log(this.state.listItems);
+            this.state.isLoading = false;
+            this.forceUpdate();
+        });
     }
 }
 
@@ -203,11 +258,12 @@ class TimesListItem extends React.Component{
     }
     render(){
         return <button class="ServicesListItem" onClick={this.updateSelectedTime.bind()}>
-            <a>{this.props.time}</a>
+            <a>{this.props.startTime} - {this.props.endTime}</a>
         </button>
     }
     updateSelectedTime(){
-        window.selectedTime = this.props.time;
+        window.selectedTime = this.props.startTime;
+        window.BookingSummaryWindow.forceUpdate();
     }    
 }
 

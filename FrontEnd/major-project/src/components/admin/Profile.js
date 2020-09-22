@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import "../../css/AdminProfile.css"
 
+const axios = require('axios').default;
+
 class Profile extends Component {
     constructor(props){
         super(props)

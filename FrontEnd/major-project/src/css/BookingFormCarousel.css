@@ -1,3 +1,28 @@
+body{
+  flex-direction: column;
+}
+
+div#root{
+  width:100%;
+  height:100%;
+  flex-grow:1;
+}
+
+div#root>div{
+  width:100%;
+  height:100%;
+}
+
+div#root>div>div{
+  width:100%;
+  height:100%;
+}
+div#root>div>div>div{
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction: column;
+}
 
 .pageContent{
     width:100%;
@@ -40,8 +65,19 @@
   
   #BookingFormCarouselControls{
     flex-grow: 0;
+    display:flex;
+    flex-direction: row;
   }
-  
+  #BookingFormCarouselControls>.backButton{
+    flex-grow: 0;
+  }
+  #BookingFormCarouselControls>.centrePadding{
+    flex-grow: 1;
+  }
+  #BookingFormCarouselControls>.forwardButton{
+    flex-grow: 0;
+  }
+
   .ServicesListItem{
     height:100px;
     min-width: 200px;

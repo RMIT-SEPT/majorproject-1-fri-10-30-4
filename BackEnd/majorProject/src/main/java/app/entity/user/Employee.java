@@ -23,8 +23,8 @@ public class Employee {
     private int employeeId;
 
     @ManyToOne
-    @JoinColumn(name = "BUSINESS_ID")
-    private Business business;
+    @JoinColumn(name = "BUSINESS_ID", nullable = true)
+    private Business business = null;
 
     @NotBlank(message="Error: First name required")
     @Column(name="FIRST_NAME")

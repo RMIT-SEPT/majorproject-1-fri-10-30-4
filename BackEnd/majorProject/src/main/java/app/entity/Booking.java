@@ -6,6 +6,7 @@ package app.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import app.entity.user.Customer;
 import app.entity.user.Employee;
 
 import javax.persistence.Entity;
@@ -29,24 +30,21 @@ public class Booking {
     @JoinColumn(name="SERVICE_ID")
     private BusinessServiceJob service;
 
-    @Column(name="CUSTOMER_ID")
-    @NotEmpty(message ="Error: Customer ID required")
-    private int customerId;
+    @ManyToOne
+    @JoinColumn(name="CUSTOMER_ID")
+    private Customer customer;
 
     @ManyToOne
     @JoinColumn(name="EMPLOYEE_ID")
     private Employee employee;
 
-    @Column(name="DATE")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @NotBlank(message = "Error: Date required for booking.")
-    private LocalDate bookingDate;
-
-    @Column(name="START_TIME")
-    @JsonFormat(pattern="HH:mm")
-    @NotBlank(message = "Error: Time required for booking.")
-    private LocalTime bookingStartTime;
-
+    @Column(name="BOOKING_START")
+    private Long startTime;
+    
+    @Column(name="BOOKING_END")
+    private Long endTime;
+    
+    
     @Column(name="BOOKING_DESC")
     private String bookingDescription;
 
@@ -54,6 +52,18 @@ public class Booking {
     @NotNull(message = "Error: Booking must be either active or inactive (true or false).")
     private Boolean isActive;
 
+    public Booking() {};
+    
+    public Booking(BusinessServiceJob service, Employee employee, Customer customer, long date, String description) {
+    	this.service = service;
+    	this.employee = employee;
+    	this.customer = customer;
+    	this.startTime = date;
+    	this.endTime = date + service.getServiceLength() * 60 * 1000;
+    	this.bookingDescription = description;
+    	this.isActive = true;
+    }
+    
     public Integer getBookingId() {
         return bookingId;
     }
@@ -62,6 +72,23 @@ public class Booking {
         this.bookingId = bookingId;
     }
 
+    public long getBookingStart() {
+    	return this.startTime;
+    }
+    
+    public void setBookingStart(long date) {
+    	this.startTime = date;
+    }
+    
+    public long getBookingEnd() {
+    	return this.endTime;
+    }
+    
+    public void setBookingEnd(long date) {
+    	this.endTime = date;
+    }
+    
+    
     public BusinessServiceJob getService() {
         return this.service;
     }
@@ -70,12 +97,12 @@ public class Booking {
         this.service = service;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return this.customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Employee getEmployee() {
@@ -86,21 +113,21 @@ public class Booking {
         this.employee = employee;
     }
 
-    public LocalDate getBookingDate() {
-        return bookingDate;
-    }
+//    public LocalDate getBookingDate() {
+//        return bookingDate;
+//    }
+//
+//    public void setBookingDate(LocalDate bookingDate) {
+//        this.bookingDate = bookingDate;
+//    }
 
-    public void setBookingDate(LocalDate bookingDate) {
-        this.bookingDate = bookingDate;
-    }
-
-    public LocalTime getBookingStartTime() {
-        return bookingStartTime;
-    }
-
-    public void setBookingStartTime(LocalTime bookingStartTime) {
-        this.bookingStartTime = bookingStartTime;
-    }
+//    public LocalTime getBookingStartTime() {
+//        return bookingStartTime;
+//    }
+//
+//    public void setBookingStartTime(LocalTime bookingStartTime) {
+//        this.bookingStartTime = bookingStartTime;
+//    }
 
     public String getBookingDescription() {
         return bookingDescription;
