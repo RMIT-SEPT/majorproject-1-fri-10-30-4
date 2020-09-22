@@ -1,0 +1,11 @@
+
+.column {
+    padding-left: 50px;
+    width: 30%;
+  }
+
+.title {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
