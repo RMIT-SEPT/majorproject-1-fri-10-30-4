@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, BrowserRouter, Switch} from "react-router-dom"
 import Admin from "./components/admin/Admin"
+import Customer from "./components/customer/Customer"
 import Login from "./components/user/Login"
 import Registration from "./components/user/Registration"
 
@@ -8,7 +9,8 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      adminLoggedIn: true
+      adminLoggedIn: false,
+      customerLoggedIn: true
     };
   }
 
@@ -20,6 +22,14 @@ class App extends Component {
         <div>
           <Router>
           <Admin />
+          </Router>
+        </div>
+      )
+    } else if (this.state.customerLoggedIn) {
+      return (
+        <div>
+          <Router>
+            <Customer />
           </Router>
         </div>
       )

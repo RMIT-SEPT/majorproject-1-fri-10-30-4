@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import "../../css/EmployeeList.css"
 import "../../css/Loading.css"
 import {NavLink} from 'react-router-dom'
+import { Jumbotron } from "react-bootstrap";
 const axios = require('axios').default;
 class EmployeeList extends Component {
     constructor() {
@@ -31,11 +32,20 @@ class EmployeeList extends Component {
     render() {
         const employees = this.state.employees.map(item => 
                             {return ( 
-                            <NavLink 
-                                key={item.userId} 
-                                to={"/employee/" + item.userId}>
-                                <li>{item.userFirstName} {item.userLastName}</li>
-                            </NavLink>
+                                <Jumbotron className="jumbotron-container">
+                                        <NavLink key={item.employeeId} to={"/employee/" + item.employeeId}>
+                                            <p>{item.firstName} {item.lastName}</p>
+                                        </NavLink>
+                                        <span>
+                                        <NavLink  key={item.employeeId} to={"/employee/update/" + item.employeeId}>
+                                            <button className="btn btn-primary employee-button">Edit</button>
+                                        </NavLink>
+                                        <NavLink key={item.employeeId} to={"/employee/remove/" + item.employeeId}>
+                                            <button className="btn btn-danger employee-button">Remove</button>
+                                        </NavLink>
+                                        </span>
+                                </Jumbotron >
+                            
                             )})
 
         const loading = () => {
@@ -48,14 +58,13 @@ class EmployeeList extends Component {
         return (
             <div>
                 <div>
-                    <h2 className="title">Employees</h2>
+                    <h2 className="employee-title">Employees</h2>
                 </div>
                 <div className="buttons">
-                    <NavLink to="/employee/add"><button className="btn btn-success button">Add Employee</button></NavLink>
-                    <NavLink to="/employee/remove"><button className="btn btn-danger button">Remove Employee</button></NavLink>
+                    <NavLink to="/employee/add"><button className="btn btn-success add-employee-button">Add Employee</button></NavLink>
                 </div>
                 <hr></hr>
-                <div className="main">
+                <div className="employee">
                     <ul>
                         {renderPage}
                     </ul>

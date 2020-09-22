@@ -1,32 +1,32 @@
 package app.repository;
 
-import app.model.user.CustomerImpl;
+import app.entity.user.Customer;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 
-public interface CustomerRepository extends CrudRepository<CustomerImpl, Integer> {
+public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 
-    /**
-     * @param userID
-     * @return The customer with the userID.
-     */
-    @Query("SELECT customer FROM CustomerImpl customer WHERE (userID = :userID)")
-    CustomerImpl getCustomerByID(@Param("userID") int userID);
-
-    /**
-     * @param address
-     * @return Get a collection of customers with the same address.
-     */
-    @Query("SELECT customers FROM CustomerImpl customers WHERE address = :address")
-    Collection<CustomerImpl> getCustomerByAddress(@Param("address") String address);
-
-    /**
-     * @param phoneNumber
-     * @return A collection of customers with the same phone number.
-     */
-    @Query("SELECT customers FROM CustomerImpl customers WHERE phoneNumber = :phoneNumber")
-    Collection<CustomerImpl> getCustomerByPhoneNumber(@Param("phoneNumber") String phoneNumber);
+//    /**
+//     * @param userID
+//     * @return The customer with the userID.
+//     */
+//    @Query("SELECT customer FROM Customer customer WHERE (customerID = :userID)")
+//    Customer getCustomerByID(@Param("userID") int userID);
+//
+//    /**
+//     * @param address
+//     * @return Get a collection of customers with the same address.
+//     */
+//    @Query("SELECT customers FROM Customer customers WHERE address = :address")
+//    Collection<Customer> getCustomerByAddress(@Param("address") String address);
+//
+//    /**
+//     * @param phoneNumber
+//     * @return A collection of customers with the same phone number.
+//     */
+//    @Query("SELECT customers FROM CustomerImpl customers WHERE phoneNumber = :phoneNumber")
+//    Collection<Customer> getCustomerByPhoneNumber(@Param("phoneNumber") String phoneNumber);
 }
