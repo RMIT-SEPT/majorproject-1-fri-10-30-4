@@ -11,19 +11,19 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        this.setState({loading: true})
-        axios.get(`http://localhost:8080/user/${this.props.match.params.userId}`)
-        .then(response =>{
-            const adminData = response.data
-            this.setState(
-                prevState => { 
-                    return {
-                        admin: adminData,
-                        loading: !prevState.loading
-                    }
-                }
-              )
-        })
+        // this.setState({loading: true})
+        // axios.get(`http://localhost:8080/user/${this.props.match.params.userId}`)
+        // .then(response =>{
+        //     const adminData = response.data
+        //     this.setState(
+        //         prevState => { 
+        //             return {
+        //                 admin: adminData,
+        //                 loading: !prevState.loading
+        //             }
+        //         }
+        //       )
+        // })
     }
 
     render() {
