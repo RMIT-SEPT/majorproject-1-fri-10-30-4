@@ -40,14 +40,13 @@ public class EmployeeControllerTest {
         employees = new ArrayList<>();
         Employee employee1 = new Employee();
         employee1.setEmployeeId(1);
-        Business business = new Business();
+        Business business = new Business("Software Services", 1);
         employee1.setBusiness(business);
         employee1.setFirstName("Jon");
         employee1.setLastName("Snow");
         employee1.setEmail("jon@ecorp.com");
         employee1.setPasswordHash("password");
         employee1.setPhoneNumber("123123");
-
         employee1.addService(null);
         employee1.setMondayTime("");
         employee1.setThursdayTime("");
