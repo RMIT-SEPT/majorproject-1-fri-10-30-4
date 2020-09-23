@@ -35,7 +35,6 @@ class BookingSummaryWindow extends React.Component{
     return (
       <div class="BookingSummaryWindow booking-summary">
         <Jumbotron className="summary-contents">
-          <div className="">
           <h3>Booking Summary:</h3><hr></hr>
           <div className="row">
             <div className="col-3">
@@ -70,7 +69,6 @@ class BookingSummaryWindow extends React.Component{
             </div>
           </div><br></br>
           {submitButton}
-          </div>
         </Jumbotron>
 
       

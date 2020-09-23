@@ -29,6 +29,11 @@
     margin: 3%;
     width: 90%;
 }
+.time-btn-block {
+    text-align: center;
+    margin: 3%;
+    width: 90%;
+}
 
 .service-btn {
     margin: 10px;
@@ -44,10 +49,12 @@
     border: none;
     background-color: rgb(15, 88, 156);
     margin: 10px;
+    width: 45%;
 }
 
 .time-btn {
     margin: 10px;
+    width: 45%;
 }
 
 .jumbotron {
@@ -60,7 +67,11 @@
     
 }
 
+.carousel-items-block {
+    height: 700px;
+}
+
 .summary-contents {
-    height: 550px;
+    height: 700px;
 }
 

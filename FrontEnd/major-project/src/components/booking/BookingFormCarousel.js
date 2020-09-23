@@ -43,7 +43,7 @@ class ServicesList extends React.Component{
         }
         return <div id="ServicesListComponent" class="shownCarouselItem">
             <div className="service-btn-block">
-                <Jumbotron>
+                <Jumbotron className="carousel-items-block">
                     {renderedList}
                 </Jumbotron>
             </div>
@@ -113,7 +113,7 @@ class WorkersList extends React.Component{
             return (
                 <div id="WorkersListComponent" class="hiddenCarouselItem">
                     <div className="employee-btn-block">
-                        <Jumbotron>
+                        <Jumbotron className="carousel-items-block">
                              {renderedList}
                         </Jumbotron>
                     </div>
@@ -189,7 +189,7 @@ class DatesList extends React.Component{
             return (
             <div id="DatesListComponent" class="hiddenCarouselItem">
                 <div className="date-btn-block">
-                <Jumbotron>
+                <Jumbotron className="carousel-items-block">
                     {renderedList}
                 </Jumbotron>
                 </div>
@@ -252,7 +252,7 @@ class TimesList extends React.Component{
     }
     constructor(props){
         super(props)
-        window.TimesList = this;
+        window.TimesList = this; 
         this.updateTimes= this.updateTimes.bind(this);
     }
     render(){
@@ -268,8 +268,8 @@ class TimesList extends React.Component{
             }
             return (
                 <div id="TimesListComponent" class="hiddenCarouselItem">
-                    <div>
-                        <Jumbotron>
+                    <div className="time-btn-block">
+                        <Jumbotron className="carousel-items-block">
                             {renderedList}
                         </Jumbotron>
                     </div>
