@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-
+import {Button} from 'react-bootstrap/'
+import "../../css/NewBooking.css"
 window.$selectedSlide = 0;
 window.numberOfSlides = 4;
 window.businessID = 10;
@@ -8,9 +9,19 @@ window.businessID = 10;
 class CarouselControls extends React.Component{
     render(){
         return <div id="BookingFormCarouselControls">
-            <div onClick={window.bookingFormCarouselComponent.changePageBack.bind()} class="BackButton">Back</div>
+            <div>
+                <button onClick={window.bookingFormCarouselComponent.changePageBack.bind()}  className="BackButton btn btn-primary">
+                    Button
+                </button>
+            </div>
+
             <div class="centrePadding"></div>
-            <div onClick={window.bookingFormCarouselComponent.changePageForward.bind()} class="ForwardButton">Forward</div>
+            
+            <div>
+                <button onClick={window.bookingFormCarouselComponent.changePageForward.bind()} className="ForwardButton btn btn-success">
+                    Forward
+                </button>
+            </div>
         </div>
     }
 }

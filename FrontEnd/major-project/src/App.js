@@ -10,7 +10,7 @@ class App extends Component {
     super()
     this.state = {
       adminLoggedIn: false,
-      customerLoggedIn: true
+      customerLoggedIn: true,
     };
   }
 
