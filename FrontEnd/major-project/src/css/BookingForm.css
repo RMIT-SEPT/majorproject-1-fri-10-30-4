@@ -1,0 +1,66 @@
+.BackButton {
+    margin-left: 50%;
+    margin-bottom: 30px;
+    width: 100px;
+    height: 50px;
+}
+
+.ForwardButton {
+    margin-left: 50%;
+    margin-bottom: 30px;
+    width: 100px;
+    height: 50px;
+}
+
+.service-btn-block {
+    text-align: center;
+    margin: 3%;
+    width: 90%;
+}
+
+.employee-btn-block {
+    text-align: center;
+    margin: 3%;
+    width: 90%;
+}
+
+.date-btn-block {
+    text-align: center;
+    margin: 3%;
+    width: 90%;
+}
+
+.service-btn {
+    margin: 10px;
+    width: 45%;
+}
+
+.employee-btn {
+    margin: 10px;
+    width: 45%;
+}
+
+.date-btn {
+    border: none;
+    background-color: rgb(15, 88, 156);
+    margin: 10px;
+}
+
+.time-btn {
+    margin: 10px;
+}
+
+.jumbotron {
+    box-shadow: 0px 0px 10px  rgb(165, 165, 165);
+}
+
+.booking-summary {
+    margin-right: 4%;
+    margin-top: 2%;
+    
+}
+
+.summary-contents {
+    height: 550px;
+}
+

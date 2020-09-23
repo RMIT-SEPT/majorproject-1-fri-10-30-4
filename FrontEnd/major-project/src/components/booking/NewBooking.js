@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 
 import BookingFormCarousel from "./BookingFormCarousel"
 import "../../css/BookingFormCarousel.css"
+import "../../css/BookingForm.css"
+import { Jumbotron } from 'react-bootstrap';
 
 
 class BookingInputWindow extends React.Component{
@@ -26,18 +28,54 @@ class BookingSummaryWindow extends React.Component{
     }
     var submitButton;
     if(window.selectedService!=null && window.selectedWorker!=null && window.selectedDate != null && window.selectedTime != null){
-      submitButton = <button onClick = {this.submitForm.bind()}>Submit</button>
+      submitButton = <button onClick = {this.submitForm.bind()} className="btn btn-success">Submit</button>
     } else{
       submitButton = <button hidden="hidden">Submit</button>
     }
-    return <div class="BookingSummaryWindow">
-      <h3>Booking Summary:</h3>
-      <p>Service:{window.selectedServiceName}</p>
-      <p>Worker:{window.selectedWorkerName}</p>
-      <p>Date:{this.dateDisplay}</p>
-      <p>Time:{window.selectedTime}</p>
-      {submitButton}
-    </div>;
+    return (
+      <div class="BookingSummaryWindow booking-summary">
+        <Jumbotron className="summary-contents">
+          <div className="">
+          <h3>Booking Summary:</h3><hr></hr>
+          <div className="row">
+            <div className="col-3">
+              <h5>Service: </h5>
+            </div>
+            <div className="col-6">
+              <h5>{window.selectedServiceName}</h5>
+            </div>
+          </div><br></br>
+          <div className="row">
+            <div className="col-3">
+              <h5>Worker: </h5>
+            </div>
+            <div className="col-6">
+              <h5>{window.selectedWorkerName}</h5>
+            </div>
+          </div><br></br>
+          <div className="row">
+            <div className="col-3">
+              <h5>Date: </h5>
+            </div>
+            <div className="col-6">
+              <h5>{this.dateDisplay}</h5>
+            </div>
+          </div><br></br>
+          <div className="row">
+            <div className="col-3">
+              <h5>Time: </h5>
+            </div>
+            <div className="col-6">
+              <h5>{window.selectedTime}</h5>
+            </div>
+          </div><br></br>
+          {submitButton}
+          </div>
+        </Jumbotron>
+
+      
+      </div>
+    );
   }
 
   submitForm(){
