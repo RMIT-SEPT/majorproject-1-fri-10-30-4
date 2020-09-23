@@ -2,6 +2,7 @@ package app.controller;
 /*
     Author: Nikita Phung s3783287
  */
+import app.entity.Business;
 import app.entity.user.Employee;
 import app.service.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,13 +40,15 @@ public class EmployeeControllerTest {
         employees = new ArrayList<>();
         Employee employee1 = new Employee();
         employee1.setEmployeeId(1);
-        employee1.setBusinessId(1);
+        Business business = new Business();
+        employee1.setBusiness(business);
         employee1.setFirstName("Jon");
         employee1.setLastName("Snow");
         employee1.setEmail("jon@ecorp.com");
         employee1.setPasswordHash("password");
         employee1.setPhoneNumber("123123");
-        employee1.setService(null);
+
+        employee1.addService(null);
         employee1.setMondayTime("");
         employee1.setThursdayTime("");
         employee1.setTuesdayTime("");
@@ -96,9 +99,4 @@ public class EmployeeControllerTest {
                 .andExpect(content().string("Error: Employee ID required in path parameter."))
                 .andExpect(status().isBadRequest());
     }
-
-
-
-
-
 }
