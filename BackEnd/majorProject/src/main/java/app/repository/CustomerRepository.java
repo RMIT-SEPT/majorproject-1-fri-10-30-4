@@ -12,7 +12,7 @@ import java.util.Collection;
 public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 
     Customer findByEmail(String email);
-    Customer getById(Long id);
+    Customer getByCustomerId(Long id);
 
 //    /**
 //     * @param userID
