@@ -3,15 +3,19 @@ package app.entity.user;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-import app.entity.Business;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 @Entity
 @Table(name="CUSTOMER")
-public class Customer {
+public class Customer implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="CUSTOMER_ID", unique=true)
-    private int customerID;
+    private Long customerID;
 
     @NotBlank(message="Error: First name required")
     @Column(name="FIRST_NAME")
@@ -20,10 +24,6 @@ public class Customer {
     @NotBlank(message="Error: Last name required")
     @Column(name="LAST_NAME")
     private String lastName;
-
-    @NotBlank(message="Error: Last name required")
-    @Column(name="USERNAME")
-    private String username;
 
     @NotBlank(message="Error: Email required")
     @Column(name="EMAIL")
@@ -52,11 +52,11 @@ public class Customer {
         this.confirmPassword = confirmPassword;
     }
 
-    public int getCustomerID() {
+    public Long getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(Long customerID) {
         this.customerID = customerID;
     }
 
@@ -76,13 +76,11 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFullName() {
+        String fullname = firstName + " " + lastName;
+        return fullname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getEmail() {
         return email;
@@ -114,5 +112,48 @@ public class Customer {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
+    }
+      /*
+    UserDetails interface methods
+     */
+
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return passwordHash;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isEnabled() {
+        return true;
     }
 }

@@ -2,7 +2,7 @@ package app.service;
 
 
 import app.entity.user.Customer;
-import app.exceptions.UsernameAlreadyExistsException;
+import app.exceptions.EmailAlreadyExistsException;
 import app.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,11 +19,11 @@ public class CustomerService {
     public Customer save(Customer newUser){
         try{
             newUser.setPasswordHash(bCryptPasswordEncoder.encode(newUser.getPasswordHash()));
-            newUser.setUsername(newUser.getUsername());
+            newUser.setEmail(newUser.getEmail());
             newUser.setConfirmPassword("");
             return customerRepository.save(newUser);
         }catch (Exception e){
-            throw new UsernameAlreadyExistsException("Username '"+ newUser.getUsername() +"' already exists");
+            throw new EmailAlreadyExistsException("Email '"+ newUser.getEmail() +"' already exists");
         }
 
     }
