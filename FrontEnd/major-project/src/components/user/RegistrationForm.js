@@ -18,7 +18,6 @@ function RegistrationForm(props){
                       type="text" 
                       placeholder="Enter First Name" />
                   <small>Error </small>
-                  <h4>{props.data.firstName}</h4>
                 </div>
                 <div className="comps">
                   <label>Last Name</label>
@@ -30,26 +29,7 @@ function RegistrationForm(props){
                       placeholder="Enter Last Name" />
                   <small>Error </small>
                 </div>
-                <div className="comps">
-                  <label>Username</label>
-                  <input
-                      onChange={props.onChange}
-                      value={props.data.username}
-                      name="username"
-                      type="text" 
-                      placeholder="Enter username" />
-                  <small>Error</small>
-                </div>
-                <div className="comps">
-                  <label>Email</label>
-                  <input
-                      onChange={props.onChange}
-                      value={props.data.email}
-                      name="email"
-                      type="text" 
-                      placeholder="Enter email" />
-                  <small>Error </small>
-                </div>
+                
                 <div className="comps">
                   <label>Address</label>
                   <input
@@ -68,6 +48,16 @@ function RegistrationForm(props){
                       name="phoneNumber"
                       type="tel" 
                       placeholder="Enter phone number" />
+                  <small>Error </small>
+                </div>
+                <div className="comps">
+                  <label>Email</label>
+                  <input
+                      onChange={props.onChange}
+                      value={props.data.email}
+                      name="email"
+                      type="text" 
+                      placeholder="Enter email" />
                   <small>Error </small>
                 </div>
                 <div className="comps">
