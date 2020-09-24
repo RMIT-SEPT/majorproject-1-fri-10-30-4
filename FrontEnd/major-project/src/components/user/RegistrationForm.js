@@ -1,56 +1,93 @@
-import React, { Component } from "react"
+import React from "react"
 import "../../css/Registration.css"
 import {NavLink} from "react-router-dom"
 
-class RegistrationForm extends Component{
-    constructor() {
-        super()
-        this.state = {}
-    }
-    
-    render() {
-        return (
-            <div className="App">
-            <div class="container">
-              <form id="form" class="form">
+function RegistrationForm(props){
+    return (
+        <div className="register-container">
+            <h5>{props.data.message}</h5>
+            <div className="container">
+              <form id="form" className="form" onSubmit={props.onSubmit}>
                 <h1>Register </h1>
-      
-                <div class="comps">
-                  <label for="fname">First Name</label>
-                  <input type="text" id="first name" placeholder="Enter First Name" />
+                <div className="comps">
+                  <label>First Name</label>
+                  <input
+                      onChange={props.onChange}
+                      value={props.data.firstName}
+                      name="firstName"
+                      type="text" 
+                      placeholder="Enter First Name" />
+                  <small>Error </small>
+                  <h4>{props.data.firstName}</h4>
+                </div>
+                <div className="comps">
+                  <label>Last Name</label>
+                  <input
+                      onChange={props.onChange}
+                      value={props.data.lastName}
+                      name="lastName"
+                      type="text" 
+                      placeholder="Enter Last Name" />
                   <small>Error </small>
                 </div>
-                <div class="comps">
-                  <label for="lname">Last Name</label>
-                  <input type="text" id="last name" placeholder="Enter Last Name" />
-                  <small>Error </small>
-                </div>
-                <div class="comps">
-                  <label for="username">Username</label>
-                  <input type="text" id="username" placeholder="Enter username" />
+                <div className="comps">
+                  <label>Username</label>
+                  <input
+                      onChange={props.onChange}
+                      value={props.data.username}
+                      name="username"
+                      type="text" 
+                      placeholder="Enter username" />
                   <small>Error</small>
                 </div>
-                <div class="comps">
-                  <label for="email">Email</label>
-                  <input type="text" id="email" placeholder="Enter email" />
-                  <small>Error </small>
-                </div>
-                <div class="comps">
-                  <label for="address">Address</label>
-                  <input type="text" id="address" placeholder="Enter Address" />
-                  <small>Error </small>
-                </div>
-                <div class="comps">
-                  <label for="password">Password</label>
-                  <input type="password" id="password" placeholder="Enter password" />
-                  <small>Error </small>
-                </div>
-                <div class="comps">
-                  <label for="password2">Confirm Password</label>
+                <div className="comps">
+                  <label>Email</label>
                   <input
-                    type="password"
-                    id="confirm password"
-                    placeholder="Confirm password"
+                      onChange={props.onChange}
+                      value={props.data.email}
+                      name="email"
+                      type="text" 
+                      placeholder="Enter email" />
+                  <small>Error </small>
+                </div>
+                <div className="comps">
+                  <label>Address</label>
+                  <input
+                      onChange={props.onChange}
+                      value={props.data.address}
+                      name="address"
+                      type="text" 
+                      placeholder="Enter address" />
+                  <small>Error </small>
+                </div>
+                <div className="comps">
+                  <label>Phone Number</label>
+                  <input
+                      onChange={props.onChange}
+                      value={props.data.phoneNumber}
+                      name="phoneNumber"
+                      type="tel" 
+                      placeholder="Enter phone number" />
+                  <small>Error </small>
+                </div>
+                <div className="comps">
+                  <label>Password</label>
+                  <input
+                      onChange={props.onChange}
+                      value={props.data.passwordHash}
+                      name="passwordHash"
+                      type="password" 
+                      placeholder="Enter password" />
+                  <small>Error </small>
+                </div>
+                <div className="comps">
+                  <label>Confirm Password</label>
+                  <input
+                      onChange={props.onChange}
+                      value={props.data.confirmPassword}
+                      name="confirmPassword"
+                      type="password"
+                      placeholder="Confirm password"
                   />
                   <small>Error </small>
                 </div>
@@ -59,9 +96,8 @@ class RegistrationForm extends Component{
                 <NavLink to="/login">Already have an account? Click here to login.</NavLink> 
               </form>
             </div>
-          </div>
-        )
-    }
+      </div>
+    )
 }
 
 export default RegistrationForm
