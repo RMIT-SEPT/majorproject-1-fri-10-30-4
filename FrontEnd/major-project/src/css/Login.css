@@ -75,4 +75,10 @@
     width: 100%;
     font-size: 20px;
   }
+
+  .login-form-block {
+    margin-top: 5%;
+    margin-left: 35%;
+    margin-right: 30%;
+  }
   

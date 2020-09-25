@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom"
 function RegistrationForm(props){
     return (
         <div className="register-container">
-            <h5>{props.data.message}</h5>
+           
             <div className="container">
               <form id="form" className="form" onSubmit={props.onSubmit}>
                 <h1>Register </h1>
@@ -82,6 +82,7 @@ function RegistrationForm(props){
                   <small>Error </small>
                 </div>
                 <button type="submit">SUBMIT</button>
+                <h5>{props.data.message}</h5>
                 <br></br>
                 <NavLink to="/login">Already have an account? Click here to login.</NavLink> 
               </form>

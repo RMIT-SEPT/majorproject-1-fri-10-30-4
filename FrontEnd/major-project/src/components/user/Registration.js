@@ -1,16 +1,17 @@
 import React, { Component } from "react"
 import RegistrationForm from "./RegistrationForm"
 
+const axios = require('axios').default;
+
 class Registration extends Component {
     constructor() {
         super()
         this.state = {
             firstName: "",
             lastName: "",
-            username: "",
-            email:"",
             address:"",
             phoneNumber: "",
+            email:"",
             passwordHash: "",
             confirmPassword: "",
 
@@ -28,18 +29,41 @@ class Registration extends Component {
     }
 
     onSubmit(event) {
-      event.preventDefault();
-        if(this.state.passwordHash !== this.state.confirmPassword) {
-            this.setState({
-              passwordHash: "",
-              confirmPassword: "",
-              message:"Error: Passwords don't match!"
-            })
-        } else {
-          this.setState({
-            message:"Success!"
-          })
-        }
+      this.setState({message: "Loading..."})
+      const customer = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        address: this.state.address,
+        phoneNumber: this.state.phoneNumber,
+        email: this.state.email,
+        passwordHash: this.state.passwordHash,
+        confirmPassword: this.state.confirmPassword,
+      }
+
+      const data = JSON.stringify(customer);
+      const config = {
+          headers: {'Content-Type': 'application/json'}
+      }
+
+      async function sendRequest(data, config) {
+        const response = await axios.post("http://localhost:8080/customer/register", data, config)
+        return response
+      }
+    
+      sendRequest(data, config).then(
+          this.setState({message: "Success!"})
+      )
+      
+      // if(this.state.passwordHash !== this.state.confirmPassword) {
+      //   //event.preventDefault();
+      //     this.setState({
+      //       passwordHash: "",
+      //       confirmPassword: "",
+      //       message:"Error: Passwords don't match!"
+      //     })
+      // } else {
+          
+      // }
     }
 
     render() {
