@@ -10,7 +10,7 @@ class App extends Component {
     super()
     this.state = {
       adminLoggedIn: false,
-      customerLoggedIn: false,
+      customerLoggedIn: true,
     };
   }
 
@@ -38,7 +38,7 @@ class App extends Component {
           <div>
             <BrowserRouter> 
               <Switch>
-                <Route exact path="/login" component={Login}/>
+                <Route exact path="/login" component={Login} {...this.state}/>
                 <Route exact path="/registration" component={Registration}/>
               </Switch>
             </BrowserRouter>
