@@ -19,7 +19,7 @@ import java.util.Collections;
 import static app.security.SecurityContants.HEADER_STRING;
 import static app.security.SecurityContants.TOKEN_PREFIX;
 
-public class JWTAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtTokenProvider tokenProvider;

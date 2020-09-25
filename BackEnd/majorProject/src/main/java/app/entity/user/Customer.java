@@ -1,6 +1,7 @@
 package app.entity.user;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,7 +16,9 @@ public class Customer implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name="CUSTOMER_ID", unique=true)
-    private Long customerID;
+    private Long customerId;
+
+
 
     @NotBlank(message="Error: First name required")
     @Column(name="FIRST_NAME")
@@ -24,6 +27,11 @@ public class Customer implements UserDetails {
     @NotBlank(message="Error: Last name required")
     @Column(name="LAST_NAME")
     private String lastName;
+
+    @Email(message = "Username needs to be an email")
+    @NotBlank(message = "username is required")
+    @Column(unique = true)
+    private String username;
 
     @NotBlank(message="Error: Email required")
     @Column(name="EMAIL")
@@ -44,6 +52,12 @@ public class Customer implements UserDetails {
     @Transient
     private String confirmPassword;
 
+    public Long getCustomerId() {
+        return customerId;
+    }
+    public void setCustomerId(Long customerId) {
+        this.customerId = customerId;
+    }
     public String getConfirmPassword() {
         return confirmPassword;
     }
@@ -52,13 +66,7 @@ public class Customer implements UserDetails {
         this.confirmPassword = confirmPassword;
     }
 
-    public Long getCustomerID() {
-        return customerID;
-    }
 
-    public void setCustomerID(Long customerID) {
-        this.customerID = customerID;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -77,8 +85,7 @@ public class Customer implements UserDetails {
     }
 
     public String getFullName() {
-        String fullname = firstName + " " + lastName;
-        return fullname;
+        return firstName + " " + lastName;
     }
 
 
@@ -130,7 +137,17 @@ public class Customer implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
+    }
+
+
+    public void setPassword(String passwordHash) {
+         this.passwordHash = passwordHash;
+    }
+
+
+    public void setUsername(String username) {
+        this.username = email;
     }
 
     @Override
