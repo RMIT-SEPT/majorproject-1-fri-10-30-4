@@ -137,7 +137,7 @@ public class Customer implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
 
@@ -147,7 +147,7 @@ public class Customer implements UserDetails {
 
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = email;
     }
 
     @Override

@@ -23,6 +23,7 @@ import javax.xml.transform.sax.SAXSource;
 import static app.security.SecurityContants.TOKEN_PREFIX;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/customer")
 public class CustomerController {
     @Autowired
@@ -37,15 +38,11 @@ public class CustomerController {
 
     @PostMapping("/register")
     public ResponseEntity<?>  registerCustomer(@RequestBody Customer customer, BindingResult result) {
-        System.out.println("register");
+
         customerValidator.validate(customer,result);
-        System.out.println("validated");
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-        System.out.println("error");
         if(errorMap != null)return errorMap;
-    ;
         customerService.save(customer);
-        System.out.println("created");
         return new  ResponseEntity<Customer>(customer, HttpStatus.OK);
     }
 

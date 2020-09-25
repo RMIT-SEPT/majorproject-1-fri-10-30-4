@@ -5,16 +5,16 @@ import javax.validation.constraints.NotBlank;
 public class LoginRequest {
 
     @NotBlank(message = "Username cannot be blank")
-    private String email;
+    private String username;
     @NotBlank(message = "Password cannot be blank")
     private String password;
 
     public String getUsername() {
-        return email;
+        return username;
     }
 
-    public void setUsername(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
