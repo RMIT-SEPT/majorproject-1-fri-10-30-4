@@ -1,7 +1,9 @@
 package app.security;
 
 public class SecurityContants {
-    public static final String SIGN_UP_URLS = "/customer/**";
+    public static final String SIGN_UP_URLS = "/customer/register";
+    public static final String CUSTOMER_URLS = "/customer/**";
+    public static final String LOGIN_URL = "/login/**";
     public static final String H2_URL = "h2-console/**";
     public static final String SECRET ="SecretKeyToGenJWTs";
     public static final String TOKEN_PREFIX= "Bearer ";

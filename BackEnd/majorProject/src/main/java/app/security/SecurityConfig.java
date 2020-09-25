@@ -16,8 +16,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static app.security.SecurityContants.H2_URL;
-import static app.security.SecurityContants.SIGN_UP_URLS;
+import static app.security.SecurityContants.*;
 
 
 @Configuration
@@ -73,7 +72,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.js"
                 ).permitAll()
                 .antMatchers(SIGN_UP_URLS).permitAll()
-                //.antMatchers("/api/users/**").permitAll()
+                .antMatchers(CUSTOMER_URLS).permitAll()
+                .antMatchers(LOGIN_URL).permitAll()
                 .antMatchers(H2_URL).permitAll()
                 .anyRequest().authenticated();
 
