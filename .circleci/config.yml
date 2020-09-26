@@ -1,0 +1,92 @@
+version: 2.1
+
+jobs:
+  backend_build:
+    docker:
+        - image: circleci/openjdk:11.0.8-jdk
+    steps:
+      - checkout
+
+      # restore the saved cache after the first run or if `pom.xml` has changed
+      #    Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      - restore_cache:
+          keys: 
+            - majorProject-backend-{{ checksum "BackEnd/majorProject/pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - majorProject-backend-
+
+      # gets the project dependencies
+      - run:
+          command: mvn dependency:go-offline
+          working_directory: BackEnd/majorProject
+
+      # saves the project dependencies
+      - save_cache:
+          paths:
+            # ***does this path need to be in BackEnd/majorProject?
+            - ~/.m2
+          key: sept-majorProject-backend-{{ checksum "BackEnd/majorProject/pom.xml" }}
+
+      # run the actual tests and, if all pass, build project
+      - run:
+          command: mvn package
+          working_directory: BackEnd/majorProject
+
+      # uploads the test metadata from path below so that it can show up in the CircleCI dashboard.
+      #    Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      - store_test_results:
+          path: BackEnd/majorProject/target/surefire-reports
+
+      # store the uberjar as an artifact
+      #    Upload artifacts for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts:
+          path: BackEnd/majorProject/target/majorProject-0.0.1-SNAPSHOT.jar
+  
+  frontend_build:
+    docker:
+      - image: circleci/node:12.18.4-stretch
+    
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - majorProject-frontend-{{ checksum "FrontEnd/major_project/package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - majorProject-frontend-
+
+      - run: 
+          command: npm install
+          working_directory: FrontEnd/major_project
+
+      - save_cache:
+          paths:
+            - FrontEnd/major_project/node_modules
+            # ***do we need these 2 paths?
+            # ***if so, do these need to be in FrontEnd/major_project?
+            - ~/.npm
+            - ~/.cache
+          key: majorProject-frontend-{{ checksum "FrontEnd/major_project/package.json" }}
+
+    #  - run: 
+    #      command: npm test
+    #      working_directory: FrontEnd/major_project
+
+      - run: 
+          command: npm run build
+          working_directory: FrontEnd/major_project
+
+      - store_artifacts:
+          path: FrontEnd/major_project/build
+
+workflows:
+  build-backend-frontend:
+    jobs:
+      - backend_build
+      #    filters:
+      #      branches:
+      #        only: master
+      - frontend_build
+      #    filters:
+      #      branches:
+      #        only: master
