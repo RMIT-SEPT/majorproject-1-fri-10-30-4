@@ -23,9 +23,8 @@ jobs:
       # saves the project dependencies
       - save_cache:
           paths:
-            # ***does this path need to be in BackEnd/majorProject?
             - ~/.m2
-          key: sept-majorProject-backend-{{ checksum "BackEnd/majorProject/pom.xml" }}
+          key: majorProject-backend-{{ checksum "BackEnd/majorProject/pom.xml" }}
 
       # run the actual tests and, if all pass, build project
       - run:
@@ -62,8 +61,6 @@ jobs:
       - save_cache:
           paths:
             - FrontEnd/major_project/node_modules
-            # ***do we need these 2 paths?
-            # ***if so, do these need to be in FrontEnd/major_project?
             - ~/.npm
             - ~/.cache
           key: majorProject-frontend-{{ checksum "FrontEnd/major_project/package.json" }}
@@ -72,8 +69,9 @@ jobs:
     #      command: npm test
     #      working_directory: FrontEnd/major_project
 
+      # CI=false so warnings not treated as errors
       - run: 
-          command: npm run build
+          command: CI=false npm run build
           working_directory: FrontEnd/major_project
 
       - store_artifacts:
@@ -82,11 +80,11 @@ jobs:
 workflows:
   build-backend-frontend:
     jobs:
-      - backend_build
-      #    filters:
-      #      branches:
-      #        only: master
-      - frontend_build
-      #    filters:
-      #      branches:
-      #        only: master
+      - backend_build:
+          filters:
+            branches:
+              only: master
+      - frontend_build:
+          filters:
+            branches:
+              only: master
