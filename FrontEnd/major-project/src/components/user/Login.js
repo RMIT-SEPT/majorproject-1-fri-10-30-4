@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import LoginForm from "./LoginForm"
-const axios = require('axios').default;
+import {login} from "../../actions/securityActions"
+// const axios = require('axios').default;
+
 class Login extends Component {
     constructor(props) {
         super(props)
@@ -25,22 +27,19 @@ class Login extends Component {
             username: this.state.username,
             password: this.state.password,
         }
-    
-        const data = JSON.stringify(loginRequest);
-        const config = {
-            headers: {'Content-Type': 'application/json'}
-        }
-    
-        async function sendRequest(data, config) {
-            const response = await axios.post("http://localhost:8080/customer/login", data, config)
-            return response
-        }
-        
-       sendRequest(data, config).then(
-            this.setState({message: "Success!"}),
-            // this.props.history.push('/')
-            // this.props.
-           )
+        this.props.login(loginRequest)
+    //     const data = JSON.stringify(loginRequest);
+    //     const config = {
+    //         headers: {'Content-Type': 'application/json'}
+    //     }
+    //     async function sendRequest(data, config) {
+    //         const response = await axios.post("http://localhost:8080/customer/login", data, config)
+    //         return response
+    //     }
+    //    sendRequest(data, config).then(
+    //         this.setState({message: "Success!"}),
+    //         // this.props.history.push('/')
+    //     )
     }
 
     render() {
