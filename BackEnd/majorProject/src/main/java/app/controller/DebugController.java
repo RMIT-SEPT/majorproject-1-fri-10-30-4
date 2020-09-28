@@ -64,6 +64,5 @@ public class DebugController {
     	employeeService.createEmployee(angelaMoss);
     	businessServiceService.saveService(computerRepair);
     	businessServiceService.saveService(assetManagement);
-    	System.out.println("A debug service was called!");
     }	
 }
