@@ -16,40 +16,48 @@ class App extends Component {
 
   
   render() {
-    const renderLogin = () => {
-    if(this.state.adminLoggedIn){
-      return (
-        <div>
-          <Router>
-          <Admin />
-          </Router>
-        </div>
-      )
-    } else if (this.state.customerLoggedIn) {
-      return (
-        <div>
-          <Router>
-            <Customer />
-          </Router>
-        </div>
-      )
-    } else {
-        return (
-          <div>
-            <BrowserRouter> 
-              <Switch>
-                <Route exact path="/login" component={Login} {...this.state}/>
-                <Route exact path="/registration" component={Registration}/>
-              </Switch>
-            </BrowserRouter>
-          </div>
-        )
-      }
-    }
+    // const renderLogin = () => {
+    // if(this.state.adminLoggedIn){
+    //   return (
+    //     <div>
+    //       <Router>
+    //       <Admin />
+    //       </Router>
+    //     </div>
+    //   )
+    // } else if (this.state.customerLoggedIn) {
+    //   return (
+    //     <div>
+    //       <Router>
+    //         <Customer />
+    //       </Router>
+    //     </div>
+    //   )
+    // } else {
+    //     return (
+    //       <div>
+    //         <BrowserRouter> 
+    //           <Switch>
+    //             <Route exact path="/login" component={Login} {...this.state}/>
+    //             <Route exact path="/registration" component={Registration}/>
+    //           </Switch>
+    //         </BrowserRouter>
+    //       </div>
+    //     )
+    //   }
+    // }
 
     return (
       <div>
-        {renderLogin()}
+          <div>
+            <BrowserRouter> 
+              <Switch>
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/registration" component={Registration}/>
+                <Route exact path="/" component={Customer}/>
+              </Switch>
+            </BrowserRouter>
+          </div>
       </div>
       
     )
