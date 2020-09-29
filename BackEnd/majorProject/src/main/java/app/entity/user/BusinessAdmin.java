@@ -1,22 +1,28 @@
 package app.entity.user;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import app.entity.Business;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 
 @Entity
-@Table(name="CUSTOMER")
-public class Customer implements UserDetails {
+@Table(name="BUSINESS_ADMIN")
+public class BusinessAdmin implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name="CUSTOMER_ID", unique=true)
-    private Long customerId;
+    @Column(name="BUSINESS_ADMIN_ID", unique=true)
+    private Long businessAdminId;
+
+    @Column(name="BUSINESS_NAME")
+    private String businessName;
+
+    @Column(name="BUSINESS_DESC")
+    private String businessDesc;
 
     @NotBlank(message="Error: First name required")
     @Column(name="FIRST_NAME")
@@ -49,22 +55,47 @@ public class Customer implements UserDetails {
 
     @Transient
     private String confirmPassword;
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
+    public BusinessAdmin(){}
+    public BusinessAdmin(Long businessAdminId, String businessName, String businessDesc, String firstName,String lastName,
+                         String username, String email,String address,  String phoneNumber, String passwordHash, String confirmPassword) {
+        this.businessAdminId = businessAdminId;
+        this.businessName = businessName;
+        this.businessDesc = businessDesc;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.passwordHash = passwordHash;
         this.confirmPassword = confirmPassword;
     }
 
+    public Long getBusinessAdminId() {
+        return businessAdminId;
+    }
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+    public void setBusinessAdminId(Long businessAdminId) {
+        this.businessAdminId = businessAdminId;
+    }
 
+    public String getBusinessName() {
+        return businessName;
+    }
+
+    public void setBusinessName(String businessName) {
+        this.businessName = businessName;
+    }
+
+    public String getBusinessDesc() {
+        return businessDesc;
+    }
+
+    public void setBusinessDesc(String businessDesc) {
+        this.businessDesc = businessDesc;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -81,11 +112,6 @@ public class Customer implements UserDetails {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
-
 
     public String getEmail() {
         return email;
@@ -118,12 +144,16 @@ public class Customer implements UserDetails {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
-      /*
-    UserDetails interface methods
-     */
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
     @Override
-    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
@@ -140,35 +170,29 @@ public class Customer implements UserDetails {
 
 
     public void setPassword(String passwordHash) {
-         this.passwordHash = passwordHash;
+        this.passwordHash = passwordHash;
     }
-
 
     public void setUsername(String username) {
         this.username = email;
     }
-
     @Override
-    @JsonIgnore
     public boolean isAccountNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
-    @JsonIgnore
     public boolean isAccountNonLocked() {
-        return true;
+        return false;
     }
 
     @Override
-    @JsonIgnore
     public boolean isCredentialsNonExpired() {
-        return true;
+        return false;
     }
 
     @Override
-    @JsonIgnore
     public boolean isEnabled() {
-        return true;
+        return false;
     }
 }

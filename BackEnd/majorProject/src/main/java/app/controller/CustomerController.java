@@ -26,6 +26,7 @@ import static app.security.SecurityContants.TOKEN_PREFIX;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/customer")
 public class CustomerController {
+
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
@@ -47,30 +48,6 @@ public class CustomerController {
     }
 
 
-    @Autowired
-    private JwtTokenProvider tokenProvider;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result){
-        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-        if(errorMap != null) return errorMap;
-
-
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()
-                )
-        );
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = TOKEN_PREFIX +  tokenProvider.generateToken(authentication);
-
-        return ResponseEntity.ok(new JwtLoginSuccessResponse(true, jwt));
-    }
 
     @GetMapping("/all")
     public Iterable<Customer> getAll() {

@@ -1,5 +1,6 @@
 package app.security;
 
+import app.entity.user.BusinessAdmin;
 import app.entity.user.Customer;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public class JwtTokenProvider {
 
     //Generate the token
 
-    public String generateToken(Authentication authentication){
+    public String generateCustomerToken(Authentication authentication){
         Customer user = (Customer)authentication.getPrincipal();
         Date now = new Date(System.currentTimeMillis());
 
@@ -26,6 +27,28 @@ public class JwtTokenProvider {
 
         Map<String,Object> claims = new HashMap<>();
         claims.put("id", (Long.toString(user.getCustomerId())));
+        claims.put("username", user.getUsername());
+        claims.put("fullName", user.getFullName());
+
+        return Jwts.builder()
+                .setSubject(userId)
+                .setClaims(claims)
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .compact();
+    }
+
+    public String generateBusinessAdminToken(Authentication authentication){
+        BusinessAdmin user = (BusinessAdmin) authentication.getPrincipal();
+        Date now = new Date(System.currentTimeMillis());
+
+        Date expiryDate = new Date(now.getTime()+EXPIRATION_TIME);
+
+        String userId = Long.toString(user.getBusinessAdminId());
+
+        Map<String,Object> claims = new HashMap<>();
+        claims.put("id", (Long.toString(user.getBusinessAdminId())));
         claims.put("username", user.getUsername());
         claims.put("fullName", user.getFullName());
 

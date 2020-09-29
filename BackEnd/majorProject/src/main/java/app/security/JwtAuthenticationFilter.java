@@ -1,10 +1,14 @@
 package app.security;
 
+import app.entity.Business;
+import app.entity.user.BusinessAdmin;
 import app.entity.user.Customer;
-import app.service.CustomerDetailsService;
+import app.exceptions.InvalidLoginResponse;
+import app.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -25,35 +29,37 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtTokenProvider tokenProvider;
 
     @Autowired
-    private CustomerDetailsService customerDetailsService;
+    private CustomUserDetailsService customUserDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                                     FilterChain filterChain) throws ServletException, IOException {
 
         try {
-
             String jwt = getJWTFromRequest(httpServletRequest);
-
             if(StringUtils.hasText(jwt)&& tokenProvider.validateToken(jwt)){
                 Long userId = tokenProvider.getUserIdFromJWT(jwt);
-                Customer userDetails = customerDetailsService.loadUserById(userId);
-
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, Collections.emptyList());
-
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                Customer customerDetails = customUserDetailsService.loadCustomerById(userId);
+                BusinessAdmin businessAdmin = customUserDetailsService.loadAdminById(userId);
+                if(customerDetails == null && businessAdmin == null){
+                    throw new UsernameNotFoundException("User not found");
+                } else if(businessAdmin != null){
+                    UsernamePasswordAuthenticationToken authentication = new
+                            UsernamePasswordAuthenticationToken(businessAdmin, null, Collections.emptyList());
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                } else if(customerDetails != null){
+                    UsernamePasswordAuthenticationToken authentication = new
+                            UsernamePasswordAuthenticationToken(customerDetails, null, Collections.emptyList());
+                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
 
             }
-
         }catch (Exception ex){
             logger.error("Could not set user authentication in security context", ex);
         }
-
-
         filterChain.doFilter(httpServletRequest, httpServletResponse);
-
     }
 
 

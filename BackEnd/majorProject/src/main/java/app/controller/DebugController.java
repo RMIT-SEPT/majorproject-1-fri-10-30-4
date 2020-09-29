@@ -1,5 +1,7 @@
 package app.controller;
 
+import app.entity.user.BusinessAdmin;
+import app.service.BusinessAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,9 +29,13 @@ public class DebugController {
     
     @Autowired
     private BusinessService businessService;
+
+	@Autowired
+	private BusinessAdminService businessAdminService;
     
     @GetMapping("/testData")
     public void refreshDBWithTestData() {
+    	businessAdminService.removeAll();
     	employeeService.removeAll();
     	businessService.removeAll();
     	businessServiceService.removeAll();
@@ -64,6 +70,24 @@ public class DebugController {
     	employeeService.createEmployee(angelaMoss);
     	businessServiceService.saveService(computerRepair);
     	businessServiceService.saveService(assetManagement);
+
+
+//    	BusinessAdmin businessAdmin = new BusinessAdmin(1L , "Computer Services", "Here there be dragons!",
+//				"Buffy", "Summers", "admin@ecorp.com", "admin@ecorp.com",
+//				"7 Slayer Street", "123123666", "admin", "admin");
+		BusinessAdmin businessAdmin = new BusinessAdmin();
+		businessAdmin.setBusinessName("Computer Services");
+		businessAdmin.setBusinessDesc("Here there be dragons!");
+		businessAdmin.setFirstName("Buffy");
+		businessAdmin.setLastName("Summers");
+		businessAdmin.setEmail("admin@ecorp.com");
+		businessAdmin.setUsername("admin@ecorp.com");
+		businessAdmin.setAddress("7 Slayer Street");
+		businessAdmin.setPhoneNumber("123123666");
+		businessAdmin.setPasswordHash("admin");
+		businessAdmin.setConfirmPassword("admin");
+    	businessAdminService.save(businessAdmin);
+
     	System.out.println("A debug service was called!");
     }	
 }

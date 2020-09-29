@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @Repository
-public interface CustomerRepository extends CrudRepository<Customer, Integer> {
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
     Customer findByEmail(String email);
     Customer getByCustomerId(Long id);
