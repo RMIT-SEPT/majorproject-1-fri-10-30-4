@@ -21,6 +21,7 @@ class NavigationBar extends Component {
               <NavLink to="/employee-list" className="navbar-element-style">Employees</NavLink>
               <NavLink to="/businesses" className="navbar-element-style">Business</NavLink>
               <NavLink to="/profile" className="navbar-element-style">Profile</NavLink>
+              <NavLink to="/bookings" className="navbar-element-style">Bookings</NavLink>
             </Nav>
               <NavLink to="/login" className="navbar-element-style"><Button>Log out</Button></NavLink>
           </Navbar>
