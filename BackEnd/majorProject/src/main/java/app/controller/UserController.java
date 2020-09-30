@@ -6,6 +6,7 @@ import app.security.JwtTokenProvider;
 import app.service.BusinessAdminService;
 import app.service.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,6 +39,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result){
+        System.out.println("*************");
         System.out.println("Checking errors");
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
 
@@ -47,25 +49,29 @@ public class UserController {
         }
 
         System.out.println("Create auth");
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()
-                )
-        );
-        System.out.println("Setting auth");
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt;
-        if(businessAdminService.exists(loginRequest.getUsername())){
-            System.out.println("Admin exists");
-            jwt = TOKEN_PREFIX +  tokenProvider.generateBusinessAdminToken(authentication);
-        } else {
-            System.out.println("Admin does not exist");
-            jwt = TOKEN_PREFIX +  tokenProvider.generateCustomerToken(authentication);
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequest.getUsername(),
+                            loginRequest.getPassword()
+                    )
+            );
+            System.out.println("Setting auth");
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt;
+            if(businessAdminService.exists(loginRequest.getUsername())){
+                System.out.println("Admin exists");
+                jwt = TOKEN_PREFIX +  tokenProvider.generateBusinessAdminToken(authentication);
+            } else {
+                System.out.println("Admin does not exist");
+                jwt = TOKEN_PREFIX +  tokenProvider.generateCustomerToken(authentication);
+            }
+            return ResponseEntity.ok(new JwtLoginSuccessResponse(true, jwt));
+        } catch(Exception e){
+            System.out.println("You made a boo boo");
+            e.printStackTrace();
         }
-
-
-        return ResponseEntity.ok(new JwtLoginSuccessResponse(true, jwt));
+        return new ResponseEntity<String>("Hello", HttpStatus.BAD_REQUEST);
     }
 
 }
