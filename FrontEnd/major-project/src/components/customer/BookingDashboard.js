@@ -10,8 +10,8 @@ function BookingDashboard() {
                         <NavLink to="/booking/new">
                             <button>New Booking</button>
                         </NavLink>
-                        <NavLink to="/">
-                            <button>View Past Bookings</button>
+                        <NavLink to="/bookings">
+                            <button>View Bookings</button>
                         </NavLink>
                     </div>
             </div>

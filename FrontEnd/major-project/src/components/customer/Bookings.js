@@ -247,18 +247,6 @@ const Bookings = () => {
                             </div>
                             <br/>
                             <div className="details">
-                                <div className="customer-details">
-                                    <h3>Customer Details</h3>
-                                    <span><strong>Name: </strong>{booking.employee?.firstName + ' ' + booking.employee?.firstName}</span><br/>
-                                    <span><strong>Email: </strong>{booking.employee?.email}</span><br/>
-                                    <span><strong>Service Description: </strong>
-                                        <ul>
-                                            {booking?.employee?.services?.map((service, index) =>
-                                                <li className="service" key={index}>{service.serviceDescription}</li>
-                                            )}
-                                        </ul>
-                                </span>
-                                </div>
                                 <div className="employee-details">
                                     <h3>Employee Details</h3>
                                     <span><strong>Name: </strong>{booking.employee?.firstName + ' ' + booking.employee?.firstName}</span><br/>
