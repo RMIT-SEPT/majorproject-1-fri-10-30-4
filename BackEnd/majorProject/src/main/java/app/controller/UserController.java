@@ -37,32 +37,21 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result){
-        System.out.println("*************");
-        System.out.println("Checking errors");
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-
         if(errorMap != null) {
-            System.out.println("Has error");
             return errorMap;
         }
 
-        System.out.println("Create auth");
-        try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginRequest.getUsername(),
-                            loginRequest.getPassword()
-                    )
-            );
-            System.out.println("Setting auth");
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            String jwt = TOKEN_PREFIX +  tokenProvider.generateToken(authentication);
-            return ResponseEntity.ok(new JwtLoginSuccessResponse(true, jwt));
-        } catch(Exception e){
-            System.out.println("You made a boo boo");
-            e.printStackTrace();
-        }
-        return new ResponseEntity<String>("Hello", HttpStatus.BAD_REQUEST);
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = TOKEN_PREFIX +  tokenProvider.generateToken(authentication);
+        return ResponseEntity.ok(new JwtLoginSuccessResponse(true, jwt));
+        
     }
 
 }
