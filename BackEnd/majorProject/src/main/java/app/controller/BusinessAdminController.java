@@ -16,17 +16,14 @@ public class BusinessAdminController {
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
-    @Autowired
-    private BusinessAdminService businessAdminService;
 
     @Autowired
-    private BusinessAdminValidator businessAdminValidator;
+    private BusinessAdminService businessAdminService;
 
 
     @PostMapping("/register")
     public ResponseEntity<?> registerAdmin(@RequestBody BusinessAdmin businessAdmin, BindingResult result) {
 
-        businessAdminValidator.validate(businessAdmin,result);
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap != null)return errorMap;
         businessAdminService.save(businessAdmin);

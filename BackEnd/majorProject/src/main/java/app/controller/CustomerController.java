@@ -21,16 +21,9 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @Autowired
-    private UserValidator customerValidator;
-
-
     @PostMapping("/register")
     public ResponseEntity<?>  registerCustomer(@RequestBody Customer customer, BindingResult result) {
 
-        customerValidator.validate(customer,result);
-        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
-        if(errorMap != null)return errorMap;
         customerService.save(customer);
         return new  ResponseEntity<Customer>(customer, HttpStatus.OK);
     }

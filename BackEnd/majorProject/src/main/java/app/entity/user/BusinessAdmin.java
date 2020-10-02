@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="BUSINESS_ADMIN")
 public class BusinessAdmin extends User {
 
     @Column(name="BUSINESS_NAME")

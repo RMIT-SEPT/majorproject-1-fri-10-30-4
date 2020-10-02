@@ -11,14 +11,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 @Entity
-@Table(name="CUSTOMER")
 public class Customer extends User{
 
-    @NotBlank(message="Error: Address required")
     @Column(name="ADDRESS")
     private String address;
 
-    @NotBlank(message="Error: Phone Number required")
     @Column(name="PHONE_NUMBER")
     private String phoneNumber;
 

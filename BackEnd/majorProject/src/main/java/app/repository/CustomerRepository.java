@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 
 @Transactional
+@Repository
 public interface CustomerRepository extends UserBaseRepository<Customer> {
 
 }

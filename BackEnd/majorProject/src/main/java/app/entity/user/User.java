@@ -10,6 +10,8 @@ import java.util.Collection;
 
 @Entity
 @Inheritance
+@DiscriminatorColumn(name = "USER_TYPE")
+@Table(name = "USERS")
 public abstract class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -70,7 +72,7 @@ public abstract class User implements UserDetails {
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.username = email;
     }
 
     public String getEmail() {

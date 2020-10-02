@@ -25,7 +25,7 @@ public class BusinessAdminDetailsService  implements UserDetailsService {
 
     @Transactional
     public BusinessAdmin loadAdminById(Long id){
-        BusinessAdmin admin = businessAdminRepository.getByBusinessAdminId(id);
+        BusinessAdmin admin = businessAdminRepository.getByUserId(id);
         if(admin == null) throw new UsernameNotFoundException("User not found");
         return admin;
     }

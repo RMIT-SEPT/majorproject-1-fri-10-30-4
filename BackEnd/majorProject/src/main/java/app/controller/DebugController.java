@@ -72,9 +72,7 @@ public class DebugController {
     	businessServiceService.saveService(assetManagement);
 
 
-//    	BusinessAdmin businessAdmin = new BusinessAdmin(1L , "Computer Services", "Here there be dragons!",
-//				"Buffy", "Summers", "admin@ecorp.com", "admin@ecorp.com",
-//				"7 Slayer Street", "123123666", "admin", "admin");
+
 		BusinessAdmin businessAdmin = new BusinessAdmin();
 		businessAdmin.setBusinessName("Computer Services");
 		businessAdmin.setBusinessDesc("Here there be dragons!");
@@ -82,8 +80,6 @@ public class DebugController {
 		businessAdmin.setLastName("Summers");
 		businessAdmin.setEmail("admin@ecorp.com");
 		businessAdmin.setUsername("admin@ecorp.com");
-		businessAdmin.setAddress("7 Slayer Street");
-		businessAdmin.setPhoneNumber("123123666");
 		businessAdmin.setPasswordHash("admin");
 		businessAdmin.setConfirmPassword("admin");
     	businessAdminService.save(businessAdmin);
