@@ -1,12 +1,9 @@
 package app.security;
 
-import app.entity.user.BusinessAdmin;
-import app.entity.user.Customer;
 import app.entity.user.User;
+import io.jsonwebtoken.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import io.jsonwebtoken.*;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,5 @@
 package app.security;
 
-import app.entity.user.BusinessAdmin;
-import app.entity.user.Customer;
 import app.entity.user.User;
 import app.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
