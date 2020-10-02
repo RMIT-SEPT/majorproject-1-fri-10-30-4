@@ -65,9 +65,9 @@ jobs:
             - ~/.cache
           key: majorProject-frontend-{{ checksum "FrontEnd/major_project/package.json" }}
 
-    #  - run: 
-    #      command: npm test
-    #      working_directory: FrontEnd/major_project
+      - run:
+          command: npm test
+          working_directory: FrontEnd/major_project
 
       # CI=false so warnings not treated as errors
       - run: 
