@@ -1,12 +1,8 @@
 package app.controller;
 
 import app.entity.user.BusinessAdmin;
-import app.entity.user.Customer;
 import app.service.BusinessAdminService;
-import app.service.CustomerService;
 import app.service.MapValidationErrorService;
-import app.validator.BusinessAdminValidator;
-import app.validator.CustomerValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

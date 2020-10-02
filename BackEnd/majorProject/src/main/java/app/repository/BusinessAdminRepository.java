@@ -2,12 +2,9 @@ package app.repository;
 
 
 import app.entity.user.BusinessAdmin;
-import app.entity.user.Customer;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-@Repository
-public interface BusinessAdminRepository extends CrudRepository<BusinessAdmin, Long > {
-    BusinessAdmin findByEmail(String email);
-    BusinessAdmin getByBusinessAdminId(Long id);
+@Transactional
+public interface BusinessAdminRepository extends UserBaseRepository<BusinessAdmin> {
+
 }
