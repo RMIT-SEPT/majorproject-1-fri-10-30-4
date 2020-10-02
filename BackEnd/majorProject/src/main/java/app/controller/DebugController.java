@@ -72,16 +72,16 @@ public class DebugController {
     	businessServiceService.saveService(assetManagement);
 
 
-
+		// Create Business Admin
 		BusinessAdmin businessAdmin = new BusinessAdmin();
-		businessAdmin.setBusinessName("Computer Services");
+		businessAdmin.setBusinessName("Storm the Castle");
 		businessAdmin.setBusinessDesc("Here there be dragons!");
 		businessAdmin.setFirstName("Buffy");
 		businessAdmin.setLastName("Summers");
 		businessAdmin.setEmail("admin@ecorp.com");
 		businessAdmin.setUsername("admin@ecorp.com");
-		businessAdmin.setPasswordHash("admin");
-		businessAdmin.setConfirmPassword("admin");
+		businessAdmin.setPasswordHash("admin123");
+		businessAdmin.setConfirmPassword("admin123");
     	businessAdminService.save(businessAdmin);
 
     	System.out.println("A debug service was called!");
