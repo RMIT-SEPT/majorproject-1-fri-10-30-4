@@ -2,6 +2,7 @@ package app.entity.user;
 
 
 import app.entity.Business;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -153,10 +154,6 @@ public class BusinessAdmin implements UserDetails {
         this.confirmPassword = confirmPassword;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
 
     @Override
     public String getPassword() {
@@ -176,22 +173,35 @@ public class BusinessAdmin implements UserDetails {
     public void setUsername(String username) {
         this.username = email;
     }
+
+
     @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+
+    @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return false;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return false;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return false;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return false;
     }

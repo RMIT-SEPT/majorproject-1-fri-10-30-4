@@ -17,10 +17,14 @@ public class BusinessAdminService {
 
 
     public BusinessAdmin save(BusinessAdmin admin){
-        admin.setPasswordHash(bCryptPasswordEncoder.encode(admin.getPasswordHash()));
-        admin.setUsername(admin.getUsername());
-        admin.setConfirmPassword("");
-        return businessAdminRepository.save(admin);
+        try {
+            admin.setPasswordHash(bCryptPasswordEncoder.encode(admin.getPasswordHash()));
+            admin.setUsername(admin.getUsername());
+            admin.setConfirmPassword("");
+            return businessAdminRepository.save(admin);
+        } catch (Exception ex) {
+            throw new EmailAlreadyUsedException("Email '"+ admin.getEmail() +"' already used.");
+        }
     }
 
     public Iterable<BusinessAdmin> getAll() {
