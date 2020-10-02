@@ -3,6 +3,7 @@ package app.security;
 import app.entity.user.BusinessAdmin;
 import app.entity.user.Customer;
 import app.entity.user.User;
+import app.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,7 +27,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtTokenProvider tokenProvider;
 
     @Autowired
-    private CustomerDetailsService customerDetailsService;
+    private CustomUserDetailsService customUserDetailsService;
 
 
     @Override
@@ -37,7 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String jwt = getJWTFromRequest(httpServletRequest);
             if(StringUtils.hasText(jwt)&& tokenProvider.validateToken(jwt)){
                 Long userId = tokenProvider.getUserIdFromJWT(jwt);
-                User userDetails = customerDetailsService.loadCustomerById(userId);
+                User userDetails =customUserDetailsService.loadUserById(userId);
                 UsernamePasswordAuthenticationToken authentication = new
                             UsernamePasswordAuthenticationToken(userDetails, null, Collections.emptyList());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
@@ -50,15 +51,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
-
-
     private String getJWTFromRequest(HttpServletRequest request){
         String bearerToken = request.getHeader(HEADER_STRING);
-
         if(StringUtils.hasText(bearerToken)&&bearerToken.startsWith(TOKEN_PREFIX)){
             return bearerToken.substring(7, bearerToken.length());
         }
-
         return null;
     }
 }
