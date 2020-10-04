@@ -1,10 +1,9 @@
 package app.security;
 
-import app.entity.user.Customer;
+import app.entity.user.User;
+import io.jsonwebtoken.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import io.jsonwebtoken.*;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,17 +16,18 @@ public class JwtTokenProvider {
     //Generate the token
 
     public String generateToken(Authentication authentication){
-        Customer user = (Customer)authentication.getPrincipal();
+        User user = (User)authentication.getPrincipal();
         Date now = new Date(System.currentTimeMillis());
 
         Date expiryDate = new Date(now.getTime()+EXPIRATION_TIME);
 
-        String userId = Long.toString(user.getCustomerId());
+        String userId = Long.toString(user.getUserId());
 
         Map<String,Object> claims = new HashMap<>();
-        claims.put("id", (Long.toString(user.getCustomerId())));
+        claims.put("id", (Long.toString(user.getUserId())));
         claims.put("username", user.getUsername());
         claims.put("fullName", user.getFullName());
+        claims.put("accountType", user.getAccountType());
 
         return Jwts.builder()
                 .setSubject(userId)

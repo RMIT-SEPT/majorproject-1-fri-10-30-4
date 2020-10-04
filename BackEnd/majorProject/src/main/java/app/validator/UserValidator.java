@@ -1,21 +1,21 @@
 package app.validator;
 
-import app.entity.user.Customer;
+import app.entity.user.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
-public class CustomerValidator  implements Validator {
+public class UserValidator implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {
-        return Customer.class.equals(aClass);
+        return User.class.equals(aClass);
     }
 
     @Override
     public void validate(Object object, Errors errors) {
 
-        Customer user = (Customer) object;
+        User user = (User) object;
 
         if(user.getPassword().length() <6){
             errors.rejectValue("password","Length", "Password must be at least 6 characters");
