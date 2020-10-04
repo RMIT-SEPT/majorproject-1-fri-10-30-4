@@ -18,6 +18,10 @@ public abstract class User implements UserDetails {
     @Column(name="USER_ID", unique=true)
     private Long userId;
 
+    @NotBlank(message = "Error: Account type required (Either ADMIN or CUSTOMER)")
+    @Column(name="ROLE")
+    private String accountType;
+
     @NotBlank(message="Error: First name required")
     @Column(name="FIRST_NAME")
     private String firstName;
@@ -42,12 +46,22 @@ public abstract class User implements UserDetails {
     @Transient
     private String confirmPassword;
 
+
+
     public Long getUserId() {
         return userId;
     }
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     public String getFirstName() {
