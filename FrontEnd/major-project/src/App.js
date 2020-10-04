@@ -4,6 +4,9 @@ import Admin from "./components/admin/Admin"
 import Customer from "./components/customer/Customer"
 import Login from "./components/user/Login"
 import Registration from "./components/user/Registration"
+import {Provider} from "react-redux"
+import store from "./store"
+
 
 class App extends Component {
   constructor(){
@@ -49,19 +52,23 @@ class App extends Component {
 
     return (
       <div>
-          <div>
-            <BrowserRouter> 
+          <Provider store={store}>
+          <BrowserRouter> 
               <Switch>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/registration" component={Registration}/>
                 <Route exact path="/" component={Customer}/>
               </Switch>
             </BrowserRouter>
-          </div>
+          </Provider>
+         
+          
       </div>
       
     )
   }
 }
-
+const mapStateToProps = state => ({
+  
+})
 export default App;
