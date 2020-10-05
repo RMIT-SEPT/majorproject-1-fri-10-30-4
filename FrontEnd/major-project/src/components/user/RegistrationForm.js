@@ -9,6 +9,28 @@ function RegistrationForm(props){
             <div className="container">
               <form id="form" className="form" onSubmit={props.onSubmit}>
                 <h1>Register </h1>
+                <span className="comps"><h4>Account Type</h4></span>
+                <label>
+                  <input 
+                      type="radio"
+                      name="accountType"
+                      value="CUSTOMER"
+                      checked={props.data.accountType === "CUSTOMER"}
+                      onChange={props.onChange}
+                    /> Customer
+                </label>
+                <br></br>
+                <label>
+                  <input   
+                      type="radio"
+                      name="accountType"
+                      value="ADMIN"
+                      checked={props.data.accountType === "ADMIN"}
+                      onChange={props.onChange}
+                    /> Admin
+                </label>
+                <br></br>
+                <br></br>
                 <div className="comps">
                   <label>First Name</label>
                   <input
@@ -82,7 +104,6 @@ function RegistrationForm(props){
                   <small>Error </small>
                 </div>
                 <button type="submit">SUBMIT</button>
-                <h5>{props.data.message}</h5>
                 <br></br>
                 <NavLink to="/login">Already have an account? Click here to login.</NavLink> 
               </form>

@@ -12,6 +12,7 @@ class Registration extends Component {
             address:"",
             phoneNumber: "",
             email:"",
+            accountType: "",
             passwordHash: "",
             confirmPassword: "",
 
@@ -36,6 +37,7 @@ class Registration extends Component {
         address: this.state.address,
         phoneNumber: this.state.phoneNumber,
         email: this.state.email,
+        accountType: this.state.accountType,
         passwordHash: this.state.passwordHash,
         confirmPassword: this.state.confirmPassword,
       }

@@ -28,8 +28,4 @@ export const login = (loginRequest, history) => async dispatch => {
         })
       
     }
-
-    
-    
-
 }
