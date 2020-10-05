@@ -4,9 +4,14 @@ import setJwtToken from "../security/setJwtToken"
 import jwt_decode from "jwt-decode"
 
 
-export const login = (loginRequest, history) => async dispatch => {
-    const response = await axios.post("http://localhost:8080/login", loginRequest);
+export const login = (loginRequest) => async dispatch => {
+    const data = JSON.stringify(loginRequest);
+    const config = {
+        headers: {'Content-Type': 'application/json'}
+    }
+    const response = await axios.post("http://localhost:8080/login", data, config);
     const {success} = response.data;
+    //console.log(success);
     if(success){
         const {token} = response.data;
         console.log(token);
@@ -17,7 +22,8 @@ export const login = (loginRequest, history) => async dispatch => {
             type: SET_CURRENT_USER,
             payload: decoded
         })
-        history.push("/")
+    } else {
+        console.log("Error")
     }
     
 

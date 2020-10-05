@@ -4,7 +4,6 @@ import Admin from "./components/admin/Admin"
 import Customer from "./components/customer/Customer"
 import Login from "./components/user/Login"
 import Registration from "./components/user/Registration"
-import { login } from "./actions/securityActions"
 import { connect } from "react-redux"
 
 
@@ -18,14 +17,17 @@ class LoginHandler extends Component {
     }
 
     render() {
+        const CUSTOMER = "CUSTOMER"
+        const ADMIN = "ADMIN"
+        const {accountType} = this.props.user
         const renderLogin = () => {
-            if(this.state.adminLoggedIn){
+            if(accountType === ADMIN){
             return (
                     <Router>
                         <Admin />
                     </Router>
                 )
-            } else if (this.state.customerLoggedIn) {
+            } else if (accountType === CUSTOMER) {
             return (
                 <Router>
                     <Customer />
@@ -35,20 +37,21 @@ class LoginHandler extends Component {
                 return (
                 <BrowserRouter> 
                     <Switch>
-                        <Route exact path="/login" component={Login}/>
+                        <Route exact path="/" component={Login}/>
                         <Route exact path="/registration" component={Registration}/>
                     </Switch>
                 </BrowserRouter>
                 )
             }
         }
-
         return (
             renderLogin()
         );
     }
 }
+
+
 const mapStateToProps = state=>({
-    security: state.security.items
+    user: state.security.user
 })
-export default connect(mapStateToProps, { login })(LoginHandler);
+export default connect(mapStateToProps)(LoginHandler);
