@@ -72,20 +72,20 @@ public class DebugController {
     	employeeService.createEmployee(angelaMoss);
     	businessServiceService.saveService(computerRepair);
     	businessServiceService.saveService(assetManagement);
-
-
-		// Create Business Admin
-		BusinessAdmin businessAdmin = new BusinessAdmin();
-		businessAdmin.setBusinessName("Storm the Castle");
-		businessAdmin.setBusinessDesc("Here there be dragons!");
-		businessAdmin.setFirstName("Buffy");
-		businessAdmin.setLastName("Summers");
-		businessAdmin.setEmail("admin@ecorp.com");
-		businessAdmin.setUsername("admin@ecorp.com");
-		businessAdmin.setPasswordHash("admin123");
-		businessAdmin.setConfirmPassword("admin123");
-    	businessAdminService.save(businessAdmin);
+      
+      // Create Business Admin
+      BusinessAdmin businessAdmin = new BusinessAdmin();
+      businessAdmin.setBusinessName("Storm the Castle");
+      businessAdmin.setBusinessDesc("Here there be dragons!");
+      businessAdmin.setFirstName("Buffy");
+      businessAdmin.setLastName("Summers");
+      businessAdmin.setEmail("admin@ecorp.com");
+      businessAdmin.setUsername("admin@ecorp.com");
+      businessAdmin.setPasswordHash("admin123");
+      businessAdmin.setConfirmPassword("admin123");
+      businessAdminService.save(businessAdmin);
 
     	System.out.println("A debug service was called!");
+
     }	
 }
