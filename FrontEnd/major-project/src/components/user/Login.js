@@ -10,7 +10,8 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            message: "",
+            error_username: "",
+            error_password: "",
             response: "",
         }
         this.onChange = this.onChange.bind(this)
@@ -24,13 +25,13 @@ class Login extends Component {
 
     onSubmit(event) {
         event.preventDefault()
-        this.setState({message: "Loading..."})
         const loginRequest = {
             username: this.state.username,
             password: this.state.password,
-        }
-        console.log("hello")
-        this.props.login(loginRequest)
+        }  
+        this.props.login(loginRequest, this.props.history)
+        this.setState({error_username: this.props.error.username})
+        this.setState({error_password: this.props.error.password})
     }
 
     render() {
@@ -45,5 +46,7 @@ class Login extends Component {
         ) 
     }
 }
-
-export default connect(null, {login})(Login);
+const mapStateToProps = state=>({
+    error: state.error
+})
+export default connect(mapStateToProps, {login})(Login);

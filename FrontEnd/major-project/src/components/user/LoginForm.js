@@ -14,6 +14,7 @@ function LoginForm(props) {
                 type="text" 
                 name="username" 
                 placeholder="Email" />
+                <h5>{props.data.error_username}</h5>
             </div>
             <div className="comps">
             <label>Password</label>
@@ -23,8 +24,9 @@ function LoginForm(props) {
                 type="password" 
                 name="password" 
                 placeholder="Password" />
+                <h5>{props.data.error_password}</h5>
             </div>
-            <h5>{props.data.message}</h5>
+            
             <button type="login">LOGIN</button>
             <br></br>
             <NavLink to="/registration">Click here to register</NavLink> 
