@@ -12,17 +12,14 @@ import EditEmployee from './EditEmployee';
 import AdminDashboard from './AdminDashboard';
 
 
-
-const history = createBrowserHistory();
-
 class Admin extends Component {
   render() {
     return (
       <div>
-        <Router history={history}>
+        <Router>
           <AdminNavigationBar/>
           <Switch>
-            <Route exact path="/" component={AdminDashboard}/>
+            <Route exact path="/home" component={AdminDashboard}/>
             <Route exact path="/businesses" component={Businesses}/>
             <Route exact path="/profile" component={AdminProfile}/>
             <Route exact path="/employee/add" component={AddEmployee}/>
@@ -31,7 +28,6 @@ class Admin extends Component {
             <Route exact path="/employee/:employeeId" component={Employee}/>
             <Route exact path="/employee-list" component={EmployeeList}/>
           </Switch>
-         
         </Router>
       </div>
     )

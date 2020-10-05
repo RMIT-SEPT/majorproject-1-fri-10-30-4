@@ -36,13 +36,16 @@ class Login extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div>
+                <div className="container">
                 <LoginForm 
                     onChange={this.onChange}
                     onSubmit={this.onSubmit}
                     data={this.state}
                 />
+                </div>
             </div>
+           
         ) 
     }
 }

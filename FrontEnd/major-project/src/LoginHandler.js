@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, BrowserRouter, Switch} from "react-router-dom"
+import { Redirect } from "react-router-dom"
 import Admin from "./components/admin/Admin"
 import Customer from "./components/customer/Customer"
 import Login from "./components/user/Login"
@@ -23,24 +24,28 @@ class LoginHandler extends Component {
         const renderLogin = () => {
             if(accountType === ADMIN){
             return (
-                    <Router>
-                        <Admin />
-                    </Router>
+                <div>
+                    <Admin />
+                </div>
+                  
                 )
             } else if (accountType === CUSTOMER) {
             return (
-                <Router>
+                <div>
                     <Customer />
-                </Router>
+                </div>
                 )
             } else {
                 return (
-                <BrowserRouter> 
+                <div>
+                    <BrowserRouter> 
                     <Switch>
+                        <Redirect exact from="/" to="/login" />
                         <Route exact path="/login" component={Login}/>
                         <Route exact path="/registration" component={Registration}/>
                     </Switch>
-                </BrowserRouter>
+                    </BrowserRouter>
+                </div>
                 )
             }
         }
