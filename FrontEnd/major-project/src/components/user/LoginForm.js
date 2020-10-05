@@ -3,11 +3,11 @@ import {NavLink} from "react-router-dom"
 import "../../css/Login.css"
 function LoginForm(props) {
     return (
-        <div className="App">
-        <form id="form" class="form" onSubmit={props.onSubmit}>
+        <div className="">
+        <form id="form" className="form" onSubmit={props.onSubmit}>
             <h1>Login </h1>
-            <div class="comps">
-            <label for="fname">Email</label>
+            <div className="comps">
+            <label>Email</label>
             <input    
                 onChange={props.onChange}
                 value={props.data.username}
@@ -15,8 +15,8 @@ function LoginForm(props) {
                 name="username" 
                 placeholder="Email" />
             </div>
-            <div class="comps">
-            <label for="password">Password</label>
+            <div className="comps">
+            <label>Password</label>
             <input 
                 onChange={props.onChange}
                 value={props.data.password}

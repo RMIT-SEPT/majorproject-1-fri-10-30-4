@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import LoginForm from "./LoginForm"
-import {login} from "../../actions/securityActions"
+import  { login }   from "../../actions/securityActions"
 // const axios = require('axios').default;
 
 class Login extends Component {
@@ -21,13 +21,15 @@ class Login extends Component {
         this.setState({[name]: value})
     }
 
-    onSubmit() {
+    onSubmit(event) {
+       // event.preventDefault()
         this.setState({message: "Loading..."})
         const loginRequest = {
             username: this.state.username,
             password: this.state.password,
         }
-        this.props.login(loginRequest)
+        console.log("hello")
+        login(loginRequest, this.props.history)
     //     const data = JSON.stringify(loginRequest);
     //     const config = {
     //         headers: {'Content-Type': 'application/json'}
@@ -43,9 +45,8 @@ class Login extends Component {
     }
 
     render() {
-   
         return (
-            <div className="login-form-block">
+            <div className="container">
                 <LoginForm 
                     onChange={this.onChange}
                     onSubmit={this.onSubmit}

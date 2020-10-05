@@ -5,9 +5,11 @@ import jwt_decode from "jwt-decode"
 
 
 export const login = (loginRequest, history) => async dispatch => {
-    const response = await axios.post("http://localhost:8080/customer/login", loginRequest);
-    if(response.data.success){
+    const response = await axios.post("http://localhost:8080/login", loginRequest);
+    const {success} = response.data;
+    if(success){
         const {token} = response.data;
+        console.log(token);
         localStorage.setItem("jwtToken", token);
         setJwtToken(token);
         const decoded = jwt_decode(token);
@@ -17,5 +19,6 @@ export const login = (loginRequest, history) => async dispatch => {
         })
         history.push("/")
     }
+    
 
 }
