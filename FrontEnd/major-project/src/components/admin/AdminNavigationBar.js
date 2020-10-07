@@ -6,7 +6,13 @@ import {NavLink} from 'react-router-dom'
 import '../../css/NavigationBar.css'
 
 class NavigationBar extends Component {
-    // if admin is logged in render this:
+    constructor(){
+        super()
+        this.goToLogin = this.goToLogin.bind(this)
+    }
+    goToLogin() {
+        window.location.href = "http://localhost:3000/login"
+    }
     render() {
         return (
             <Navbar className="navbar">
@@ -23,7 +29,7 @@ class NavigationBar extends Component {
                     <NavLink to="/profile" className="navbar-element-style">Profile</NavLink>
                     <NavLink to="/bookings" className="navbar-element-style">Bookings</NavLink>
                 </Nav>
-                <NavLink to="/login" className="navbar-element-style"><Button>Log out</Button></NavLink>
+                <Button onClick={this.goToLogin}>Log out</Button>
             </Navbar>
         )
     }
