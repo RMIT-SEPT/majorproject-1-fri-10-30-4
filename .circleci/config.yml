@@ -94,7 +94,7 @@ jobs:
 workflows:
   test-backend
     jobs:
-      - backend_test
+      - backend_test:
           filters:
             branches:
               only: CDCItest
