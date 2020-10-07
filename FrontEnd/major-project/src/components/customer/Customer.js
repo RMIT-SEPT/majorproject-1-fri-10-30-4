@@ -6,6 +6,7 @@ import Home from "../Home"
 import CustomerProfile from "./Profile"
 import NewBooking from "../booking/NewBooking"
 import BookingDashboard from "./BookingDashboard"
+import Bookings from './Bookings';
 
 class Customer extends Component {
     render() {
@@ -17,6 +18,7 @@ class Customer extends Component {
                         <Route exact path="/" component={Home}/>
                         <Route exact path="/profile" component={CustomerProfile}/>
                         <Route exact path="/booking" component={BookingDashboard}/>
+                        <Route exact path="/bookings" component={Bookings}/>
                         <Route exact path="/booking/new" component={NewBooking}/>
                     </Switch>
                 </Router>

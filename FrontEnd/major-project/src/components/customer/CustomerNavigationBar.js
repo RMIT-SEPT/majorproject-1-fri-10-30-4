@@ -9,8 +9,8 @@ class NavigationBar extends Component {
     // if customer is logged in render this:
     render() {
         return (
-            <Navbar bg="dark" variant="dark">
-                <NavLink to="/">
+            <Navbar className="navbar">
+                <NavLink to="/" className="logo-container">
                     <img
                         src={require("../../img/logo.png")} alt="logo"
                         className="logo"
@@ -19,7 +19,7 @@ class NavigationBar extends Component {
                 <Nav className="mr-auto">
                     <NavLink to="/" className="navbar-element-style">Home</NavLink>
                     <NavLink to="/profile" className="navbar-element-style">Profile</NavLink>
-                    <NavLink to="/booking" className="navbar-element-style">Bookings</NavLink>
+                    <NavLink to="/bookings" className="navbar-element-style">Bookings</NavLink>
                 </Nav>
                 <NavLink to="/login" className="navbar-element-style"><Button>Log out</Button></NavLink>
             </Navbar>

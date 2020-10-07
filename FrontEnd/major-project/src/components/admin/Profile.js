@@ -1,10 +1,10 @@
-import React, { Component } from "react"
-import "../../css/AdminProfile.css"
+import React, {Component} from 'react'
+import '../../css/AdminProfile.css'
 
 const axios = require('axios').default;
 
 class Profile extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             admin: {},
@@ -29,38 +29,33 @@ class Profile extends Component {
     }
 
     render() {
-        const {admin } = this.state;
-        return(
-            <div class="profile-container">
-                <div class="card">
-                    <div class="card-bio">
-                        <div class="img-wrapper">
-                                <img src={require("../../img/default.png")} alt="person" class="imageProfile"></img>
-                        </div>
-                        <div class="person-info">
-                            <h4>{admin.businessID}</h4>
-                            <h4>{admin.name}</h4>
-                            <p>Administrator</p>
-                            <p>Working as an administrator for E-booking.</p>
-                        </div>
+        const {admin} = this.state;
+        return (
+            <div className="admin-profile">
+                <div className="details">
+                    <div>
+                        <img src={require('../../img/default.png')} alt="person"/>
                     </div>
-                    <div class="card-myinfo">
-                        <h3>My Information</h3>
+                    <div className="person-info">
+                        <h4>{admin.businessID}</h4>
+                        <h4>{admin.name}</h4>
+                        <p>Administrator</p>
+                        <p>Working as an administrator for E-booking.</p>
                     </div>
-                    <div class="person-socialInfo">
-                        <div class ="icon-wrapper">
-                            <i class="envelope"></i>
+                </div>
+                <div className="information">
+                    <h3>My Information</h3>
+                    <div className="person-socialInfo">
+                        <div className="icon-wrapper">
+                            <i className="envelope"/>
                         </div>
                         <h4>Email:</h4>
                         <p>admin_email@gmail.com</p>
-
                         <h4>Phone:</h4>
                         <p>+61 012345678</p>
-                        
                     </div>
                 </div>
             </div>
-
         )
     }
 }
