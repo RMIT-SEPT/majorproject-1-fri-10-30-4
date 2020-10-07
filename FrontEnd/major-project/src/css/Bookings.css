@@ -1,20 +1,13 @@
-.admin-profile{
-    display: flex;
-    flex-flow: column nowrap;
-    padding: 4rem;
-    min-height: 100%;
+.bookings{
+    padding: 2rem;
 }
 
-.admin-profile img{
-    border-radius: 100%;
-    margin-bottom: 20px;
+.bookings .list{
+    list-style: none;
 }
 
-.admin-profile .details{
-    padding: 1rem;
-}
-
-.admin-profile .information{
+.bookings .list .booking{
+    margin: 1rem 0;
     padding: 1rem;
     box-shadow: 0 2.8px 2.8px -9px rgba(0,0,0,.008), 0 6.7px 6.7px -9px rgba(0,0,0,.01), 0 12.5px 12.6px -9px rgba(0,0,0,.016), 0 22.3px 22.6px -9px rgba(0,0,0,.02), 0 41.8px 42.2px -9px rgba(0,0,0,.024), 0 100px 101px -9px rgba(0,0,0,.03);
     border-radius: 12px;
@@ -25,3 +18,26 @@
     border-image: initial;
     color: rgba(0,0,0,.45);
 }
+
+.bookings .list .booking h3{
+    color: purple;
+}
+
+
+.bookings .list li span{
+    margin-right: 10px;
+}
+
+.bookings .list .service{
+    margin-left: 1.5rem;
+}
+
+.bookings .list .details{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.bookings .list .customer-details{
+    margin-right: 3rem;
+}
+

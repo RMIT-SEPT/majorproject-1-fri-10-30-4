@@ -4,13 +4,14 @@ import Admin from "./components/admin/Admin"
 import Customer from "./components/customer/Customer"
 import Login from "./components/user/Login"
 import Registration from "./components/user/Registration"
+import './css/Global.css'
 
 class App extends Component {
   constructor(){
     super()
     this.state = {
-      adminLoggedIn: false,
-      customerLoggedIn: true,
+      adminLoggedIn: true,
+      customerLoggedIn: false,
     };
   }
 
