@@ -92,7 +92,7 @@ jobs:
           path: FrontEnd/major_project/build
 
 workflows:
-  test-backend
+  test-backend:
     jobs:
       - backend_test:
           filters:
