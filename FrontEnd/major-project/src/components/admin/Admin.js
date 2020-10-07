@@ -10,6 +10,7 @@ import AddEmployee from "./AddEmployee"
 import RemoveEmployee from './RemoveEmployee';
 import EditEmployee from './EditEmployee';
 import AdminDashboard from './AdminDashboard';
+import Bookings from './Bookings';
 
 
 class Admin extends Component {
@@ -27,6 +28,7 @@ class Admin extends Component {
             <Route exact path="/employee/remove/:employeeId" component={RemoveEmployee}/>
             <Route exact path="/employee/:employeeId" component={Employee}/>
             <Route exact path="/employee-list" component={EmployeeList}/>
+            <Route exact path="/bookings" component={Bookings}/>
           </Switch>
         </Router>
       </div>
