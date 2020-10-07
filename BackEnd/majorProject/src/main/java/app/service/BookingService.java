@@ -55,8 +55,9 @@ public class BookingService {
     	) {
     	Business business = businessRepository.findById(businessID).get();
     	Employee employee = employeeRepository.findById(employeeID).get();
-    	//TODO:Replace this.
-    	//Customer customer  = customerRepository.findById(customerID).get();
+      
+    	Customer customer  = customerRepository.findById(Long.valueOf(customerID)).get();
+
     	BusinessServiceJob service = businessServiceRepository.findById(serviceID).get();
     	//TODO:validate
     	Booking booking =  new Booking(service, employee, null, date, "");

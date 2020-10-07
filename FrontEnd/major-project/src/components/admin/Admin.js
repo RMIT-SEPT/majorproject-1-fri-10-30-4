@@ -13,17 +13,14 @@ import AdminDashboard from './AdminDashboard';
 import Bookings from './Bookings';
 
 
-
-const history = createBrowserHistory();
-
 class Admin extends Component {
   render() {
     return (
       <div>
-        <Router history={history}>
+        <Router>
           <AdminNavigationBar/>
           <Switch>
-            <Route exact path="/" component={AdminDashboard}/>
+            <Route exact path="/home" component={AdminDashboard}/>
             <Route exact path="/businesses" component={Businesses}/>
             <Route exact path="/profile" component={AdminProfile}/>
             <Route exact path="/employee/add" component={AddEmployee}/>
@@ -33,7 +30,6 @@ class Admin extends Component {
             <Route exact path="/employee-list" component={EmployeeList}/>
             <Route exact path="/bookings" component={Bookings}/>
           </Switch>
-         
         </Router>
       </div>
     )

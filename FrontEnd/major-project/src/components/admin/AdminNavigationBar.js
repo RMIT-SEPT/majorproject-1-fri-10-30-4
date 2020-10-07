@@ -10,14 +10,14 @@ class NavigationBar extends Component {
     render() {
         return (
             <Navbar className="navbar">
-                <NavLink to="/" className="logo-container">
+                <NavLink to="/home" className="logo-container">
                     <img
                         src={require('../../img/logo.png')} alt="logo"
                         className="logo"
                     ></img>
                 </NavLink>
                 <Nav className="mr-auto">
-                    <NavLink to="/" className="navbar-element-style">Home</NavLink>
+                    <NavLink to="/home" className="navbar-element-style">Home</NavLink>
                     <NavLink to="/employee-list" className="navbar-element-style">Employees</NavLink>
                     <NavLink to="/businesses" className="navbar-element-style">Business</NavLink>
                     <NavLink to="/profile" className="navbar-element-style">Profile</NavLink>
