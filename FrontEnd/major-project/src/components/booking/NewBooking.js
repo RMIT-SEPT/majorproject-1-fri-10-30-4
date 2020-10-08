@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
 
 import BookingFormCarousel from "./BookingFormCarousel"
 import "../../css/BookingFormCarousel.css"
@@ -91,7 +90,7 @@ class BookingSummaryWindow extends React.Component{
     fetch("http://localhost:8080/booking/create?"+requestBody.join("&"), {method:"POST"})
     .then(x=>{
       alert("Booking request submitted.");
-      window.location.href = "http://localhost:3000/"
+      window.location.href = "http://localhost:3000/home"
     })
   }
 }

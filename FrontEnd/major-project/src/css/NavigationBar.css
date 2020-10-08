@@ -1,10 +1,36 @@
 .navbar-element-style {
     margin-left: 30px;
     margin-right: 30px;
-    color: whitesmoke;
 }
 .logo {
     height: 40px;
     width: 40px;
     margin: 5px;
 }
+
+.navbar a{
+    color: black;
+    font-weight: bold;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.navbar a:hover{
+    text-decoration: none;
+    opacity: 0.6;
+}
+
+.navbar{
+    box-shadow: 0 2.8px 2.8px -9px rgba(0,0,0,.008), 0 6.7px 6.7px -9px rgba(0,0,0,.01), 0 12.5px 12.6px -9px rgba(0,0,0,.016), 0 22.3px 22.6px -9px rgba(0,0,0,.02), 0 41.8px 42.2px -9px rgba(0,0,0,.024), 0 100px 101px -9px rgba(0,0,0,.03)!important;
+    border-radius: 12px;
+    background: hsla(0,0%,100%,.4)!important;
+    outline: 0;
+    border: 1px solid transparent;
+    border-image: initial;
+    color: rgba(0,0,0,.45);
+}
+
+.navbar .logo-container{
+    background: black;
+    border-radius: 100%;
+}
+

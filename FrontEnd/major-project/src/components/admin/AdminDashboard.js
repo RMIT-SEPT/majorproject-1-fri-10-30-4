@@ -7,7 +7,7 @@ function AdminDashboard() {
         <div>
             <h1 className="dashboard-title">Admin Dashboard</h1>
             <hr/>
-            <div className="container">
+            <div className="container block-glass">
                     <div className="comps">
                         <label>Employees</label>
                         <NavLink to="/employee/add">

@@ -1,1 +1,2 @@
-export const SET_LOGIN_STATE = "SET_LOGIN_STATE"
+export const SET_CURRENT_USER = "SET_CURRENT_USER"
+export const ERROR = "ERROR"
