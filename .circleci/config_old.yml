@@ -1,34 +1,6 @@
 version: 2.1
 
-orbs:
-  aws-ecr: circleci/aws-ecr@6.12.2
-  aws-ecs: circleci/aws-ecs@1.3.0
-  aws-cli: circleci/aws-cli@1.3.0
-
 jobs:
-  backend_test:
-    docker:
-      - image: circleci/openjdk:11.0.8-jdk
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - majorProject-backend-{{ checksum "BackEnd/majorProject/pom.xml"}}
-            - majorProject-backend-
-      #Download required maven files to disk.
-      - run:
-          name: Downloading maven Dependencies
-          command: mvn dependency:go-offline
-          working_directory: BackEnd/majorProject
-      #Run maven test
-      - run:
-          name: Maven tests
-          command: mvn test
-          working_directory: BackEnd/majorProject
-      #Upload surefire test results.
-      - store_test_results:
-          path: BackEnd/majorProject/target/surefire-reports
-
   backend_build:
     docker:
         - image: circleci/openjdk:11.0.8-jdk
@@ -45,7 +17,6 @@ jobs:
 
       # gets the project dependencies
       - run:
-          name: Download maven dependencies.
           command: mvn dependency:go-offline
           working_directory: BackEnd/majorProject
 
@@ -57,8 +28,7 @@ jobs:
 
       # run the actual tests and, if all pass, build project
       - run:
-          name: Build java application with maven
-          command: mvn install
+          command: mvn package
           working_directory: BackEnd/majorProject
 
       # uploads the test metadata from path below so that it can show up in the CircleCI dashboard.
@@ -70,52 +40,7 @@ jobs:
       #    Upload artifacts for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
       - store_artifacts:
           path: BackEnd/majorProject/target/majorProject-0.0.1-SNAPSHOT.jar
-      - run:
-          command: ls
-
-      #Persist backend files to a workspace.
-      - persist_to_workspace:
-          root: BackEnd
-          paths:
-            - majorProject/*
-
-  backend_image_build:
-    docker:
-      - image: circleci/openjdk:11.0.8-jdk
-
-    steps:
-      - attach_workspace:
-          at: /tmp/BackEnd
-
-      - setup_remote_docker:
-          version: 19.03.13
-      #Build dockerfile
-      - run:
-          name: Building backend docker image
-          command: docker build -t haz1123/majorproject:backend_latest ./
-          working_directory: /tmp/BackEnd/majorProject/
-      
-      #Login to docker
-      - run:
-          name: Login to docker
-          command: docker login --username haz1123 --password $HarrisonCIToken
-
-      #Push built image to remote repo
-      - run:
-          name: Push docker image to remote repo
-          command: docker push haz1123/majorproject:backend_latest
-          working_directory: BackEnd/majorProject
-
-  frontend_test:
-    docker:
-      - image: circleci/node:12.18.4-stretch
-    
-    steps:
-      - checkout
-
-      - run:
-          command: ls
-
+  
   frontend_build:
     docker:
       - image: circleci/node:12.18.4-stretch
@@ -152,27 +77,14 @@ jobs:
       - store_artifacts:
           path: FrontEnd/major_project/build
 
-
 workflows:
-  backend:
+  build-backend-frontend:
     jobs:
-      - backend_test
       - backend_build:
-          requires:
-            - backend_test
           filters:
             branches:
               only: master
-      - backend_deploy:
-          requires:
-            - backend_build
-          filters:
-            branches:
-              only: master
-  
-  frontend:
-    jobs:
-      - frontend_test
       - frontend_build:
-          requires:
-            - frontend_test
+          filters:
+            branches:
+              only: master
