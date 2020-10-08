@@ -70,8 +70,6 @@ jobs:
       #    Upload artifacts for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
       - store_artifacts:
           path: BackEnd/majorProject/target/majorProject-0.0.1-SNAPSHOT.jar
-      - run:
-          command: ls
 
       #Persist backend files to a workspace.
       - persist_to_workspace:
@@ -205,7 +203,7 @@ workflows:
               only: CircleCIWork
       - frontend_image_build:
           requires:
-            -frontend_build
+            - frontend_build
           filters:
             branches:
               only: CircleCIWork
