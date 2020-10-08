@@ -140,18 +140,42 @@ jobs:
             - ~/.cache
           key: majorProject-frontend-{{ checksum "FrontEnd/major_project/package.json" }}
 
-      - run:
-          command: npm test
-          working_directory: FrontEnd/major_project
-
-      # CI=false so warnings not treated as errors
-      - run: 
-          command: CI=false npm run build
-          working_directory: FrontEnd/major_project
-
       - store_artifacts:
           path: FrontEnd/major_project/build
 
+      #Persist frontend files to a workspace.
+      - persist_to_workspace:
+        root: FrontEnd
+        paths:
+          - major-project/*
+
+frontend_image_build:
+    docker:
+      - image: circleci/openjdk:11.0.8-jdk
+
+    steps:
+      - attach_workspace:
+          at: /tmp/BackEnd
+
+      - setup_remote_docker:
+          version: 19.03.13
+
+      #Build dockerfile
+      - run:
+          name: Building frontend docker image
+          command: docker build -t haz1123/majorproject:frontend_latest ./
+          working_directory: /tmp/FrontEnd/major-project
+      
+      #Login to docker
+      - run:
+          name: Login to docker
+          command: docker login --username haz1123 --password $HarrisonCIToken
+
+      #Push built image to remote repo
+      - run:
+          name: Push docker image to remote repo
+          command: docker push haz1123/majorproject:frontend_latest
+          working_directory: FrontEnd/major-project
 
 workflows:
   backend:
@@ -169,11 +193,19 @@ workflows:
           filters:
             branches:
               only: master
-              
-  
+
   frontend:
     jobs:
       - frontend_test
       - frontend_build:
           requires:
             - frontend_test
+          filter:
+            branches:
+              only: CircleCIWork
+      - frontend_image_build:
+          requires:
+            -frontend_build
+          filters:
+            branches:
+              only: CircleCIWork
