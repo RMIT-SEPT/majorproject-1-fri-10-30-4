@@ -55,10 +55,12 @@ public class BookingService {
     	) {
     	Business business = businessRepository.findById(businessID).get();
     	Employee employee = employeeRepository.findById(employeeID).get();
-    	Customer customer  = customerRepository.findById(customerID).get();
+      
+    	Customer customer  = customerRepository.findById(Long.valueOf(customerID)).get();
+
     	BusinessServiceJob service = businessServiceRepository.findById(serviceID).get();
     	//TODO:validate
-    	Booking booking =  new Booking(service, employee, customer, date, "");
+    	Booking booking =  new Booking(service, employee, null, date, "");
     	return bookingRepository.save(booking);
    }
     
@@ -135,4 +137,9 @@ public class BookingService {
 		}
     	return bookingTimeOptions;
     }    
+    
+    public Optional<Booking> findByID(int bookingID){
+    	return bookingRepository.findById(bookingID);
+    }
+    
 }

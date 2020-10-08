@@ -1,17 +1,32 @@
 import React from 'react';
+import { Jumbotron } from 'react-bootstrap';
 import ReactDOM from 'react-dom'
-
+// import {Button} from 'react-bootstrap/'
+import "../../css/BookingForm.css"
 window.$selectedSlide = 0;
 window.numberOfSlides = 4;
 window.businessID = 10;
 
 class CarouselControls extends React.Component{
     render(){
-        return <div id="BookingFormCarouselControls">
-            <div onClick={window.bookingFormCarouselComponent.changePageBack.bind()} class="BackButton">Back</div>
+        return (
+        <div id="BookingFormCarouselControls">
+            <div>
+                <button onClick={window.bookingFormCarouselComponent.changePageBack.bind()}  className="BackButton btn btn-primary">
+                    Back
+                </button>
+            </div>
+
             <div class="centrePadding"></div>
-            <div onClick={window.bookingFormCarouselComponent.changePageForward.bind()} class="ForwardButton">Forward</div>
+            
+            <div>
+                <button onClick={window.bookingFormCarouselComponent.changePageForward.bind()} className="ForwardButton btn btn-success">
+                    Forward
+                </button>
+            </div>
+           
         </div>
+        )
     }
 }
 
@@ -27,7 +42,12 @@ class ServicesList extends React.Component{
             renderedList.push(<ServicesListItem serviceName={service.serviceDescription} serviceId={service.serviceID}/>)
         }
         return <div id="ServicesListComponent" class="shownCarouselItem">
-            {renderedList}
+            <div className="service-btn-block">
+                <Jumbotron className="carousel-items-block">
+                    {renderedList}
+                </Jumbotron>
+            </div>
+           
         </div>
     }
 
@@ -52,9 +72,14 @@ class ServicesListItem extends React.Component{
         this.updateSelectedService = this.updateSelectedService.bind(this);
     }
     render(){
-        return <button class="ServicesListItem" onClick={this.updateSelectedService.bind()}>
-            <a>{this.props.serviceName}</a>
-        </button>
+        return (
+            <button class="ServicesListItem btn btn-info service-btn" onClick={this.updateSelectedService.bind()}>
+                <a>{this.props.serviceName}</a>
+            </button>
+        )
+            
+          
+       
     }
     updateSelectedService(){
         window.selectedService = this.props.serviceId;
@@ -85,9 +110,16 @@ class WorkersList extends React.Component{
                 var worker = this.state.listItems[i];
                 renderedList.push(<WorkersListItem workerName={worker.firstName + " " + worker.lastName} workerId={worker.employeeId}/>)
             }
-            return <div id="WorkersListComponent" class="hiddenCarouselItem">
-                {renderedList}
-            </div>         
+            return (
+                <div id="WorkersListComponent" class="hiddenCarouselItem">
+                    <div className="employee-btn-block">
+                        <Jumbotron className="carousel-items-block">
+                             {renderedList}
+                        </Jumbotron>
+                    </div>
+                    
+                </div>
+            )         
         }
     }
 
@@ -119,9 +151,11 @@ class WorkersListItem extends React.Component{
         this.updateSelectedWorker = this.updateSelectedWorker.bind(this);
     }
     render(){
-        return <button class="ServicesListItem" onClick={this.updateSelectedWorker.bind()}>
-            <a>{this.props.workerName}</a>
-        </button>
+        return( 
+            <button class="ServicesListItem btn btn-dark employee-btn" onClick={this.updateSelectedWorker.bind()}>
+                <a>{this.props.workerName}</a>
+            </button>
+        )
     }
     updateSelectedWorker(){
         window.selectedWorker = this.props.workerId;
@@ -152,9 +186,16 @@ class DatesList extends React.Component{
                 var dateOption = this.state.listItems[i];
                 renderedList.push(<DatesListItem date={dateOption} />)
             }
-            return <div id="DatesListComponent" class="hiddenCarouselItem">
-                {renderedList}
-            </div>         
+            return (
+            <div id="DatesListComponent" class="hiddenCarouselItem">
+                <div className="date-btn-block">
+                <Jumbotron className="carousel-items-block">
+                    {renderedList}
+                </Jumbotron>
+                </div>
+            </div>  
+            )
+
         }
     }
 
@@ -191,9 +232,11 @@ class DatesListItem extends React.Component{
         var month = this.props.date.getMonth() + 1; //Months are indexed from 0
         var date = this.props.date.getDate();
         
-        return <button class="ServicesListItem" onClick={this.updateSelectedDate.bind()}>
-            <a>{days[this.props.date.getDay()]}, {date}/{month}/{year}</a>
-        </button>
+        return (
+            <button class="ServicesListItem btn btn-primary date-btn" onClick={this.updateSelectedDate.bind()}>
+                <a>{days[this.props.date.getDay()]}, {date}/{month}/{year}</a>
+            </button>
+        )
     }
     updateSelectedDate(){
         window.selectedDate = this.props.date;
@@ -209,7 +252,7 @@ class TimesList extends React.Component{
     }
     constructor(props){
         super(props)
-        window.TimesList = this;
+        window.TimesList = this; 
         this.updateTimes= this.updateTimes.bind(this);
     }
     render(){
@@ -223,9 +266,15 @@ class TimesList extends React.Component{
                 var timeOption = this.state.listItems[i];
                 renderedList.push(<TimesListItem startTime={timeOption.shiftStart} endTime={timeOption.shiftEnd} />)
             }
-            return <div id="TimesListComponent" class="hiddenCarouselItem">
-                {renderedList}
-            </div>         
+            return (
+                <div id="TimesListComponent" class="hiddenCarouselItem">
+                    <div className="time-btn-block">
+                        <Jumbotron className="carousel-items-block">
+                            {renderedList}
+                        </Jumbotron>
+                    </div>
+                </div>
+            )  
         }
     }
 
@@ -257,9 +306,11 @@ class TimesListItem extends React.Component{
         this.updateSelectedTime = this.updateSelectedTime.bind(this);
     }
     render(){
-        return <button class="ServicesListItem" onClick={this.updateSelectedTime.bind()}>
-            <a>{this.props.startTime} - {this.props.endTime}</a>
-        </button>
+        return (
+            <button class="ServicesListItem btn btn-info time-btn" onClick={this.updateSelectedTime.bind()}>
+                <a>{this.props.startTime} - {this.props.endTime}</a>
+            </button>
+        )
     }
     updateSelectedTime(){
         window.selectedTime = this.props.startTime;

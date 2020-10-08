@@ -9,3 +9,5 @@ tmp/
 .settings/
 Backend.zip
 FrontEnd/bookingPage__/*
+*.iml
+

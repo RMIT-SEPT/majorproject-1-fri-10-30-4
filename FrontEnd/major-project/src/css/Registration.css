@@ -92,14 +92,16 @@
   }
   
   .form button {
+    text-align: center;
     display: block;
     padding: 8px;
-    margin-top: 25px;
+    /* margin-top: 25px; */
     cursor: pointer;
     background-color: #046d41;
     border: 3pc solid #046d41;
-    border-radius: 14px;
+    /* border-radius: 14px; */
     color: #fff;
+    /* height: 0%; */
     width: 100%;
     font-size: 20px;
   }
@@ -107,4 +109,8 @@
   .comps.error small {
     visibility: visible;
   }
+
+  /* .register-container {
+
+  } */
   

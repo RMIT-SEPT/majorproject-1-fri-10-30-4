@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpResponse;
+import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
@@ -74,6 +75,17 @@ public class BookingController {
     {
     	return new ResponseEntity<>(bookingService.getAvailableBookings(businessID, employeeID, serviceID, date), HttpStatus.OK);
     }
+    
+    @GetMapping("{bookingID}")
+    public ResponseEntity<?> getBookingByID(@PathVariable(value="bookingID") int bookingID){
+    	try {
+    		Booking booking = bookingService.findByID(bookingID).get();
+    		return new ResponseEntity<>(booking, HttpStatus.OK);
+    	} catch(NoSuchElementException e) {
+    		return new ResponseEntity<>("No booking under that ID", HttpStatus.NOT_FOUND);
+    	}
+    }
+    
     
     /************************************For Testing*****************************************/
 
