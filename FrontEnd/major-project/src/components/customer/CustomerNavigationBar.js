@@ -25,7 +25,7 @@ class NavigationBar extends Component {
                 <Nav className="mr-auto">
                     <NavLink to="/home" className="navbar-element-style">Home</NavLink>
                     <NavLink to="/profile" className="navbar-element-style">Profile</NavLink>
-                    <NavLink to="/bookings" className="navbar-element-style">Bookings</NavLink>
+                    <NavLink to="/booking" className="navbar-element-style">Bookings</NavLink>
                 </Nav>
                 <Button onClick={this.goToLogin}>Log out</Button>
             </Navbar>

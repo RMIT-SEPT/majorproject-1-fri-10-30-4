@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
+import { Redirect } from "react-router-dom"
 import CustomerNavigationBar from "./CustomerNavigationBar"
 import Home from "../Home"
 import CustomerProfile from "./Profile"
 import NewBooking from "../booking/NewBooking"
 import BookingDashboard from "./BookingDashboard"
-import Login from '../user/Login';
 import Bookings from './Bookings';
 
 class Customer extends Component {
@@ -13,6 +13,7 @@ class Customer extends Component {
         return (
             <div>
                 <Router>
+                <Redirect to='/home' />
                     <CustomerNavigationBar />
                     <Switch>
                         <Route exact path="/home" component={Home}/>
