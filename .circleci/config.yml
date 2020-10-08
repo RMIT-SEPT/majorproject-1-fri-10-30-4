@@ -198,7 +198,7 @@ workflows:
       - frontend_build:
           requires:
             - frontend_test
-          filter:
+          filters:
             branches:
               only: CircleCIWork
       - frontend_image_build:
