@@ -145,9 +145,9 @@ jobs:
 
       #Persist frontend files to a workspace.
       - persist_to_workspace:
-        root: FrontEnd
-        paths:
-          - major-project/*
+          root: FrontEnd
+          paths:
+            - major-project/*
 
 frontend_image_build:
     docker:
