@@ -55,10 +55,10 @@ jobs:
             - ~/.m2
           key: majorProject-backend-{{ checksum "BackEnd/majorProject/pom.xml" }}
 
-      # run the actual tests and, if all pass, build project
+      # Maven builds the project.
       - run:
           name: Build java application with maven
-          command: mvn install
+          command: mvn install -DskipTests
           working_directory: BackEnd/majorProject
 
       # uploads the test metadata from path below so that it can show up in the CircleCI dashboard.
@@ -163,12 +163,13 @@ workflows:
           filters:
             branches:
               only: master
-      - backend_deploy:
+      - backend_image_build:
           requires:
             - backend_build
           filters:
             branches:
               only: master
+              
   
   frontend:
     jobs:
