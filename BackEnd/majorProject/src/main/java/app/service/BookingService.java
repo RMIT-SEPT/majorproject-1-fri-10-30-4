@@ -19,10 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BookingService {
@@ -141,5 +138,25 @@ public class BookingService {
     public Optional<Booking> findByID(int bookingID){
     	return bookingRepository.findById(bookingID);
     }
+
+    public Iterable<Booking> getAllByCustomerId(Long customerID){
+    	List<Booking> bookings = new ArrayList<>();
+    	for(Booking booking : bookingRepository.findAll()){
+    		if(booking.getCustomer().getUserId().equals(customerID)) {
+    			bookings.add(booking);
+			}
+		}
+    	return bookings;
+	}
+
+	public boolean cancelBooking(Integer bookingId){
+		for(Booking booking : getAll()) {
+			if (booking.getBookingId() == bookingId) {
+					booking.setActive(false);
+				return true;
+			}
+		}
+		return false;
+	}
     
 }
