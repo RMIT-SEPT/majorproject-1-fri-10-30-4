@@ -147,7 +147,7 @@ jobs:
           paths:
             - major-project/*
 
-frontend_image_build:
+  frontend_image_build:
     docker:
       - image: circleci/openjdk:11.0.8-jdk
 
