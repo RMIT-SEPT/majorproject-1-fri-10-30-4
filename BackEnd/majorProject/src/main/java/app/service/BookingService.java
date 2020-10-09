@@ -38,6 +38,8 @@ public class BookingService {
     
     @Autowired
     private CustomerRepository customerRepository;
+
+
     
     public Booking createBooking(Booking booking) {
         return bookingRepository.save(booking);
@@ -57,7 +59,7 @@ public class BookingService {
 
     	BusinessServiceJob service = businessServiceRepository.findById(serviceID).get();
     	//TODO:validate
-    	Booking booking =  new Booking(service, employee, null, date, "");
+    	Booking booking =  new Booking(service, employee, customer, date, "");
     	return bookingRepository.save(booking);
    }
     
