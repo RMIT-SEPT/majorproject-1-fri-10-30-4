@@ -90,7 +90,7 @@ class BookingSummaryWindow extends React.Component{
     fetch("http://localhost:8080/booking/create?"+requestBody.join("&"), {method:"POST"})
     .then(x=>{
       alert("Booking request submitted.");
-      window.location.href = "http://localhost:3000/home"
+      //window.location.href = "http://localhost:3000/home"
     })
   }
 }

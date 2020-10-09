@@ -32,6 +32,7 @@ class LoginHandler extends Component {
             } else if (accountType === CUSTOMER) {
             return (
                 <div>
+                    
                     <Customer />
                 </div>
                 )
