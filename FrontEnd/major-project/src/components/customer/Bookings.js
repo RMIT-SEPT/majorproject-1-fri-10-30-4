@@ -210,7 +210,7 @@ class Bookings extends Component {
     constructor() {
         super();
         this.state = {
-            bookings: [],
+            bookings: data,
             loading: false
         }
         this.getBookings = this.getBookings.bind(this);
@@ -219,15 +219,16 @@ class Bookings extends Component {
     }
 
     componentDidMount() {
-        this.setState({loading: true})
-        this.getBookings();
+        // Uncomment these when bookings can be made
+        // this.setState({loading: true})
+        // this.getBookings();
     }
 
     getBookings() {
         // Once you get backend working
         //axios.get(`http://localhost:8080/booking/1`).then(data => console.log(data))
         const {id} = this.props.user
-        axios.get(`http://localhost:8080/booking/allbyid?${id}`).then(res => {
+        axios.get(`http://localhost:8080/booking/allbyid?customerID=${id}`).then(res => {
                 console.log(id)
                 this.setState({
                     bookings: res.data.sort((curr, next) => next.bookingStart - curr.bookingStart),
@@ -279,7 +280,7 @@ class Bookings extends Component {
                                 <div className="details">
                                     <div className="employee-details">
                                         <h3>Employee Details</h3>
-                                        <span><strong>Name: </strong>{booking.employee?.firstName + ' ' + booking.employee?.firstName}</span><br/>
+                                        <span><strong>Name: </strong>{booking.employee?.firstName + ' ' + booking.employee?.lastName}</span><br/>
                                         <span><strong>Email: </strong>{booking.employee?.email}</span><br/>
                                         <span><strong>Service Description: </strong>
                                             <ul>

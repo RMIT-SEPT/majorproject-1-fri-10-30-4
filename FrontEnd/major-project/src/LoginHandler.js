@@ -13,7 +13,7 @@ class LoginHandler extends Component {
         super(props)
         this.state = {
             adminLoggedIn: false,
-            customerLoggedIn: false,
+            customerLoggedIn: true,
         }
     }
 
