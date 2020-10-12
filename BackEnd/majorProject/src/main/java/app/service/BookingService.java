@@ -152,9 +152,10 @@ public class BookingService {
 	}
 
 	public boolean cancelBooking(Integer bookingId){
-		for(Booking booking : getAll()) {
+		for(Booking booking : bookingRepository.findAll()) {
 			if (booking.getBookingId() == bookingId) {
-					booking.setActive(false);
+				booking.setActive(Boolean.valueOf(false));
+				bookingRepository.save(booking);
 				return true;
 			}
 		}
