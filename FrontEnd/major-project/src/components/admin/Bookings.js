@@ -261,7 +261,7 @@ class Bookings extends Component {
     constructor() {
         super();
         this.state = {
-            bookings: data,
+            bookings: [],
             loading: false
         }
         this.getBookings = this.getBookings.bind(this);
@@ -271,8 +271,8 @@ class Bookings extends Component {
 
     componentDidMount() {
         // Uncomment these when bookings can be made
-        // this.setState({loading: true})
-        // this.getBookings();
+        this.setState({loading: true})
+        this.getBookings();
     }
 
     getBookings() {
@@ -280,7 +280,7 @@ class Bookings extends Component {
         //axios.get(`http://localhost:8080/booking/1`).then(data => console.log(data))
         const {id} = this.props.user
         axios.get(`http://localhost:8080/booking/allbyid?customerID=${id}`).then(res => {
-                console.log(id)
+                console.log("Getting bookings...")
                 this.setState({
                     bookings: res.data.sort((curr, next) => next.bookingStart - curr.bookingStart),
                     loading: false
@@ -308,12 +308,12 @@ class Bookings extends Component {
             const res = await axios.delete(`http://localhost:8080/booking/remove?bookingId=${bookingId}`)
             return res
         }
-        sendRequest();
+        sendRequest()
         
     }
     render() {
         return (
-            this.state.loading && this.state.bookings.length > 0 ?
+            this.state.loading ?
                 <div>
                     <h1>Loading...</h1>
                 </div> :
