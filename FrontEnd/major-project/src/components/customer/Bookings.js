@@ -210,7 +210,7 @@ class Bookings extends Component {
     constructor() {
         super();
         this.state = {
-            bookings: data,
+            bookings: [],
             loading: false
         }
         this.getBookings = this.getBookings.bind(this);
@@ -220,8 +220,8 @@ class Bookings extends Component {
 
     componentDidMount() {
         // Uncomment these when bookings can be made
-        // this.setState({loading: true})
-        // this.getBookings();
+        this.setState({loading: true})
+        this.getBookings();
     }
 
     getBookings() {
