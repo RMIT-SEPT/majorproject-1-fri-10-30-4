@@ -237,7 +237,7 @@ class Bookings extends Component {
             }
         )
     }
-    
+
     cancelBooking(bookingId) {
         //Cancel the booking {set active to false}
         //console.log('Cancel: ', id)
@@ -246,11 +246,11 @@ class Bookings extends Component {
             return res
         }
         sendRequest()
-      
+
     }
-    
+
     removeBooking(bookingId) {
-    
+
         // Remove the booking
         //console.log('Remove: ', id)
         async function sendRequest() {
@@ -258,7 +258,7 @@ class Bookings extends Component {
             return res
         }
         sendRequest()
-        
+
     }
     render() {
         return (
@@ -296,7 +296,7 @@ class Bookings extends Component {
                                         onClick={this.removeBooking(booking.bookingId)}>Remove
                                 </button>
                                 {
-                                    Date.now().valueOf() < booking.bookingEnd && <button type="button" className="btn btn-danger add-employee-btn-group"
+                                    Date.now().valueOf() < (booking.bookingStart - 48 * 3600000) && <button type="button" className="btn btn-danger add-employee-btn-group"
                                     onClick={this.cancelBooking(booking.bookingId)}>Cancel</button>
                                 }
                             </li>
@@ -305,7 +305,7 @@ class Bookings extends Component {
                 </div>
         );
     }
-   
+
 };
 const mapStateToProps = state=>({
     user: state.security.user
