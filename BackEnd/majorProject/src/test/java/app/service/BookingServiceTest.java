@@ -21,6 +21,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 /**
@@ -28,9 +29,6 @@ import static org.mockito.Mockito.when;
  */
 @ExtendWith(MockitoExtension.class)
 public class BookingServiceTest {
-
-    @Mock
-    private BusinessRepository businessRepository;
 
     @Mock
     private EmployeeRepository employeeRepository;
@@ -50,14 +48,13 @@ public class BookingServiceTest {
     private long getPastDateUpperLimit(Date date) {
         // delay in ms
         // max delay for frontend request to reach service
-        int acceptableDelay = 2000;
-        return date.getTime() - acceptableDelay;
+        int excessDelay = 2000;
+        return date.getTime() - excessDelay;
     }
 
     @Nested
-    class createBooking {
+    class CreateBooking {
 
-        private Business business;
         private Employee employee;
         private Customer customer;
         private BusinessServiceJob service;
@@ -65,13 +62,11 @@ public class BookingServiceTest {
 
         @BeforeEach
         void init() {
-            business = new Business();
             employee = new Employee();
             customer = new Customer();
             service = new BusinessServiceJob();
             date = new Date();
 
-            Mockito.lenient().when(businessRepository.findById(1)).thenReturn(Optional.of(business));
             Mockito.lenient().when(employeeRepository.findById(1)).thenReturn(Optional.of(employee));
             Mockito.lenient().when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
             Mockito.lenient().when(businessServiceRepository.findById(1)).thenReturn(Optional.of(service));
@@ -93,14 +88,6 @@ public class BookingServiceTest {
             assertNotNull(bookingCaptorValue.getCustomer());
             assertTrue(bookingCaptorValue.getBookingStart() > pastDateUpperLimit);
             assertNotNull(bookingCaptorValue.getBookingDescription());
-        }
-
-        @Test
-        void createBooking_Null_IfBusinessIdDoesNotExist() {
-            when(businessRepository.findById(2)).thenReturn(Optional.empty());
-
-            Booking createdBooking = bookingService.createBooking(2, 1, 1, 1, date.getTime());
-            assertNull(createdBooking);
         }
 
         @Test
@@ -140,7 +127,7 @@ public class BookingServiceTest {
     }
 
     @Nested
-    class removeBooking {
+    class RemoveBooking_And_CancelBooking {
 
         @BeforeEach
         void init() {
@@ -160,6 +147,112 @@ public class BookingServiceTest {
         @Test
         public void removeBooking_False_IfBookingIdDoesNotExist() {
             assertFalse(bookingService.removeBooking(2));
+        }
+
+        @Test
+        void cancelBooking_True_IfBookingIdExists() {
+            assertTrue(bookingService.cancelBooking(1));
+        }
+
+        @Test
+        void cancelBooking_False_IfBookingIdSoesNotExist() {
+            assertFalse(bookingService.cancelBooking(2));
+        }
+    }
+
+    @Nested
+    class GetAvailableBookings {
+
+        private Employee employee;
+        private BusinessServiceJob service;
+        private Iterable<Booking> overlappingBookings;
+        private Date date;
+
+        @BeforeEach
+        void init() {
+            //employee = new Employee(1, new Business(), "", "", "", "", "");
+            employee = new Employee();
+            employee.setMondayTime("00:00-00:00");
+            employee.setTuesdayTime("00:00-00:00");
+            employee.setWednesdayTime("00:00-00:00");
+            employee.setThursdayTime("00:00-00:00");
+            employee.setFridayTime("00:00-00:00");
+            employee.setSaturdayTime("00:00-00:00");
+            employee.setSundayTime("00:00-00:00");
+
+            service = new BusinessServiceJob();
+            overlappingBookings = new ArrayList<>();
+            date = new Date();
+
+            Mockito.lenient().when(employeeRepository.findById(1)).thenReturn(Optional.of(employee));
+            Mockito.lenient().when(businessServiceRepository.findById(1)).thenReturn(Optional.of(service));
+            Mockito.lenient().when(
+                    bookingRepository.getOverlappingBookings(eq(1), any(Long.class), any(Long.class)))
+                    .thenReturn(overlappingBookings);
+        }
+
+        @Test
+        void getAvailableBookings_Bookings_IfAllArgsValid() {
+            Iterable<BookingTimeOptionDTO> availableBookings =
+                    bookingService.getAvailableBookings(1, 1, 1, date.getTime());
+            assertNotNull(availableBookings);
+        }
+
+        @Test
+        void getAvailableBookings_Null_IfEmployeeIdDoesNotExist() {
+            when(employeeRepository.findById(2)).thenReturn(Optional.empty());
+
+            Iterable<BookingTimeOptionDTO> availableBookings =
+                    bookingService.getAvailableBookings(1, 2, 1, date.getTime());
+            assertNull(availableBookings);
+        }
+
+        @Test
+        void getAvailableBookings_Null_IfServiceIdDoesNotExist() {
+            when(businessServiceRepository.findById(2)).thenReturn(Optional.empty());
+
+            Iterable<BookingTimeOptionDTO> availableBookings =
+                    bookingService.getAvailableBookings(1, 1, 2, date.getTime());
+            assertNull(availableBookings);
+        }
+
+        @Test
+        void getAvailableBookings_Null_IfDateIsPast() {
+            long pastDateUpperLimit = getPastDateUpperLimit(date);
+
+            Iterable<BookingTimeOptionDTO> availableBookings =
+                    bookingService.getAvailableBookings(1, 1, 1, pastDateUpperLimit);
+            assertNull(availableBookings);
+        }
+    }
+
+    @Nested
+    class GetAllByCustomerId {
+
+        List<Booking> bookings;
+        Customer customer;
+
+        @BeforeEach
+        void init() {
+            Booking booking = new Booking();
+            customer = new Customer();
+            customer.setUserId(1L);
+            booking.setCustomer(customer);
+            bookings = new ArrayList<>();
+            bookings.add(booking);
+
+            when(bookingRepository.findAll()).thenReturn(bookings);
+        }
+
+        @Test
+        void getAllByCustomerId_Bookings_IfCustomerIdExists() {
+            for (Booking b : bookingService.getAllByCustomerId(1L))
+                assertEquals(1L, b.getCustomer().getUserId());
+        }
+
+        @Test
+        void getAllByCustomerId_EmptyBookings_IfCustomerIdDoesNotExist() {
+            assertNull(bookingService.getAllByCustomerId(2L));
         }
     }
 }
