@@ -5,6 +5,7 @@ import app.entity.Business;
 import app.entity.BusinessServiceJob;
 import app.entity.user.Customer;
 import app.entity.user.Employee;
+import app.model.booking.BookingTimeOptionDTO;
 import app.repository.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -46,6 +47,13 @@ public class BookingServiceTest {
     @InjectMocks
     private BookingService bookingService;
 
+    private long getPastDateUpperLimit(Date date) {
+        // delay in ms
+        // max delay for frontend request to reach service
+        int acceptableDelay = 2000;
+        return date.getTime() - acceptableDelay;
+    }
+
     @Nested
     class createBooking {
 
@@ -54,7 +62,6 @@ public class BookingServiceTest {
         private Customer customer;
         private BusinessServiceJob service;
         private Date date;
-        private long pastDateUpperLimit;
 
         @BeforeEach
         void init() {
@@ -68,11 +75,6 @@ public class BookingServiceTest {
             Mockito.lenient().when(employeeRepository.findById(1)).thenReturn(Optional.of(employee));
             Mockito.lenient().when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
             Mockito.lenient().when(businessServiceRepository.findById(1)).thenReturn(Optional.of(service));
-
-            // delay in ms
-            // max delay for frontend request to reach service
-            int acceptableDelay = 2000;
-            pastDateUpperLimit = date.getTime() - acceptableDelay;
         }
 
         @Captor
@@ -84,11 +86,21 @@ public class BookingServiceTest {
             Mockito.verify(bookingRepository).save(bookingCaptor.capture());
             Booking bookingCaptorValue = bookingCaptor.getValue();
 
+            long pastDateUpperLimit = getPastDateUpperLimit(date);
+
             assertNotNull(bookingCaptorValue.getService());
             assertNotNull(bookingCaptorValue.getEmployee());
-            //assertNotNull(bookingCaptorValue.getCustomer());
+            assertNotNull(bookingCaptorValue.getCustomer());
             assertTrue(bookingCaptorValue.getBookingStart() > pastDateUpperLimit);
             assertNotNull(bookingCaptorValue.getBookingDescription());
+        }
+
+        @Test
+        void createBooking_Null_IfBusinessIdDoesNotExist() {
+            when(businessRepository.findById(2)).thenReturn(Optional.empty());
+
+            Booking createdBooking = bookingService.createBooking(2, 1, 1, 1, date.getTime());
+            assertNull(createdBooking);
         }
 
         @Test
@@ -119,6 +131,8 @@ public class BookingServiceTest {
         void createBooking_Null_IfDateIsPast() {
             Booking booking = new Booking();
             Mockito.lenient().when(bookingRepository.save(any(Booking.class))).thenReturn(booking);
+
+            long pastDateUpperLimit = getPastDateUpperLimit(date);
 
             Booking createdBooking = bookingService.createBooking(1, 1, 1, 1, pastDateUpperLimit);
             assertNull(createdBooking);
