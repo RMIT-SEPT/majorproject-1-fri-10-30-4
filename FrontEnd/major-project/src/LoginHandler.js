@@ -13,7 +13,7 @@ class LoginHandler extends Component {
         super(props)
         this.state = {
             adminLoggedIn: false,
-            customerLoggedIn: false,
+            customerLoggedIn: true,
         }
     }
 
@@ -32,6 +32,7 @@ class LoginHandler extends Component {
             } else if (accountType === CUSTOMER) {
             return (
                 <div>
+                    
                     <Customer />
                 </div>
                 )

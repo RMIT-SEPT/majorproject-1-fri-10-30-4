@@ -31,7 +31,7 @@ public class Booking {
     private BusinessServiceJob service;
 
     @ManyToOne
-    @JoinColumn(name="CUSTOMER_ID", nullable=true)
+    @JoinColumn(name="USER_ID")
     private Customer customer;
 
     @ManyToOne

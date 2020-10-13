@@ -36,7 +36,7 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+            <div className='login-form-block'>
                 <div className="container">
                 <LoginForm 
                     onChange={this.onChange}

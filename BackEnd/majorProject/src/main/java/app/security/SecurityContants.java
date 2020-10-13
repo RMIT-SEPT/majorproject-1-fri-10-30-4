@@ -3,6 +3,8 @@ package app.security;
 public class SecurityContants {
     public static final String SIGN_UP_URLS = "/customer/register";
     public static final String CUSTOMER_URLS = "/customer/**";
+    public static final String BOOKING = "/booking/**";
+//    public static final String BOOKING_CREATE= "/booking/create";
     public static final String TEST = "/debug/testData";
     public static final String WEBSITE ="/**";
     public static final String LOGIN_URL = "/login";

@@ -12,17 +12,22 @@ class CarouselControls extends React.Component{
         return (
         <div id="BookingFormCarouselControls">
             <div>
-                <button onClick={window.bookingFormCarouselComponent.changePageBack.bind()}  className="BackButton btn btn-primary">
-                    Back
-                </button>
+                <label>
+                    <button onClick={window.bookingFormCarouselComponent.changePageBack.bind()}  className="BackButton btn btn-primary">
+                        Back
+                    </button>
+                </label>
+         
             </div>
 
             <div class="centrePadding"></div>
             
             <div>
+                <label>
                 <button onClick={window.bookingFormCarouselComponent.changePageForward.bind()} className="ForwardButton btn btn-success">
                     Forward
                 </button>
+                </label>
             </div>
            
         </div>
@@ -101,9 +106,21 @@ class WorkersList extends React.Component{
     }
     render(){
         if(window.selectedService==null){
-            return <div id="WorkersListComponent" class="hiddenCarouselItem">Please select a service before continuing.</div>
+            return <div id="WorkersListComponent" class="hiddenCarouselItem">
+                    <div className="employee-btn-block">
+                        <Jumbotron className="carousel-items-block">
+                            <h4>Please select a service before continuing.</h4>
+                        </Jumbotron>
+                    </div>
+                </div>
         } else if(this.state.isLoading){
-            return <div id="WorkersListComponent" class="hiddenCarouselItem">Now loading employees...</div>
+            return <div id="WorkersListComponent" class="hiddenCarouselItem">
+                 <div className="employee-btn-block">
+                    <Jumbotron className="carousel-items-block">
+                        <h4>Now loading employees...</h4>
+                    </Jumbotron>
+                    </div>
+                </div>
         } else{  
             var renderedList = [];
             for(const i in this.state.listItems){
@@ -177,9 +194,21 @@ class DatesList extends React.Component{
     }
     render(){
         if(window.selectedService==null){
-            return <div id="DatesListComponent" class="hiddenCarouselItem">Please select a service before continuing.</div>
+            return <div id="DatesListComponent" class="hiddenCarouselItem">
+                 <div className="date-btn-block">
+                    <Jumbotron className="carousel-items-block">
+                        <h4>Please select a service before continuing.</h4>
+                    </Jumbotron>
+                    </div>      
+                </div>
         } else if(this.state.isLoading){
-            return <div id="DatesListComponent" class="hiddenCarouselItem">Now loading possible dates...</div>
+            return <div id="DatesListComponent" class="hiddenCarouselItem">
+                    <div className="date-btn-block">
+                    <Jumbotron className="carousel-items-block">
+                        <h4>Now loading possible dates...</h4>
+                    </Jumbotron>
+                    </div>
+                </div>
         } else{  
             var renderedList = [];
             for(const i in this.state.listItems){
@@ -257,9 +286,21 @@ class TimesList extends React.Component{
     }
     render(){
         if(window.selectedService==null){
-            return <div id="TimesListComponent" class="hiddenCarouselItem">Please select a date before continuing.</div>
+            return <div id="TimesListComponent" class="hiddenCarouselItem">
+                <div className="time-btn-block">
+                    <Jumbotron className="carousel-items-block">
+                    <h4> Please select a date before continuing.</h4>
+                    </Jumbotron>
+                </div>
+            </div>
         } else if(this.state.isLoading){
-            return <div id="TimesListComponent" class="hiddenCarouselItem">Now loading appointment times...</div>
+            return <div id="TimesListComponent" class="hiddenCarouselItem">
+                    <div className="time-btn-block">
+                        <Jumbotron className="carousel-items-block">
+                        <h4>Now loading appointment times...</h4>
+                        </Jumbotron>
+                    </div>
+                </div>
         } else{  
             var renderedList = [];
             for(const i in this.state.listItems){

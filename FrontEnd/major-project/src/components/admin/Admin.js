@@ -11,6 +11,7 @@ import RemoveEmployee from './RemoveEmployee';
 import EditEmployee from './EditEmployee';
 import AdminDashboard from './AdminDashboard';
 import Bookings from './Bookings';
+import { Redirect } from "react-router-dom"
 
 
 class Admin extends Component {
@@ -18,6 +19,7 @@ class Admin extends Component {
     return (
       <div>
         <Router>
+        <Redirect to='/home' />
           <AdminNavigationBar/>
           <Switch>
             <Route exact path="/home" component={AdminDashboard}/>
