@@ -229,7 +229,7 @@ class Bookings extends Component {
         //axios.get(`http://localhost:8080/booking/1`).then(data => console.log(data))
         const {id} = this.props.user
         axios.get(`http://localhost:8080/booking/allbyid?customerID=${id}`).then(res => {
-                console.log(id)
+                console.log("Retrieving bookings...")
                 this.setState({
                     bookings: res.data.sort((curr, next) => next.bookingStart - curr.bookingStart),
                     loading: false
@@ -237,32 +237,32 @@ class Bookings extends Component {
             }
         )
     }
-    
+
     cancelBooking(bookingId) {
-        // Cancel the booking {set active to false}
+        //Cancel the booking {set active to false}
         //console.log('Cancel: ', id)
         async function sendRequest() {
             const res = await axios.put(`http://localhost:8080/booking/cancel?bookingId=${bookingId}`)
             return res
         }
         sendRequest()
-      
+
     }
-    
+
     removeBooking(bookingId) {
-    
+
         // Remove the booking
         //console.log('Remove: ', id)
         async function sendRequest() {
             const res = await axios.delete(`http://localhost:8080/booking/remove?bookingId=${bookingId}`)
             return res
         }
-        sendRequest();
-        
+        sendRequest()
+
     }
     render() {
         return (
-            this.state.loading && this.state.bookings.length > 0 ?
+            this.state.loading ?
                 <div>
                     <h1>Loading...</h1>
                 </div> :
@@ -288,7 +288,7 @@ class Bookings extends Component {
                                                     <li className="service" key={index}>{service.serviceDescription}</li>
                                                 )}
                                             </ul>
-                                    </span>
+                                        </span>
                                     </div>
                                 </div>
                                 <br/>
@@ -296,7 +296,7 @@ class Bookings extends Component {
                                         onClick={this.removeBooking(booking.bookingId)}>Remove
                                 </button>
                                 {
-                                    Date.now().valueOf() < booking.bookingEnd && <button type="button" className="btn btn-danger add-employee-btn-group"
+                                    Date.now().valueOf() < (booking.bookingStart - 48 * 3600000) && <button type="button" className="btn btn-danger add-employee-btn-group"
                                     onClick={this.cancelBooking(booking.bookingId)}>Cancel</button>
                                 }
                             </li>
@@ -305,7 +305,7 @@ class Bookings extends Component {
                 </div>
         );
     }
-   
+
 };
 const mapStateToProps = state=>({
     user: state.security.user

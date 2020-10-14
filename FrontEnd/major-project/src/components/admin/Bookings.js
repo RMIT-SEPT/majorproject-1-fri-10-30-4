@@ -1,6 +1,6 @@
 import React, {useEffect, useState, Component} from 'react';
 import '../../css/Bookings.css'
-import { connect } from "react-redux"
+import {connect} from 'react-redux'
 
 const axios = require('axios').default;
 
@@ -16,19 +16,19 @@ const data = [
             'serviceLength': 10,
             'serviceDescription': 'Computer Repair'
         },
-        'customer':     {
-            "userId": 17,
-            "accountType": "CUSTOMER",
-            "firstName": "William",
-            "lastName": "Butcher",
-            "username": "butcher@ecorp.com",
-            "email": "butcher@ecorp.com",
-            "passwordHash": "$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi",
-            "confirmPassword": null,
-            "address": "7 Soup Street",
-            "phoneNumber": "12345678",
-            "fullName": "William Butcher",
-            "password": "$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi"
+        'customer': {
+            'userId': 17,
+            'accountType': 'CUSTOMER',
+            'firstName': 'William',
+            'lastName': 'Butcher',
+            'username': 'butcher@ecorp.com',
+            'email': 'butcher@ecorp.com',
+            'passwordHash': '$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi',
+            'confirmPassword': null,
+            'address': '7 Soup Street',
+            'phoneNumber': '12345678',
+            'fullName': 'William Butcher',
+            'password': '$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi'
         },
         'employee': {
             'employeeId': 11,
@@ -76,19 +76,19 @@ const data = [
             'serviceLength': 10,
             'serviceDescription': 'Computer Repair'
         },
-        'customer':     {
-            "userId": 7,
-            "accountType": "CUSTOMER",
-            "firstName": "Buffy",
-            "lastName": "Summers",
-            "username": "buffy@sunnydale.com",
-            "email": "buffy@sunnydale.com",
-            "passwordHash": "$2a$10$G0B/mIZU/nnk206HQCuyM.6/vL7vp1W8U.iRtCaXQo0q8BAAZiwzW",
-            "confirmPassword": null,
-            "address": "666 Dracula Street",
-            "phoneNumber": "0123456789",
-            "fullName": "Buffy Summers",
-            "password": "$2a$10$G0B/mIZU/nnk206HQCuyM.6/vL7vp1W8U.iRtCaXQo0q8BAAZiwzW"
+        'customer': {
+            'userId': 7,
+            'accountType': 'CUSTOMER',
+            'firstName': 'Buffy',
+            'lastName': 'Summers',
+            'username': 'buffy@sunnydale.com',
+            'email': 'buffy@sunnydale.com',
+            'passwordHash': '$2a$10$G0B/mIZU/nnk206HQCuyM.6/vL7vp1W8U.iRtCaXQo0q8BAAZiwzW',
+            'confirmPassword': null,
+            'address': '666 Dracula Street',
+            'phoneNumber': '0123456789',
+            'fullName': 'Buffy Summers',
+            'password': '$2a$10$G0B/mIZU/nnk206HQCuyM.6/vL7vp1W8U.iRtCaXQo0q8BAAZiwzW'
         },
         'employee': {
             'employeeId': 11,
@@ -136,19 +136,19 @@ const data = [
             'serviceLength': 10,
             'serviceDescription': 'Computer Repair'
         },
-        'customer':     {
-            "userId": 17,
-            "accountType": "CUSTOMER",
-            "firstName": "William",
-            "lastName": "Butcher",
-            "username": "butcher@ecorp.com",
-            "email": "butcher@ecorp.com",
-            "passwordHash": "$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi",
-            "confirmPassword": null,
-            "address": "7 Soup Street",
-            "phoneNumber": "12345678",
-            "fullName": "William Butcher",
-            "password": "$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi"
+        'customer': {
+            'userId': 17,
+            'accountType': 'CUSTOMER',
+            'firstName': 'William',
+            'lastName': 'Butcher',
+            'username': 'butcher@ecorp.com',
+            'email': 'butcher@ecorp.com',
+            'passwordHash': '$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi',
+            'confirmPassword': null,
+            'address': '7 Soup Street',
+            'phoneNumber': '12345678',
+            'fullName': 'William Butcher',
+            'password': '$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi'
         },
         'employee': {
             'employeeId': 11,
@@ -196,19 +196,19 @@ const data = [
             'serviceLength': 10,
             'serviceDescription': 'Computer Repair'
         },
-        'customer':     {
-            "userId": 17,
-            "accountType": "CUSTOMER",
-            "firstName": "William",
-            "lastName": "Butcher",
-            "username": "butcher@ecorp.com",
-            "email": "butcher@ecorp.com",
-            "passwordHash": "$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi",
-            "confirmPassword": null,
-            "address": "7 Soup Street",
-            "phoneNumber": "12345678",
-            "fullName": "William Butcher",
-            "password": "$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi"
+        'customer': {
+            'userId': 17,
+            'accountType': 'CUSTOMER',
+            'firstName': 'William',
+            'lastName': 'Butcher',
+            'username': 'butcher@ecorp.com',
+            'email': 'butcher@ecorp.com',
+            'passwordHash': '$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi',
+            'confirmPassword': null,
+            'address': '7 Soup Street',
+            'phoneNumber': '12345678',
+            'fullName': 'William Butcher',
+            'password': '$2a$10$ZLrR7GKXH/al/UhXeJ.7Tec9XyujJlvtLQILvq6oi9ak4d7VPUNgi'
         },
         'employee': {
             'employeeId': 11,
@@ -261,7 +261,7 @@ class Bookings extends Component {
     constructor() {
         super();
         this.state = {
-            bookings: data,
+            bookings: [],
             loading: false
         }
         this.getBookings = this.getBookings.bind(this);
@@ -271,8 +271,8 @@ class Bookings extends Component {
 
     componentDidMount() {
         // Uncomment these when bookings can be made
-        // this.setState({loading: true})
-        // this.getBookings();
+        this.setState({loading: true})
+        this.getBookings();
     }
 
     getBookings() {
@@ -280,7 +280,7 @@ class Bookings extends Component {
         //axios.get(`http://localhost:8080/booking/1`).then(data => console.log(data))
         const {id} = this.props.user
         axios.get(`http://localhost:8080/booking/allbyid?customerID=${id}`).then(res => {
-                console.log(id)
+                console.log('Getting bookings...')
                 this.setState({
                     bookings: res.data.sort((curr, next) => next.bookingStart - curr.bookingStart),
                     loading: false
@@ -288,7 +288,7 @@ class Bookings extends Component {
             }
         )
     }
-    
+
     cancelBooking(bookingId) {
         // Cancel the booking {set active to false}
         //console.log('Cancel: ', id)
@@ -296,24 +296,27 @@ class Bookings extends Component {
             const res = await axios.put(`http://localhost:8080/booking/cancel?bookingId=${bookingId}`)
             return res
         }
+
         sendRequest()
-      
+
     }
-    
+
     removeBooking(bookingId) {
-    
+
         // Remove the booking
         //console.log('Remove: ', id)
         async function sendRequest() {
             const res = await axios.delete(`http://localhost:8080/booking/remove?bookingId=${bookingId}`)
             return res
         }
-        sendRequest();
-        
+
+        sendRequest()
+
     }
+
     render() {
         return (
-            this.state.loading && this.state.bookings.length > 0 ?
+            this.state.loading ?
                 <div>
                     <h1>Loading...</h1>
                 </div> :
@@ -336,7 +339,8 @@ class Bookings extends Component {
                                         <span><strong>Service Description: </strong>
                                             <ul>
                                                 {booking?.employee?.services?.map((service, index) =>
-                                                    <li className="service" key={index}>{service.serviceDescription}</li>
+                                                    <li className="service"
+                                                        key={index}>{service.serviceDescription}</li>
                                                 )}
                                             </ul>
                                     </span>
@@ -348,7 +352,8 @@ class Bookings extends Component {
                                         <span><strong>Service Description: </strong>
                                             <ul>
                                                 {booking?.employee?.services?.map((service, index) =>
-                                                    <li className="service" key={index}>{service.serviceDescription}</li>
+                                                    <li className="service"
+                                                        key={index}>{service.serviceDescription}</li>
                                                 )}
                                             </ul>
                                     </span>
@@ -359,8 +364,9 @@ class Bookings extends Component {
                                         onClick={this.removeBooking(booking.bookingId)}>Remove
                                 </button>
                                 {
-                                    Date.now().valueOf() < booking.bookingEnd && <button type="button" className="btn btn-danger add-employee-btn-group"
-                                    onClick={this.cancelBooking(booking.bookingId)}>Cancel</button>
+                                    Date.now().valueOf() < booking.bookingStart &&
+                                    <button type="button" className="btn btn-danger add-employee-btn-group"
+                                            onClick={this.cancelBooking(booking.bookingId)}>Cancel</button>
                                 }
                             </li>
                         )}
@@ -368,15 +374,11 @@ class Bookings extends Component {
                 </div>
         );
     }
-   
+
 };
 
 
-
-
-
-
-const mapStateToProps = state=>({
+const mapStateToProps = state => ({
     user: state.security.user
 })
 export default connect(mapStateToProps)(Bookings);
