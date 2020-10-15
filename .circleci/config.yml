@@ -80,7 +80,9 @@ jobs:
   backend_image_build:
     docker:
       - image: circleci/openjdk:11.0.8-jdk
-
+    environment:
+      ECR_REPOSITORY_NAME: springbootdemo
+      FULL_IMAGE_NAME: 594973024332.dkr.ecr.us-east-1.amazonaws.com/springbootdemo:latest
     steps:
       - attach_workspace:
           at: /tmp/BackEnd
@@ -93,10 +95,19 @@ jobs:
           command: docker build -t haz1123/majorproject:backend_latest ./
           working_directory: /tmp/BackEnd/majorProject/
       
-      #Login to docker
       - run:
-          name: Login to docker
-          command: docker login --username haz1123 --password $HarrisonCIToken
+          name: Install dependencies for AWS
+          command: |
+            sudo apt-get update
+            sudo apt-get -y -qq install awscli
+            sudo apt-get install python3-pip
+            sudo pip3 install --upgrade awscli
+
+      - run:
+          name: Push image
+          command: |
+            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 929269043601.dkr.ecr.us-east-1.amazonaws.com/majorproject
+            docker push $FULL_IMAGE_NAME
 
       #Push built image to remote repo
       - run:
@@ -184,13 +195,13 @@ workflows:
             - backend_test
           filters:
             branches:
-              only: master
+              only: CircleCIWork
       - backend_image_build:
           requires:
             - backend_build
           filters:
             branches:
-              only: master
+              only: CircleCIWork
 
   frontend:
     jobs:
