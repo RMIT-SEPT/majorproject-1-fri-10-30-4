@@ -278,8 +278,8 @@ class Bookings extends Component {
     getBookings() {
         // Once you get backend working
         //axios.get(`http://localhost:8080/booking/1`).then(data => console.log(data))
-        const {id} = this.props.user
-        axios.get(`http://localhost:8080/booking/allbyid?customerID=${id}`).then(res => {
+        //const {id} = this.props.user
+        axios.get(`http://localhost:8080/booking/all`).then(res => {
                 console.log('Getting bookings...')
                 this.setState({
                     bookings: res.data.sort((curr, next) => next.bookingStart - curr.bookingStart),
@@ -290,8 +290,6 @@ class Bookings extends Component {
     }
 
     cancelBooking(bookingId) {
-        // Cancel the booking {set active to false}
-        //console.log('Cancel: ', id)
         async function sendRequest() {
             const res = await axios.put(`http://localhost:8080/booking/cancel?bookingId=${bookingId}`)
             return res
