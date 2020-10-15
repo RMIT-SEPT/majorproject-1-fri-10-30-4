@@ -66,6 +66,7 @@ class Registration extends Component {
       // } else {
           
       // }
+      return false;
     }
 
     render() {
