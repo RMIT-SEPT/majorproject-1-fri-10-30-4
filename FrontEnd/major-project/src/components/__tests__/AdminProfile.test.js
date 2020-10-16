@@ -41,8 +41,8 @@ describe("Admin Profile", () => {
 
         const divwrapper = shallow(
                 <div class="person-info">
-                    <h4>{admin.businessID}</h4>
-                    <h4>{admin.name}</h4>
+                    <h4>1124</h4>
+                    <h4>1234</h4>
                     <p>Administrator</p>
                     <p>Working as an administrator for E-booking.</p>
                 </div>
@@ -70,8 +70,22 @@ describe("Admin Profile", () => {
             admin:profile
         });
         
-        expect(wrapper.find("h4")).toHaveLength(1);
+        expect(wrapper.find("h4")).toHaveLength(4);
     });
 
+    test("Successfully shows output in list when data renders",()=>{
+        const wrapper = shallow(<Profile />)
+        const profile = [
+            {"userID" : 1234,
+            "businessID" : 1124,
+            }
+        ]
 
+        wrapper.setState({
+            isLoading:false,
+            admin:profile
+        });
+        
+        expect(wrapper.find("h4")).toHaveLength(4);
+    });
 });

@@ -19,7 +19,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookingService {
@@ -114,9 +118,16 @@ public class BookingService {
 				shiftString = "";
 				break;
 		}
-    	String[] shift = shiftString.split("-");
-		LocalTime shiftStart = LocalTime.parse(shift[0], DateTimeFormatter.ofPattern("HH:mm"));
-		LocalTime shiftEnd = LocalTime.parse(shift[1], DateTimeFormatter.ofPattern("HH:mm"));
+		LocalTime shiftStart;
+		LocalTime shiftEnd;
+		try {
+			String[] shift = shiftString.split("-");
+			shiftStart = LocalTime.parse(shift[0], DateTimeFormatter.ofPattern("HH:mm"));
+			shiftEnd = LocalTime.parse(shift[1], DateTimeFormatter.ofPattern("HH:mm"));
+		} catch (DateTimeParseException e) {
+			ArrayList<BookingTimeOptionDTO> bookingTimeOptions = new ArrayList<BookingTimeOptionDTO>();
+			return bookingTimeOptions;
+		}
 		int appointmentIncrement = 60;
 		shiftEnd = shiftEnd.minusMinutes(serviceLength);
 		
