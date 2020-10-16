@@ -219,15 +219,14 @@ class Bookings extends Component {
     }
 
     componentDidMount() {
-        // Uncomment these when bookings can be made
         this.setState({loading: true})
         this.getBookings();
     }
 
     getBookings() {
-        // Once you get backend working
-        //axios.get(`http://localhost:8080/booking/1`).then(data => console.log(data))
         const {id} = this.props.user
+
+        
         axios.get(`http://localhost:8080/booking/allbyid?customerID=${id}`).then(res => {
                 console.log("Retrieving bookings...")
                 this.setState({
@@ -245,8 +244,8 @@ class Bookings extends Component {
             const res = await axios.put(`http://localhost:8080/booking/cancel?bookingId=${bookingId}`)
             return res
         }
+        
         sendRequest()
-
     }
 
     removeBooking(bookingId) {
@@ -258,8 +257,9 @@ class Bookings extends Component {
             return res
         }
         sendRequest()
-
     }
+
+
     render() {
         return (
             this.state.loading ?

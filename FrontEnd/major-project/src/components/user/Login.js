@@ -32,6 +32,7 @@ class Login extends Component {
         this.props.login(loginRequest, this.props.history)
         this.setState({error_username: this.props.error.username})
         this.setState({error_password: this.props.error.password})
+        return false;
     }
 
     render() {
