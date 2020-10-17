@@ -32,11 +32,12 @@ class Login extends Component {
         this.props.login(loginRequest, this.props.history)
         this.setState({error_username: this.props.error.username})
         this.setState({error_password: this.props.error.password})
+        return false;
     }
 
     render() {
         return (
-            <div>
+            <div className='login-form-block'>
                 <div className="container">
                 <LoginForm 
                     onChange={this.onChange}

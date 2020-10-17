@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,6 +42,8 @@ public class BookingService {
     
     @Autowired
     private CustomerRepository customerRepository;
+
+
     
     public Booking createBooking(Booking booking) {
         return bookingRepository.save(booking);
@@ -61,7 +63,7 @@ public class BookingService {
 
     	BusinessServiceJob service = businessServiceRepository.findById(serviceID).get();
     	//TODO:validate
-    	Booking booking =  new Booking(service, employee, null, date, "");
+    	Booking booking =  new Booking(service, employee, customer, date, "");
     	return bookingRepository.save(booking);
    }
     
@@ -149,5 +151,26 @@ public class BookingService {
     public Optional<Booking> findByID(int bookingID){
     	return bookingRepository.findById(bookingID);
     }
+
+    public Iterable<Booking> getAllByCustomerId(Long customerID){
+    	List<Booking> bookings = new ArrayList<>();
+    	for(Booking booking : bookingRepository.findAll()){
+    		if(booking.getCustomer().getUserId().equals(customerID)) {
+    			bookings.add(booking);
+			}
+		}
+    	return bookings;
+	}
+
+	public boolean cancelBooking(Integer bookingId){
+		for(Booking booking : bookingRepository.findAll()) {
+			if (booking.getBookingId() == bookingId) {
+				booking.setActive(Boolean.valueOf(false));
+				bookingRepository.save(booking);
+				return true;
+			}
+		}
+		return false;
+	}
     
 }

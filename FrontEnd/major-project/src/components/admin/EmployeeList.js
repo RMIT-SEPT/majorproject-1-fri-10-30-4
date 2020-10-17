@@ -45,7 +45,6 @@ class EmployeeList extends Component {
                                         </NavLink>
                                         </span>
                                 </Jumbotron >
-                            
                             )})
 
         const loading = () => {
