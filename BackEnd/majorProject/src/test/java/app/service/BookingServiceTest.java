@@ -170,17 +170,8 @@ public class BookingServiceTest {
 
         @BeforeEach
         void init() {
-            //employee = new Employee(1, new Business(), "", "", "", "", "");
-            employee = new Employee();
-            employee.setMondayTime("00:00-00:00");
-            employee.setTuesdayTime("00:00-00:00");
-            employee.setWednesdayTime("00:00-00:00");
-            employee.setThursdayTime("00:00-00:00");
-            employee.setFridayTime("00:00-00:00");
-            employee.setSaturdayTime("00:00-00:00");
-            employee.setSundayTime("00:00-00:00");
-
-            service = new BusinessServiceJob();
+            employee = new Employee(1, new Business(), "", "", "", "", "");
+            service = new BusinessServiceJob(10, "");
             overlappingBookings = new ArrayList<>();
             date = new Date();
 
@@ -240,19 +231,24 @@ public class BookingServiceTest {
             booking.setCustomer(customer);
             bookings = new ArrayList<>();
             bookings.add(booking);
-
-            when(bookingRepository.findAll()).thenReturn(bookings);
         }
 
         @Test
         void getAllByCustomerId_Bookings_IfCustomerIdExists() {
+            when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
+            when(bookingRepository.findAll()).thenReturn(bookings);
+
             for (Booking b : bookingService.getAllByCustomerId(1L))
                 assertEquals(1L, b.getCustomer().getUserId());
         }
 
         @Test
-        void getAllByCustomerId_EmptyBookings_IfCustomerIdDoesNotExist() {
+        void getAllByCustomerId_Null_IfCustomerIdDoesNotExist() {
+            when(customerRepository.findById(2L)).thenReturn(Optional.empty());
+
             assertNull(bookingService.getAllByCustomerId(2L));
         }
     }
+
+    // Tests for cancelBooking() in above inner class RemoveBooking_CancelBooking
 }
