@@ -7,5 +7,6 @@ tmp/
 .project
 .classpath/
 .settings/
+*.iml
 Backend.zip
 FrontEnd/bookingPage__/*

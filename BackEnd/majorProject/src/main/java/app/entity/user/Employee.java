@@ -247,8 +247,6 @@ public class Employee {
         this.fridayTime = fridayTime;
     }
 
-
-
     public String getSaturdayTime() {
         if(saturdayTime.equals(NO_SCHEDULE)){
             return "";

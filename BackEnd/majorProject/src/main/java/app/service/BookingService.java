@@ -19,9 +19,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,6 +42,8 @@ public class BookingService {
     
     @Autowired
     private CustomerRepository customerRepository;
+
+
     
     public Booking createBooking(Booking booking) {
         return bookingRepository.save(booking);
@@ -55,7 +58,9 @@ public class BookingService {
     	) {
     	Business business = businessRepository.findById(businessID).get();
     	Employee employee = employeeRepository.findById(employeeID).get();
-    	Customer customer  = customerRepository.findById(customerID).get();
+      
+    	Customer customer  = customerRepository.findById(Long.valueOf(customerID)).get();
+
     	BusinessServiceJob service = businessServiceRepository.findById(serviceID).get();
     	//TODO:validate
     	Booking booking =  new Booking(service, employee, customer, date, "");
@@ -113,9 +118,16 @@ public class BookingService {
 				shiftString = "";
 				break;
 		}
-    	String[] shift = shiftString.split("-");
-		LocalTime shiftStart = LocalTime.parse(shift[0], DateTimeFormatter.ofPattern("HH:mm"));
-		LocalTime shiftEnd = LocalTime.parse(shift[1], DateTimeFormatter.ofPattern("HH:mm"));
+		LocalTime shiftStart;
+		LocalTime shiftEnd;
+		try {
+			String[] shift = shiftString.split("-");
+			shiftStart = LocalTime.parse(shift[0], DateTimeFormatter.ofPattern("HH:mm"));
+			shiftEnd = LocalTime.parse(shift[1], DateTimeFormatter.ofPattern("HH:mm"));
+		} catch (DateTimeParseException e) {
+			ArrayList<BookingTimeOptionDTO> bookingTimeOptions = new ArrayList<BookingTimeOptionDTO>();
+			return bookingTimeOptions;
+		}
 		int appointmentIncrement = 60;
 		shiftEnd = shiftEnd.minusMinutes(serviceLength);
 		
@@ -135,4 +147,30 @@ public class BookingService {
 		}
     	return bookingTimeOptions;
     }    
+    
+    public Optional<Booking> findByID(int bookingID){
+    	return bookingRepository.findById(bookingID);
+    }
+
+    public Iterable<Booking> getAllByCustomerId(Long customerID){
+    	List<Booking> bookings = new ArrayList<>();
+    	for(Booking booking : bookingRepository.findAll()){
+    		if(booking.getCustomer().getUserId().equals(customerID)) {
+    			bookings.add(booking);
+			}
+		}
+    	return bookings;
+	}
+
+	public boolean cancelBooking(Integer bookingId){
+		for(Booking booking : bookingRepository.findAll()) {
+			if (booking.getBookingId() == bookingId) {
+				booking.setActive(Boolean.valueOf(false));
+				bookingRepository.save(booking);
+				return true;
+			}
+		}
+		return false;
+	}
+    
 }

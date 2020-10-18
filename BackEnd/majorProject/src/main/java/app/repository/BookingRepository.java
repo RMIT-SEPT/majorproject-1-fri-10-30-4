@@ -14,8 +14,8 @@ public interface BookingRepository extends CrudRepository<Booking, Integer> {
 //     * @param customerId
 //     * @return an Iterable list of bookings filtered by customer id.
 //     */
-//    @Query("SELECT booking FROM Booking booking WHERE (booking.customerId = ?1)")
-//    Iterable<Booking> getAllByCustomerId(int customerId);
+//    @Query("SELECT booking FROM Booking booking WHERE (booking.customer.customerId = ?1)")
+//    Iterable<Booking> getAllByCustomerId(Long customerId);
 
     /**
      * @param employeeID

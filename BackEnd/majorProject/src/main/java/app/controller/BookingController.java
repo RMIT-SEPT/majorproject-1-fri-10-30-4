@@ -9,22 +9,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpResponse;
+import java.util.NoSuchElementException;
 
 import javax.validation.Valid;
 
 @RestController
 //TODO:fix
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/booking")
 public class BookingController {
 
     @Autowired
     private BookingService bookingService;
 
-//    @GetMapping("/allbyid")
-//    public Iterable<Booking> getBookingsByCustomerId(@RequestParam("customerID") int customerID) {
-//        return bookingService.getAllByCustomerId(customerID);
-//    }
+    @GetMapping("/allbyid")
+    public Iterable<Booking> getBookingsByCustomerId(@RequestParam("customerID") Long customerID) {
+        return bookingService.getAllByCustomerId(customerID);
+    }
 
 //    @PostMapping("/create")
 //    public ResponseEntity<?> createBooking(@Valid @RequestBody Booking booking, BindingResult result) {
@@ -46,7 +47,24 @@ public class BookingController {
     {
     	return new ResponseEntity<Booking>(bookingService.createBooking(businessID, employeeID, customerID, serviceID, date), HttpStatus.OK);
     }
-    
+
+    @PutMapping("/cancel")
+    public ResponseEntity<String> cancelBooking(@RequestParam("bookingId") Integer bookingId) {
+        String message;
+        if(bookingId == null) {
+            message = "Error: Failed to cancel booking. Please enter a booking ID.";
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+
+        boolean bookingFoundAndCancelled = bookingService.cancelBooking(bookingId);
+        if(!bookingFoundAndCancelled){
+            message = "Error: Failed to cancel booking #" + bookingId.toString() + "\n" +
+                    "Booking not found.";
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        }
+        message = "Booking #" + bookingId.toString() + " successfully cancelled.";
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
     
     @DeleteMapping("/remove")
     public ResponseEntity<String> removeBooking(@RequestParam("bookingId") Integer bookingId) {
@@ -74,6 +92,17 @@ public class BookingController {
     {
     	return new ResponseEntity<>(bookingService.getAvailableBookings(businessID, employeeID, serviceID, date), HttpStatus.OK);
     }
+    
+    @GetMapping("{bookingID}")
+    public ResponseEntity<?> getBookingByID(@PathVariable(value="bookingID") int bookingID){
+    	try {
+    		Booking booking = bookingService.findByID(bookingID).get();
+    		return new ResponseEntity<>(booking, HttpStatus.OK);
+    	} catch(NoSuchElementException e) {
+    		return new ResponseEntity<>("No booking under that ID", HttpStatus.NOT_FOUND);
+    	}
+    }
+    
     
     /************************************For Testing*****************************************/
 

@@ -2,26 +2,34 @@
     margin-top: 50px;
     margin-bottom: 50px;
     text-align: center;
-  }
-  
-  .container {
-    margin-top: 50px;
-    padding-top: 25px;
-    padding-right: 0px;
-  }
+}
 
-  .comps {
+.block-glass {
+    margin-top: 50px;
+    padding: 1rem;
+    box-shadow: 0 2.8px 2.8px -9px rgba(0,0,0,.008), 0 6.7px 6.7px -9px rgba(0,0,0,.01), 0 12.5px 12.6px -9px rgba(0,0,0,.016), 0 22.3px 22.6px -9px rgba(0,0,0,.02), 0 41.8px 42.2px -9px rgba(0,0,0,.024), 0 100px 101px -9px rgba(0,0,0,.03)!important;
+    border-radius: 12px;
+    background: hsla(0,0%,100%,.4)!important;
+    outline: 0;
+    border: 1px solid transparent;
+    border-image: initial;
+    color: rgba(0,0,0,.45);
+}
+
+.comps {
     padding-bottom: 25px;
-  }
-  .comps label {
+}
+
+.comps label {
     display: block;
     padding-left: 10px;
     margin-bottom: 5px;
     color: rgb(0, 0, 0);
     font-size: 20px;
     font-weight: bold;
-  }
-  .comps button {
+}
+
+.comps button {
     margin: 10px;
     cursor: pointer;
     background-color: #046d41;
@@ -30,8 +38,9 @@
     color: #fff;
     width: 45%;
     font-size: 20px;
-  }
-  .comps button:hover {
+}
+
+.comps button:hover {
     transform: scale(1.05);
-  }
+}
 

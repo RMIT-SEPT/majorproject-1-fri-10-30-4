@@ -1,0 +1,27 @@
+.customer-profile{
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 4rem;
+    min-height: 100%;
+}
+
+.customer-profile img{
+    border-radius: 100%;
+    margin-bottom: 20px;
+}
+
+.customer-profile .details{
+    padding: 1rem;
+}
+
+.customer-profile .information{
+    padding: 1rem;
+    box-shadow: 0 2.8px 2.8px -9px rgba(0,0,0,.008), 0 6.7px 6.7px -9px rgba(0,0,0,.01), 0 12.5px 12.6px -9px rgba(0,0,0,.016), 0 22.3px 22.6px -9px rgba(0,0,0,.02), 0 41.8px 42.2px -9px rgba(0,0,0,.024), 0 100px 101px -9px rgba(0,0,0,.03);
+    border-radius: 12px;
+    background: hsla(0,0%,100%,.4);
+    outline: 0;
+    border: 1px solid transparent;
+    border-image: none;
+    border-image: initial;
+    color: rgba(0,0,0,.45);
+}

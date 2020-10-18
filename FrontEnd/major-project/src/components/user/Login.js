@@ -1,25 +1,56 @@
-import React from "react"
-import {NavLink} from "react-router-dom"
-import "../../css/Login.css"
-function Login() {
-    return (
-        <div className="App">
-        <form id="form" class="form">
-            <h1>Login </h1>
-            <div class="comps">
-            <label for="fname">Email</label>
-            <input type="text" id="email" placeholder="Email" />
-            </div>
-            <div class="comps">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Password" />
-            </div>
-            <button type="login">LOGIN</button>
-            <br></br>
-            <NavLink to="/registration">Click here to register</NavLink> 
-        </form>
-        </div>
-    )
-}
+import React, { Component } from "react"
+import LoginForm from "./LoginForm"
+import { connect } from "react-redux"
+import  { login }   from "../../actions/securityActions"
+// const axios = require('axios').default;
 
-export default Login
+class Login extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            username: "",
+            password: "",
+            error_username: "",
+            error_password: "",
+            response: "",
+        }
+        this.onChange = this.onChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
+    }
+
+    onChange(event) {
+        const {name, value} = event.target
+        this.setState({[name]: value})
+    }
+
+    onSubmit(event) {
+        event.preventDefault()
+        const loginRequest = {
+            username: this.state.username,
+            password: this.state.password,
+        }  
+        this.props.login(loginRequest, this.props.history)
+        this.setState({error_username: this.props.error.username})
+        this.setState({error_password: this.props.error.password})
+        return false;
+    }
+
+    render() {
+        return (
+            <div className='login-form-block'>
+                <div className="container">
+                <LoginForm 
+                    onChange={this.onChange}
+                    onSubmit={this.onSubmit}
+                    data={this.state}
+                />
+                </div>
+            </div>
+           
+        ) 
+    }
+}
+const mapStateToProps = state=>({
+    error: state.error
+})
+export default connect(mapStateToProps, {login})(Login);
