@@ -91,38 +91,62 @@ public class BookingServiceTest {
         }
 
         @Test
-        void createBooking_Null_IfEmployeeIdDoesNotExist() {
+        void createBooking_Exception_IfEmployeeIdDoesNotExist() {
             when(employeeRepository.findById(2)).thenReturn(Optional.empty());
 
-            Booking createdBooking = bookingService.createBooking(1, 2, 1, 1, date.getTime());
-            assertNull(createdBooking);
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                bookingService.createBooking(1, 2, 1, 1, date.getTime());
+            });
+
+            String expectedMessage = "employee id not found";
+            String actualMessage = exception.getMessage();
+
+            assertTrue(actualMessage.contains(expectedMessage));
         }
 
         @Test
-        void createBooking_Null_IfCustomerIdDoesNotExist() {
+        void createBooking_Exception_IfCustomerIdDoesNotExist() {
             when(customerRepository.findById(2L)).thenReturn(Optional.empty());
 
-            Booking createdBooking = bookingService.createBooking(1, 1, 2, 1, date.getTime());
-            assertNull(createdBooking);
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                bookingService.createBooking(1, 1, 2, 1, date.getTime());
+            });
+
+            String expectedMessage = "customer id not found";
+            String actualMessage = exception.getMessage();
+
+            assertTrue(actualMessage.contains(expectedMessage));
         }
 
         @Test
-        void createBooking_Null_IfServiceIdDoesNotExist() {
+        void createBooking_Exception_IfServiceIdDoesNotExist() {
             when(businessServiceRepository.findById(2)).thenReturn(Optional.empty());
 
-            Booking createdBooking = bookingService.createBooking(1, 1, 1, 2, date.getTime());
-            assertNull(createdBooking);
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                bookingService.createBooking(1, 1, 1, 2, date.getTime());
+            });
+
+            String expectedMessage = "service id not found";
+            String actualMessage = exception.getMessage();
+
+            assertTrue(actualMessage.contains(expectedMessage));
         }
 
         @Test
-        void createBooking_Null_IfDateIsPast() {
+        void createBooking_Exception_IfDateIsPast() {
             Booking booking = new Booking();
             Mockito.lenient().when(bookingRepository.save(any(Booking.class))).thenReturn(booking);
 
             long pastDateUpperLimit = getPastDateUpperLimit(date);
 
-            Booking createdBooking = bookingService.createBooking(1, 1, 1, 1, pastDateUpperLimit);
-            assertNull(createdBooking);
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                bookingService.createBooking(1, 1, 1, 1, pastDateUpperLimit);
+            });
+
+            String expectedMessage = "date cannot be in the past";
+            String actualMessage = exception.getMessage();
+
+            assertTrue(actualMessage.contains(expectedMessage));
         }
     }
 
@@ -190,30 +214,45 @@ public class BookingServiceTest {
         }
 
         @Test
-        void getAvailableBookings_Null_IfEmployeeIdDoesNotExist() {
+        void getAvailableBookings_Exception_IfEmployeeIdDoesNotExist() {
             when(employeeRepository.findById(2)).thenReturn(Optional.empty());
 
-            Iterable<BookingTimeOptionDTO> availableBookings =
-                    bookingService.getAvailableBookings(1, 2, 1, date.getTime());
-            assertNull(availableBookings);
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                bookingService.getAvailableBookings(1, 2, 1, date.getTime());
+            });
+
+            String expectedMessage = "employee id not found";
+            String actualMessage = exception.getMessage();
+
+            assertTrue(actualMessage.contains(expectedMessage));
         }
 
         @Test
-        void getAvailableBookings_Null_IfServiceIdDoesNotExist() {
+        void getAvailableBookings_Exception_IfServiceIdDoesNotExist() {
             when(businessServiceRepository.findById(2)).thenReturn(Optional.empty());
 
-            Iterable<BookingTimeOptionDTO> availableBookings =
-                    bookingService.getAvailableBookings(1, 1, 2, date.getTime());
-            assertNull(availableBookings);
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                bookingService.getAvailableBookings(1, 1, 2, date.getTime());
+            });
+
+            String expectedMessage = "service id not found";
+            String actualMessage = exception.getMessage();
+
+            assertTrue(actualMessage.contains(expectedMessage));
         }
 
         @Test
-        void getAvailableBookings_Null_IfDateIsPast() {
+        void getAvailableBookings_Exception_IfDateIsPast() {
             long pastDateUpperLimit = getPastDateUpperLimit(date);
 
-            Iterable<BookingTimeOptionDTO> availableBookings =
-                    bookingService.getAvailableBookings(1, 1, 1, pastDateUpperLimit);
-            assertNull(availableBookings);
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                bookingService.getAvailableBookings(1, 1, 1, pastDateUpperLimit);
+            });
+
+            String expectedMessage = "date cannot be in the past";
+            String actualMessage = exception.getMessage();
+
+            assertTrue(actualMessage.contains(expectedMessage));
         }
     }
 
@@ -243,10 +282,17 @@ public class BookingServiceTest {
         }
 
         @Test
-        void getAllByCustomerId_Null_IfCustomerIdDoesNotExist() {
+        void getAllByCustomerId_Exception_IfCustomerIdDoesNotExist() {
             when(customerRepository.findById(2L)).thenReturn(Optional.empty());
 
-            assertNull(bookingService.getAllByCustomerId(2L));
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                bookingService.getAllByCustomerId(2L);
+            });
+
+            String expectedMessage = "customer id not found";
+            String actualMessage = exception.getMessage();
+
+            assertTrue(actualMessage.contains(expectedMessage));
         }
     }
 
