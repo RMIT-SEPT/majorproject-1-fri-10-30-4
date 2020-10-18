@@ -194,13 +194,13 @@ workflows:
             - backend_test
           filters:
             branches:
-              only: CircleCIWork
+              only: master
       - backend_image_build:
           requires:
             - backend_build
           filters:
             branches:
-              only: CircleCIWork
+              only: master
 
   frontend:
     jobs:
@@ -210,10 +210,10 @@ workflows:
             - frontend_test
           filters:
             branches:
-              only: CircleCIWork
+              only: master
       - frontend_image_build:
           requires:
             - frontend_build
           filters:
             branches:
-              only: CircleCIWork
+              only: master
