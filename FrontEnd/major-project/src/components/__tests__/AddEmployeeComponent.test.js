@@ -1,7 +1,7 @@
 import React from "react"
 import Enzyme,{shallow,mount} from "enzyme"
 import Adapter from 'enzyme-adapter-react-16'
-import AddEmployeeComponent from '../AddEmployeeComponent.js'
+import AddEmployeeComponent from '../admin/AddEmployeeComponent.js'
 
 Enzyme.configure({ adapter: new Adapter()})
 
@@ -26,5 +26,11 @@ describe("Admin adding employees", () => {
         sundayTime: this.state.sundayTime
     }
 
-
+    describe("Customer Profile", () => {
+        //Check if Admin Component Renders
+        test("Render successful", () => {
+            const wrapper = shallow(<Profile />)
+            expect(wrapper.exists()).toBe(true);
+        });
+    });
 });

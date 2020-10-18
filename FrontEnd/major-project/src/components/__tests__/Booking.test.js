@@ -1,7 +1,7 @@
 import React from "react"
 import Enzyme,{shallow,mount} from "enzyme"
 import Adapter from 'enzyme-adapter-react-16'
-import Booking from '../booking/Booking.js'
+import Booking from '../customer/Booking.js'
 import { act } from "react-dom/test-utils";
 import { render, unmountComponentAtNode } from "react-dom";
 
